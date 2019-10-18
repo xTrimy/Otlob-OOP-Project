@@ -15,39 +15,58 @@ public class Admin extends User
     private int adminId;
     private String adminName;
     private String adminEmail;
-    
+    private restaurant R ;
+
     
     public Admin(int aId, String aN, String aE, String pass, String uname, int uId, LocalDate myObj)
     {
        super(pass, uname, uId, myObj);
-       this.adminId = aId;
-       this.adminEmail = aE;
-       this.adminName = aN;
+       adminId = aId;
+       adminEmail = aE;
+       adminName = aN;
 
     }
-    
-        public void Writeadmin()throws IOException {
-    
-        BufferedWriter out = new BufferedWriter(new FileWriter("admin.txt"));
-        out.write(this.toString());
-    }
-         public void Readadmin() throws IOException
+    public void initializeRestaurant(String name)
     {
-        BufferedReader read = new BufferedReader(new FileReader("admin.txt"));
-        String S;
+        R = new restaurant(name);
+    }
+      
+    public void writeToRestaurant() throws IOException
+    {
+        FileWriter res = new FileWriter("restaurant.txt");
+
+        BufferedWriter writer = new BufferedWriter(res);
         
-        while ((S = read.readLine()) != null)
-        {
-            System.out.println(S+"\n");
+        writer.write(this.toString());
+        writer.close();
+    }
+    
+    //should probably move this one to the guest class    
+    public void Writeadmin()throws IOException
+    {
+    
+            BufferedWriter out = new BufferedWriter(new FileWriter("admin.txt"));
+            out.write(this.toString());
+    }
+        
+    public void Readadmin() throws IOException
+    {
+            BufferedReader read = new BufferedReader(new FileReader("admin.txt"));
+            String S;
+        
+            while ((S = read.readLine()) != null)
+            {
+                System.out.println(S+"\n");
             
-        }
+            }
         
     }
     
-       public String toString()
+    public String toString()
     {
-        return String.format("%s,%s,%s,%s,%s,%s", 
-                adminId,adminName,adminEmail,password,userId,myObj);
+        //after overRiding the restaurant the toString restaurant function returns string
+        return String.format("%s,%s,%s,%s", 
+                R.getRestaurant(),adminId,username,adminEmail);
     }
     
 }
