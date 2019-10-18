@@ -4,17 +4,17 @@
  * and open the template in the editor.
  */
 package otlob;
+
 /**
  *
  * @author PC
  */
-public class Otlob {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+public class OffersInbox extends Inbox {
+    private int restaurantId;
+    private float percentage;
+    private String content;
+    @Override
+    public String readMessages(){
+        return content;
     }
-    
 }
