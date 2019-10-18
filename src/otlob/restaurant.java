@@ -51,7 +51,7 @@ public class restaurant
     }
     
     
-    //over riding
+    //overriding
     public String toString()
     {
         return String.format("%s,%s,%s", 

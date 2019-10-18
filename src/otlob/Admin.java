@@ -9,9 +9,18 @@ package otlob;
  *
  * @author Zeina Ayman
  */
-public class Admin extends User {
+public class Admin extends User 
+{
     private int adminId;
     private String adminName;
     private String adminEmail;
+    
+    
+    public Admin()
+    {}
+    
+    
+    
+    
     
 }
