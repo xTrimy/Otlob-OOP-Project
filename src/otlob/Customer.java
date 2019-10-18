@@ -18,7 +18,6 @@ public class Customer extends User{
     private int customerId;
     private String email;
     private String phoneNum;
-    
     private Address location;
     
     
@@ -38,10 +37,21 @@ public class Customer extends User{
     }
      public void writedetails()throws IOException {
     
-        BufferedWriter out = new BufferedWriter(new FileWriter("Customer.txt"));
-        out.write(this.toString());
+        BufferedWriter writer = new BufferedWriter(new FileWriter("Customer.txt"));
+        writer.write(this.toString());
     }
-    
+     public void Readdetails() throws IOException
+    {
+        BufferedReader read = new BufferedReader(new FileReader("Customer.txt"));
+        String S;
+        
+        while ((S = read.readLine()) != null)
+        {
+            System.out.println(S+"\n");
+            
+        }
+        
+    }
     public void SetName(String name){
         name = customerName;
     }
@@ -53,7 +63,7 @@ public class Customer extends User{
        //overriding
     public String toString()
     {
-        return String.format("%s,%s,%s,%s,%s", 
-                customerName,customerId,email,phoneNum,location);
+        return String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s", 
+                customerName,customerId,email,phoneNum,location,password,username,userId,myObj);
     }
 }
