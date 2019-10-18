@@ -14,27 +14,51 @@ import java.io.*;
 public class restaurant 
 {
     private String name;
-    public int restaurantId;
+    private int restaurantId;
     private static int restaurantRating;
     
+    public restaurant()
+    {name = " ";
+        restaurantId =0;
+        restaurantRating =0;
+    }
     
     
-    public restaurant(String n,int rr)
+    public restaurant(String n)
     {
+        name =n;
+        restaurantId = 0;
+        restaurantRating = 0;
+    }
+    
+    
+    public void setRestaurant(String n,int rr)
+    { 
         name =n;
         restaurantId = 0;
         restaurantRating = rr;
     }
     
-    public void writeToRestaurant() throws IOException
+    public String getRestaurant()
     {
-        FileWriter res = new FileWriter("restaurant.txt");
-
-        BufferedWriter writer = new BufferedWriter(res);
-        
-        writer.write(this.toString());
-        writer.close();
+        return this.toString();
     }
+    
+    public int getRestaurantid()
+    {
+        return restaurantId;
+    }
+    
+    public String getRestaurantRating()
+    {
+        return " ";
+    }
+    
+    public String getRestaurantName()
+    {
+        return name;
+    }
+    
     
     
     public void Readrestaurant() throws IOException
