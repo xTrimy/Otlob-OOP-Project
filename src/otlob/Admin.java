@@ -4,17 +4,14 @@
  * and open the template in the editor.
  */
 package otlob;
+
 /**
  *
- * @author PC
+ * @author Zeina Ayman
  */
-public class Otlob {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+public class Admin extends User {
+    private int adminId;
+    private String adminName;
+    private String adminEmail;
     
 }
