@@ -16,6 +16,15 @@ public class User {
     LocalDate myObj = LocalDate.now();
     protected int userId;
     
+    public User(String pass, String uname, int uId, LocalDate myObj)
+    {
+        password = pass;
+        username = uname;
+        userId = uId;
+        this.myObj = myObj;
+    }
+    
+    
     public Boolean verifylogin(){
         return true;
     }

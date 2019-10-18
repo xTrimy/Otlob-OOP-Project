@@ -16,6 +16,12 @@ public class Address {
     protected String buildingNumber;
     protected String landlineNumber;
     
-    
+    public Address(String aN, String aD, String aL, String bN, String Ln){
+        this.appartmentNumber = aN;
+        this.appartmentDescription = aD;
+        this.appartmentLocation = aL;
+        this.buildingNumber = bN;
+        this.landlineNumber = Ln;
+    }
     
 }
