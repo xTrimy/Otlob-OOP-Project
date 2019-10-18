@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package otlob;
+import java.io.*;
 /**
  *
  * @author PC
@@ -13,8 +14,8 @@ public class Otlob {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main(String[] args) throws IOException{
+
     }
     
 }
