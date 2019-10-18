@@ -9,12 +9,13 @@ package otlob;
  *
  * @author Zeina Ayman
  */
+
 public class Address {
-    protected String appartmentNumber;
-    protected String appartmentDescription;
-    protected String appartmentLocation;
-    protected String buildingNumber;
-    protected String landlineNumber;
+    private String appartmentNumber;
+    private String appartmentDescription;
+    private String appartmentLocation;
+    private String buildingNumber;
+    private String landlineNumber;
     
     public Address(String aN, String aD, String aL, String bN, String Ln){
         this.appartmentNumber = aN;
@@ -22,6 +23,14 @@ public class Address {
         this.appartmentLocation = aL;
         this.buildingNumber = bN;
         this.landlineNumber = Ln;
+    }
+    
+    public String toString()
+    {
+      return String.format("%s,%s,%s,%s,%s"
+              ,appartmentNumber,appartmentDescription,appartmentLocation
+                ,buildingNumber,landlineNumber);
+              
     }
     
 }

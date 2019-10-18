@@ -26,15 +26,20 @@ public class Customer extends User{
     }
     
     
-     public Customer(String cusname, int cusId, String email, String phonNum, Address loc,String pass, String uname, int uId, LocalDate myObj){
+    
+    
+     public Customer(String cusname, int cusId, String email, String phonNum,
+             Address loc,String pass, String uname, int uId, LocalDate myObj)
+    {
         super(pass, uname, uId, myObj);
         this.customerName = cusname;
         this.customerId  = cusId;
         this.email       = email;
         this.phoneNum  = phonNum;
         this.location = loc;
-
     }
+     
+     
      public void writedetails()throws IOException {
     
         BufferedWriter writer = new BufferedWriter(new FileWriter("Customer.txt"));
@@ -64,6 +69,7 @@ public class Customer extends User{
     public String toString()
     {
         return String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s", 
-                customerName,customerId,email,phoneNum,location,password,username,userId,myObj);
+                customerName,customerId,email,phoneNum,
+                location,password,username,userId,myObj);
     }
 }
