@@ -4,12 +4,9 @@
  * and open the template in the editor.
  */
 package otlob;
-<<<<<<< HEAD
-=======
 
 import java.io.IOException;
 
->>>>>>> 69e0bdf6545c96f3f185ea44ce5862c7d9a02c8a
 /**
  *
  * @author PC
