@@ -19,71 +19,127 @@ public class Otlob {
      */
     public static void main(String[] args)throws IOException 
     {
-        String s = "1,password,ahmed,smth@domain.com";
-        String [] list = s.split(",");
-        System.out.println(list[1]);
-        
-        if(list[1].equals("password") && list[2].equals("ahmed"))
-            System.out.println("pci");
-        
-        System.out.println("please choose which type of customer you are");
-        System.out.println("1)admin \n2)customer");
+        User user;
+        System.out.println("please choose which type of user you are");
+        System.out.println("1)admin\n2)customer");
         Scanner input = new Scanner(System.in);
-        int x;
-        x = input.nextInt();
         
-        if(x == 1)
-        {
-            System.out.println("please enter the retaurants name: ");
-            String RName = input.next();
-            Admin a = new Admin(0,"ahmed","ahmed180123@gmail.com"
-                    ,"pass","3adel",5,LocalDate.now());
-            a.initializeRestaurant(RName);
-            a.writeToRestaurant();
-        }
-        else
+       
+        byte type,ch;
+        type = input.nextByte();
+        
+        if(type == 1)
         {
             
-            char ch ;
+            //the admin section
             System.out.println("enter 1 for login and 2 for sign up");
-            ch = input.next().charAt(0);
+            ch = input.nextByte();
+            if(ch == 1)
+            {
+                System.out.println("enter userName: ");
+                String userName = input.next();
+                System.out.println("enter password: ");
+                String password = input.next();
+                
+               user = new Admin();
+               String searchedId = user.LogIn("admin.txt", userName, password);
+               //if matched returns the id else returns the following message
+               if(searchedId.equals("incorrect userName or password"))
+               {
+                   System.out.println(searchedId);
+               }
+               else
+               {
+                   user = user.getUser(searchedId);
+                   System.out.println(user.toString());
+               }
 
-            if(ch == '2')
+            }     
+            else if(ch == 2)
             {
                 //prompt for user information
-                String Type,name,pass,mail;
-                System.out.print("enter customer or admin: ");
-                Type = input.next();
+               String name,pass,mail,phoneNumber;
+               String resName;
+               System.out.print("enter username: ");
+               name = input.next();
+               System.out.print("enter  pass: ");
+               pass = input.next();
+               System.out.print("enter  mail: ");
+               mail = input.next();
+               System.out.print("enter phoneNumber: ");
+               phoneNumber = input.next();
+               System.out.print("enter restaurant name: ");
+               resName = input.next();
+               
+               
+                  user = new Admin(name,mail,
+                        pass,name,resName);
+                user.writeUser();
+               
+            }
+        }
+        else if(type == 2)
+        {
+            
+            System.out.println("enter 1 for signup and 2 for login");
+            ch = input.nextByte();
+
+            if(ch == 1)
+            {
+                //prompting with spaces please!
+                //prompt for user information
+                String name,pass,mail,phoneNumber;
+                
                 System.out.print("enter username: ");
                 name = input.next();
                 System.out.print("enter  pass: ");
                 pass = input.next();
                 System.out.print("enter  mail: ");
                 mail = input.next();
+                System.out.print("enter phoneNumber: ");
+                phoneNumber = input.next();
 
                 //prompt for address
                 String aN,aD,aL,bN,Ln;
                 System.out.print("enter appartment number: ");
                 aN = input.next();
-                System.out.print("enter appartment description(optional): ");
-                aD = input.nextLine();
+              //  System.out.print("enter appartment description(optional): ");
+             //   aD = input.nextLine();
                 System.out.print("enter appartment location: ");
-                aL = input.nextLine();
+                aL = input.next();
                 System.out.print("enter building number: ");
                 bN = input.next();
                 System.out.print("enter landLine number: ");
-                Ln = input.nextLine();
+                Ln = input.next();
 
                 //sign up !
-                Address location = new Address(aN,aD,aL,bN,Ln);
-                guest g = new guest();
-                g.signUp(Type, name, pass, 0, mail,location);
-            }
-            else if(ch == '1')
-            {
-                guest g = new guest();
-                g.LogIn(1);
+                Address location = new Address(aN,"test",aL,bN,Ln);
                 
+
+                  user = new Customer(name,mail,phoneNumber
+                        ,location,pass,name,LocalDate.now());
+                user.writeUser();
+            }
+            else if(ch == 2)
+            {
+                System.out.println("enter userName: ");
+                String userName = input.next();
+                System.out.println("enter password: ");
+                String password = input.next();
+                
+                user = new Customer();
+               String id =  user.LogIn("customer.txt", userName, password);
+                
+                user = user.getUser(id);
+                if(id.equals("incorrect userName or password"))
+               {
+                   System.out.println(id);
+               }
+               else
+               {
+                   user = user.getUser(id);
+                   System.out.println(user.toString());
+               }
             }
             
         }

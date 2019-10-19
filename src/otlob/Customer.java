@@ -25,15 +25,57 @@ public class Customer extends User{
         
     }
     
-    
-    
-    
-     public Customer(String cusname, int cusId, String email, String phonNum,
-             Address loc,String pass, String uname, int uId, LocalDate myObj)
+    public Customer()
     {
-        super(pass, uname, uId, myObj);
+    }
+    
+    public   User getUser(String id) throws IOException
+    {
+        
+        
+        
+        //customer 
+        BufferedReader readobj = new BufferedReader(new FileReader("customer.txt"));
+
+        String s;
+        while((s = readobj.readLine()) != null)
+        {
+            //try because the first iteration iterates over the first line which is the size
+          try
+          {
+               // StringTokenizer tokens = new StringTokenizer(s,",");
+               String [] list = s.split(",");
+                if(list[0].equals(id))
+                {
+                    this.password = list[2];
+                    this.username = list[1];
+                    this.customerName = list[4];
+                    this.customerId = Integer.parseInt(id);
+                    this.email       = list[5];
+                    this.phoneNum  = list[6];
+                    this.date = LocalDate.parse(list[3]);
+                    return this;
+                }
+
+           }
+           catch(ArrayIndexOutOfBoundsException exception) 
+           {
+                continue;
+           }
+
+        }
+        
+        return null;
+    }
+    
+     public Customer(String cusname, String email, String phonNum,
+             Address loc,String pass, String uname, LocalDate myObj) throws IOException
+    {
+        super(pass, uname, myObj);
         this.customerName = cusname;
-        this.customerId  = cusId;
+        assistingClass obj = new assistingClass();
+        //+1 for the printing
+        this.customerId  =  obj.getId("customer.txt") +1;
         this.email       = email;
         this.phoneNum  = phonNum;
         this.location = loc;
@@ -66,10 +108,35 @@ public class Customer extends User{
     }
     
        //overriding
+    //this one is used mainly in printing the file so it creates a new id
     public String toString()
     {
-        return String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s", 
-                customerName,customerId,email,phoneNum,
-                location,password,username,userId,myObj);
+        //super has userName, password, userId, date
+        return String.format("%s,%s,%s,%s,%s\n", 
+                customerId,super.toString(),customerName,email,phoneNum);
     }
+    
+    
+    
+public void writeUser() throws IOException
+{
+   assistingClass obj = new assistingClass();
+   //create the writing objects
+   FileWriter c = new FileWriter("customer.txt",true);
+   FileWriter c1 = new FileWriter("address.txt",true);
+   BufferedWriter Buffaddress = new BufferedWriter(c1);
+   BufferedWriter customerWriter = new BufferedWriter(c);
+
+   customerWriter.write(this.toString());
+   Buffaddress.write((customerId +1) +","+location.toString());
+
+   customerWriter.close();
+   Buffaddress.close();
+   obj.modifyFile("customer.txt",Integer.toString(customerId -1), Integer.toString(customerId ));
+   obj.modifyFile("address.txt",Integer.toString(customerId -1), Integer.toString(customerId ));
+
+}
+   
+
+    
 }

@@ -25,6 +25,12 @@ public class Address {
         this.landlineNumber = Ln;
     }
     
+    public Address getAdrress(String id)
+    {
+        
+        return this;
+    }
+    
     public String toString()
     {
       return String.format("%s,%s,%s,%s,%s"

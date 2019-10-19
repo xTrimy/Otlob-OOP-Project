@@ -24,10 +24,11 @@ public class restaurant
     }
     
     
-    public restaurant(String n)
+    public restaurant(String n)throws IOException
     {
         name =n;
-        restaurantId = 0;
+        assistingClass obj = new assistingClass();
+        restaurantId = obj.getId("restaurant.txt") + 1;
         restaurantRating = 0;
     }
     
@@ -78,8 +79,8 @@ public class restaurant
     //overriding
     public String toString()
     {
-        return String.format("%s,%s,%s", 
-                restaurantId,name,restaurantRating);
+        return String.format("%d,%s,%d\n", 
+                restaurantId ,name,restaurantRating);
     }
     
     
