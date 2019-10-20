@@ -5,10 +5,9 @@
  */
 package otlob;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-
+import java.io.*;
+import java.util.*;
+import java.time.LocalDate;
 /**
  *
  * @author ahmed
@@ -18,31 +17,65 @@ public class guest
     
     guest(){}
     
-    //user passes the type userName pass the id
-    public void signUp(String Type,String userName,String pass,int userId,String userEmail) throws IOException
+    
+    public void LogIn(byte option) throws IOException
     {
-        if("customer".equals(Type))
-        {
-            assistingClass obj = new assistingClass();
-            int size = obj.getId("customer.txt");
-            FileWriter c = new FileWriter("customer.txt",true);
-            BufferedWriter writer = new BufferedWriter(c);
-            writer.write(String.format("%s,%s,%s,%s \n"
-                    ,size + 1,pass,userName,userEmail));
-            
-            writer.close();
-            
-            obj.modifyFile("customer.txt",Integer.toString(size), Integer.toString(size +1));
-        }
-        else if(Type == "admin")
-        { 
-            FileWriter ad = new FileWriter("admin.txt");
-            BufferedWriter writer = new BufferedWriter(ad);
-            writer.write("under development ");
-            writer.close();
-        }
+        //customer 
+        
+            Scanner input = new Scanner(System.in);
+            System.out.println("enter userName: ");
+                String u = input.next();
+            System.out.println("enter password: ");
+                String p = input.next();
+                
+             BufferedReader readobj = new BufferedReader(new FileReader("customer.txt"));
+                                 boolean match = false;
+
+             String s;
+             while((s = readobj.readLine()) != null)
+             {
+               try
+               {
+                    // StringTokenizer tokens = new StringTokenizer(s,",");
+                    String [] list = s.split(",");
+                     if(list[1].equals(p) && list[2].equals(u))
+                     {
+                         match = true;
+                         System.out.println("matched :)");
+                         break;
+                     }
+                 
+                }
+                catch(ArrayIndexOutOfBoundsException exception) 
+                {
+                continue;
+                }
+                 
+             }
+             if(match == false)
+             System.out.println("wrong password or user name :(");
+
         
     }
+    
+    
+    
+  /*  public void signUp(User u) throws IOException
+    {
+        if(type == 2)
+        {
+            u = new Customer(userName,userEmail,phoneNumber,location,pass,userName,LocalDate.now());
+            u.writeUser();
+        }
+        else if(type == 1)
+        { 
+            u = new Admin(userName,userEmail,pass,userName);          
+            u.writeUser();
+        }
+        else 
+            return;
+        
+    }*/
     public void view()
     {
         

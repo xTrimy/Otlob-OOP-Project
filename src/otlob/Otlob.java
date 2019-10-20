@@ -19,39 +19,171 @@ public class Otlob {
      */
     public static void main(String[] args)throws IOException 
     {
-        
-        System.out.println("please choose which type of customer you are");
-        System.out.println("1)admin \n2)customer");
+        User user;
+        System.out.println("please choose which type of user you are");
+        System.out.println("1)admin\n2)customer");
         Scanner input = new Scanner(System.in);
-        int x;
-        x = input.nextInt();
         
-        if(x == 1)
+       
+        byte type,ch;
+        type = input.nextByte();
+        
+        if(type == 1)
         {
-            System.out.println("please enter the retaurants name: ");
-            String RName = input.next();
-            Admin a = new Admin(0,"ahmed","ahmed180123@gmail.com"
-                    ,"pass","3adel",5,LocalDate.now());
-            a.initializeRestaurant(RName);
-            a.writeToRestaurant();
-        }
-        else
-        {
-            String Type,name,pass,mail;
-            System.out.print("enter customer or admin: ");
-            Type = input.next();
-            System.out.print("enter username: ");
-            name = input.next();
-            System.out.print("enter  pass: ");
-            pass = input.next();
-            System.out.print("enter  mail: ");
-            mail = input.next();
+            
+            //the admin section
+            System.out.println("enter 1 for login and 2 for sign up");
+            ch = input.nextByte();
+            if(ch == 1)
+            {
+                System.out.println("enter userName: ");
+                String userName = input.next();
+                System.out.println("enter password: ");
+                String password = input.next();
+                
+               user = new Admin();
+               String searchedId = user.LogIn("admin.txt", userName, password);
+               //if matched returns the id else returns the following message
+               if(searchedId.equals("incorrect userName or password"))
+               {
+                   System.out.println(searchedId);
+               }
+               else
+               {
+                   user = user.getUser(searchedId);
+                   System.out.println("welcome " + user.getUserName());
+                   System.out.printf("here you can manage your restaurant\n1)view restaurant products\n2)add restaurant products  " );
+                   ch = input.nextByte();
+                   
+                   if(ch == 1)
+                   {
+                       return;
+                   }
+                   else if(ch == 2)
+                   {
+                       String mealName,mealType;
+                       float price;
+                       int quantity;
+                       System.out.println("enter mealname: ");
+                       mealName = input.next();
+                       System.out.println("enter meal Type: ");
+                       mealType = input.next();
+                       System.out.println("enter meal price: ");
+                       price = input.nextFloat();
+                       System.out.println("enter mea; quantity: ");
+                       quantity = input.nextInt();
+                       
+                        meal m = new meal(mealName,mealType,price,quantity);
+                        m.writeToMeals(Integer.toString(user.getUserId()));
+                   }
+                   
+               }
 
-            guest g = new guest();
-            g.signUp(Type, name, pass, 0, mail);
+            }     
+            else if(ch == 2)
+            {
+                //prompt for user information
+               String name,pass,mail,phoneNumber;
+               String resName;
+               System.out.print("enter username: ");
+               name = input.next();
+               System.out.print("enter  pass: ");
+               pass = input.next();
+               System.out.print("enter  mail: ");
+               mail = input.next();
+               System.out.print("enter phoneNumber: ");
+               phoneNumber = input.next();
+               System.out.print("enter restaurant name: ");
+               resName = input.next();
+               
+               
+                  user = new Admin(name,mail,
+                        pass,name,resName);
+                user.writeUser();
+               
+            }
         }
-        
-        
+        else if(type == 2)
+        {
+            
+            System.out.println("enter 1 for signup and 2 for login");
+            ch = input.nextByte();
+
+            if(ch == 1)
+            {
+                //prompting with spaces please!
+                //prompt for user information
+                String name,pass,mail,phoneNumber;
+                
+                System.out.print("enter username: ");
+                name = input.next();
+                System.out.print("enter  pass: ");
+                pass = input.next();
+                System.out.print("enter  mail: ");
+                mail = input.next();
+                System.out.print("enter phoneNumber: ");
+                phoneNumber = input.next();
+
+                //prompt for address
+                String aN,aD,aL,bN,Ln;
+                System.out.print("enter appartment number: ");
+                aN = input.next();
+              //  System.out.print("enter appartment description(optional): ");
+             //   aD = input.nextLine();
+                System.out.print("enter appartment location: ");
+                aL = input.next();
+                System.out.print("enter building number: ");
+                bN = input.next();
+                System.out.print("enter landLine number: ");
+                Ln = input.next();
+
+                //sign up !
+                Address location = new Address(aN,"test",aL,bN,Ln);
+                
+
+                  user = new Customer(name,mail,phoneNumber
+                        ,location,pass,name,LocalDate.now());
+                user.writeUser();
+            }
+            else if(ch == 2)
+            {
+                System.out.println("enter userName: ");
+                String userName = input.next();
+                System.out.println("enter password: ");
+                String password = input.next();
+                
+                user = new Customer();
+               String id =  user.LogIn("customer.txt", userName, password);
+                
+                user = user.getUser(id);
+                if(id.equals("incorrect userName or password"))
+               {
+                   System.out.println(id);
+               }
+               else
+               {
+                   user = user.getUser(id);
+                   System.out.println("welcome, "+user.getUserName());
+                   System.out.println("1)toviewproducts\n2)to search restaurants");
+                   ch = input.nextByte();
+                   
+                   if(ch == 1)
+                   {
+                        restaurant res = new restaurant();
+                        res.Readrestaurant();
+                    }
+                   else if(ch ==2)
+                   {
+                       
+                       
+                   }
+                }
+                   
+            }
+        }   
+            
     }
-    
+        
 }
+    
+
