@@ -51,7 +51,32 @@ public class Otlob {
                else
                {
                    user = user.getUser(searchedId);
-                   System.out.println(user.toString());
+                   System.out.println("welcome " + user.getUserName());
+                   System.out.printf("here you can manage your restaurant\n1)view restaurant products\n2)add restaurant products  " );
+                   ch = input.nextByte();
+                   
+                   if(ch == 1)
+                   {
+                       return;
+                   }
+                   else if(ch == 2)
+                   {
+                       String mealName,mealType;
+                       float price;
+                       int quantity;
+                       System.out.println("enter mealname: ");
+                       mealName = input.next();
+                       System.out.println("enter meal Type: ");
+                       mealType = input.next();
+                       System.out.println("enter meal price: ");
+                       price = input.nextFloat();
+                       System.out.println("enter mea; quantity: ");
+                       quantity = input.nextInt();
+                       
+                        meal m = new meal(mealName,mealType,price,quantity);
+                        m.writeToMeals(Integer.toString(user.getUserId()));
+                   }
+                   
                }
 
             }     
@@ -138,12 +163,27 @@ public class Otlob {
                else
                {
                    user = user.getUser(id);
-                   System.out.println(user.toString());
-               }
+                   System.out.println("welcome, "+user.getUserName());
+                   System.out.println("1)toviewproducts\n2)to search restaurants");
+                   ch = input.nextByte();
+                   
+                   if(ch == 1)
+                   {
+                        restaurant res = new restaurant();
+                        res.Readrestaurant();
+                    }
+                   else if(ch ==2)
+                   {
+                       
+                       
+                   }
+                }
+                   
             }
+        }   
             
-        }
-        
     }
-    
+        
 }
+    
+

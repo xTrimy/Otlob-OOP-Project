@@ -68,6 +68,11 @@ public class Customer extends User{
         return null;
     }
     
+    
+    public int getUserId()
+    {
+        return customerId;
+    }
      public Customer(String cusname, String email, String phonNum,
              Address loc,String pass, String uname, LocalDate myObj) throws IOException
     {
@@ -81,6 +86,11 @@ public class Customer extends User{
         this.location = loc;
     }
      
+     
+     public String getUserName()
+     {
+       return username;   
+     }
      
      public void writedetails()throws IOException {
     

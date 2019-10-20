@@ -34,7 +34,8 @@ public abstract class User {
     
     public abstract User getUser(String id) throws IOException;
     
-    
+    public abstract String getUserName();
+    public abstract int getUserId();
     //declared abstract for overRiding only
     public abstract void writeUser() throws IOException;
     

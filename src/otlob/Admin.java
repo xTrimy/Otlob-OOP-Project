@@ -58,6 +58,7 @@ public class Admin extends User
         return null;
     }
     
+
 public Admin(String aN, String aE, String pass
         , String uname,String resName)throws IOException
 {
@@ -73,6 +74,7 @@ public Admin(String aN, String aE, String pass
 
 
 }
+
 
 
 public void writeUser() throws IOException
@@ -107,6 +109,13 @@ public void writeToRestaurant() throws IOException
     writer.close();
 }
 
+public int getUserId()
+{
+    return adminId;
+}
+        
+
+
 //should probably move this one to the guest class    
 public void Writeadmin()throws IOException
 {
@@ -126,6 +135,11 @@ public void Readadmin() throws IOException
 
         }
 
+}
+
+public String getUserName()
+{
+    return adminName;
 }
 
 public String toString()

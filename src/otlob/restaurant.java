@@ -66,12 +66,23 @@ public class restaurant
     {
         BufferedReader readRestaurant = new BufferedReader(new FileReader("restaurant.txt"));
         String S;
+        String adminId;
         
-        while ((S = readRestaurant.readLine()) != null)
-        {
-            System.out.println(S+"\n");
-            
-        }
+            while ((S = readRestaurant.readLine()) != null)
+            {
+                try
+                {
+                    String [] list = S.split(",");
+                    
+                    System.out.println(list[2] + " rating : " + list[3]);
+                  
+                }
+                catch(ArrayIndexOutOfBoundsException exception)
+                {
+                 continue;   
+                }
+            }
+        
         
     }
     

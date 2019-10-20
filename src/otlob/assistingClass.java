@@ -48,7 +48,33 @@ public class assistingClass {
 
     }
     
-    
+String searchId(String Id,String fileName) throws IOException
+{
+   BufferedReader obj = new BufferedReader(new FileReader("fileName"));
+   String s;
+   while((s = obj.readLine()) != null)
+   {
+       //try because the first iteration iterates over the first line which is the size
+     try
+     {
+          // StringTokenizer tokens = new StringTokenizer(s,",");
+          String [] list = s.split(",");
+           if(list[0].equals(Id))
+           {
+               return Id;
+           }
+
+      }
+      catch(ArrayIndexOutOfBoundsException exception) 
+      {
+           continue;
+      }
+
+   }
+   return "not found";
+}
+
+
      void modifyFile(String filePath, String oldString, String newString)
     {
         File fileToBeModified = new File(filePath);
