@@ -42,6 +42,7 @@ public abstract class User {
     
     public String toString()
     {
+        assistingClass obj = new assistingClass();
         return String.format("%s,%s,%s",username,password,date);
     }
     
@@ -60,6 +61,8 @@ public abstract class User {
                             boolean match = false;
 
         String s;
+        //assistingClass obj = new assistingClass();
+        //obj.passwordDecryption(arg)
         while((s = readobj.readLine()) != null)
         {
             //try because the first iteration iterates over the first line which is the size

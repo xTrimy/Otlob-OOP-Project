@@ -48,9 +48,61 @@ public class assistingClass {
 
     }
     
+public String search(String arg,String fileName)throws IOException
+{
+    int count =0;
+    BufferedReader obj = new BufferedReader(new FileReader(fileName));
+    String s;
+    while ((s = obj.readLine()) != null)
+    {
+        
+      // StringTokenizer tokens = new StringTokenizer(s,",");
+            String [] list = s.split(",");
+
+            for(String x : list)
+            {
+                if(x.equals(arg))
+                {
+                    return x;
+                }
+            }
+    }
+    return "not found";
+}
+//not used yet 
+String passwordEncyption(String s)
+{
+    String e = "";
+    int length = s.length();
+    for(int i=0;i<length;i++)
+    {
+        e += (char)(s.charAt(i) + i + 1);
+    }
+    
+    return e;
+}
+String passwordDecryption(String s)
+{
+    String d = "";
+    int length = s.length();
+    for(int i=0;i<length;i++)
+    {
+        d += (char)(s.charAt(i) - i - 1);
+    }
+    
+    return d;
+}
+void writeFile(String arg,String fileName)throws IOException
+{
+    BufferedWriter writer = new BufferedWriter(new FileWriter(fileName,true));
+    writer.write(arg);
+    writer.close();
+    
+    
+}
 String searchId(String Id,String fileName) throws IOException
 {
-   BufferedReader obj = new BufferedReader(new FileReader("fileName"));
+   BufferedReader obj = new BufferedReader(new FileReader(fileName));
    String s;
    while((s = obj.readLine()) != null)
    {
@@ -88,40 +140,37 @@ String searchId(String Id,String fileName) throws IOException
         try
         {
             reader = new BufferedReader(new FileReader(fileToBeModified));
-             
             //Reading all the lines of input text file into oldContent
-             
             String line = reader.readLine();
-             
+            //read all of the file !
            while (line != null) 
             {
+                //store it in oldcontenr and use a lineseparator
                 oldContent = oldContent + line + System.lineSeparator();
                  
                 line = reader.readLine();
             }
              
             //Replacing oldString with newString in the oldContent
-             
+             //user replace first to replace the first thing you see
+             //when useing only replace you shall change the whole file 
             String newContent = oldContent.replaceFirst(oldString, newString);
              
             //Rewriting the input text file with newContent
-             
             writer = new FileWriter(fileToBeModified);
-             
             writer.write(newContent);
         }
         catch (IOException e)
         {
             e.printStackTrace();
         }
+        //finaly block is always excuted in the try and catch
         finally
         {
             try
             {
                 //Closing the resources
-                 
                 reader.close();
-                 
                 writer.close();
             } 
             catch (IOException e) 
