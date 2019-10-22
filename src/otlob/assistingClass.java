@@ -25,28 +25,28 @@ public class assistingClass {
         return size;
     }
     
-    public void resetSize(String fileName) throws IOException
-    {
-        File fileToBeModified = new File(fileName);
-        String oldSize = "";
-        
-       BufferedReader reader = new BufferedReader(new FileReader(fileToBeModified));
-       
-       String line = reader.readLine();
-
-        while (line != null)
-        {
-            oldSize = oldSize + line + System.lineSeparator();
-            line = reader.readLine();
-        }
-       // String newContent = oldSize.replaceAll(oldString, newString);
-        
-        FileWriter writer = new FileWriter(fileToBeModified);
-      //  writer.write(newContent);
-        reader.close();
-        writer.close();
-
-    }
+//    public void resetSize(String fileName) throws IOException
+//    {
+//        File fileToBeModified = new File(fileName);
+//        String oldSize = "";
+//        
+//       BufferedReader reader = new BufferedReader(new FileReader(fileToBeModified));
+//       
+//       String line = reader.readLine();
+//
+//        while (line != null)
+//        {
+//            oldSize = oldSize + line + System.lineSeparator();
+//            line = reader.readLine();
+//        }
+//       // String newContent = oldSize.replaceAll(oldString, newString);
+//        
+//        FileWriter writer = new FileWriter(fileToBeModified);
+//      //  writer.write(newContent);
+//        reader.close();
+//        writer.close();
+//
+//    }
     
 public String search(String arg,String fileName)throws IOException
 {
@@ -142,6 +142,7 @@ String searchId(String Id,String fileName) throws IOException
             reader = new BufferedReader(new FileReader(fileToBeModified));
             //Reading all the lines of input text file into oldContent
             String line = reader.readLine();
+            
             //read all of the file !
            while (line != null) 
             {

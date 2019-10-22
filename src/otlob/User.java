@@ -42,7 +42,6 @@ public abstract class User {
     
     public String toString()
     {
-        assistingClass obj = new assistingClass();
         return String.format("%s,%s,%s",username,password,date);
     }
     

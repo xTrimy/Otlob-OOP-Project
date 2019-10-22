@@ -62,19 +62,20 @@ public class restaurant
     
     
     
-    public void Readrestaurant() throws IOException
+    public String[] Readrestaurant() throws IOException
     {
         BufferedReader readRestaurant = new BufferedReader(new FileReader("restaurant.txt"));
         String S;
         String adminId;
-        
+        String content = "";
             while ((S = readRestaurant.readLine()) != null)
             {
                 try
                 {
-                    String [] list = S.split(",");
+                   // String [] list = S.split(",");
+                    content = content + S + System.lineSeparator();
                     
-                    System.out.println(list[2] + " rating : " + list[3]);
+                   // System.out.println(list[2] + " rating : " + list[3]);
                   
                 }
                 catch(ArrayIndexOutOfBoundsException exception)
@@ -82,7 +83,10 @@ public class restaurant
                  continue;   
                 }
             }
+        readRestaurant.close();
         
+       String [] list  = content.split(System.lineSeparator());
+        return list;
         
     }
     

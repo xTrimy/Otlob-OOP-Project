@@ -19,9 +19,6 @@ public class Otlob {
      */
     public static void main(String[] args)throws IOException 
     {
-        assistingClass obj = new assistingClass();
-        String searching = obj.search("smth","customer.txt");
-        System.out.print(searching);
         
         
         
@@ -176,7 +173,9 @@ public class Otlob {
                    if(ch == 1)
                    {
                         restaurant res = new restaurant();
-                        res.Readrestaurant();
+                        String [] content = res.Readrestaurant();
+                        for(String x : content)
+                            System.out.println(x);
                     }
                    else if(ch ==2)
                    {
