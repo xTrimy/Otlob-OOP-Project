@@ -81,32 +81,21 @@ public void writeUser() throws IOException
 {
     
     assistingClass obj = new assistingClass();
-    //create the writing objects
-    FileWriter c = new FileWriter("admin.txt",true);
-
-    BufferedWriter adminWriter = new BufferedWriter(c);
-
-    adminWriter.write(this.toString());
+    obj.writeFile(this.toString(), "admin.txt");
     writeToRestaurant();
-    adminWriter.close();
-    //previous admin id replace with the new incremented one in the ocnstructor
+    //previous admin id replace with the new incremented one in the constructor
     obj.modifyFile("admin.txt",Integer.toString(adminId -1), Integer.toString(adminId));
 
 }
+
 
 public void writeToRestaurant() throws IOException
 {
     assistingClass obj = new assistingClass();
     int rId = R.getRestaurantid();
     //second parameter true for appending
-    FileWriter res = new FileWriter("restaurant.txt",true);
-
-    BufferedWriter writer = new BufferedWriter(res);
-
-    writer.write(Integer.toString(adminId)+"," + R.toString());
+    obj.writeFile(Integer.toString(adminId)+"," + R.toString(),"restaurant.txt");
     obj.modifyFile("restaurant.txt",Integer.toString(rId -1), Integer.toString(rId));
-
-    writer.close();
 }
 
 public int getUserId()
@@ -116,13 +105,7 @@ public int getUserId()
         
 
 
-//should probably move this one to the guest class    
-public void Writeadmin()throws IOException
-{
 
-        BufferedWriter out = new BufferedWriter(new FileWriter("admin.txt"));
-        out.write(this.toString());
-}
 
 public void Readadmin() throws IOException
 {
@@ -132,7 +115,7 @@ public void Readadmin() throws IOException
         while ((S = read.readLine()) != null)
         {
             System.out.println(S+"\n");
-
+            
         }
 
 }

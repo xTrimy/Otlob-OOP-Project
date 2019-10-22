@@ -21,6 +21,12 @@ public class Otlob {
 
     public static void main(String[] args)throws IOException 
     {
+        assistingClass obj = new assistingClass();
+        String searching = obj.search("smth","customer.txt");
+        System.out.print(searching);
+        
+        
+        
         User user;
         System.out.println("please choose which type of user you are");
         System.out.println("1)admin\n2)customer");

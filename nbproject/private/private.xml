@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Zeina%20Ayman/Documents/NetBeansProjects/Otlob-OOP-Project/src/otlob/Customer.java</file>
             <file>file:/C:/Users/Zeina%20Ayman/Documents/NetBeansProjects/Otlob-OOP-Project/src/otlob/Address.java</file>
             <file>file:/C:/Users/Zeina%20Ayman/Documents/NetBeansProjects/Otlob-OOP-Project/src/otlob/Navigator.java</file>
@@ -11,6 +12,16 @@
             <file>file:/C:/Users/Zeina%20Ayman/Documents/NetBeansProjects/Otlob-OOP-Project/src/otlob/meal.java</file>
             <file>file:/C:/Users/Zeina%20Ayman/Documents/NetBeansProjects/Otlob-OOP-Project/src/otlob/Admin.java</file>
             <file>file:/C:/Users/Zeina%20Ayman/Documents/NetBeansProjects/Otlob-OOP-Project/src/otlob/Otlob.java</file>
+=======
+            <file>file:/C:/Users/ahmed/Desktop/otlob%20oop/V%201.0/Otlob-OOP-Project-master/src/otlob/restaurant.java</file>
+            <file>file:/C:/Users/ahmed/Desktop/otlob%20oop/V%201.0/Otlob-OOP-Project-master/src/otlob/Customer.java</file>
+            <file>file:/C:/Users/ahmed/Desktop/otlob%20oop/V%201.0/Otlob-OOP-Project-master/src/otlob/Otlob.java</file>
+            <file>file:/C:/Users/ahmed/Desktop/otlob%20oop/V%201.0/Otlob-OOP-Project-master/src/otlob/meal.java</file>
+            <file>file:/C:/Users/ahmed/Desktop/otlob%20oop/V%201.0/Otlob-OOP-Project-master/src/otlob/User.java</file>
+            <file>file:/C:/Users/ahmed/Desktop/otlob%20oop/V%201.0/Otlob-OOP-Project-master/src/otlob/Admin.java</file>
+            <file>file:/C:/Users/ahmed/Desktop/otlob%20oop/V%201.0/Otlob-OOP-Project-master/src/otlob/costumerRating.java</file>
+            <file>file:/C:/Users/ahmed/Desktop/otlob%20oop/V%201.0/Otlob-OOP-Project-master/src/otlob/assistingClass.java</file>
+>>>>>>> 16aab8592341f9447213b10da39ca89815f0ad08
         </group>
     </open-files>
 </project-private>
