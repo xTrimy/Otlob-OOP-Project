@@ -193,7 +193,14 @@ public class Otlob {
                    if(ch == 1)
                    {
                         restaurant res = new restaurant();
-                        res.Readrestaurant();
+                        String[][] list = res.Readrestaurant();
+                        for(String[] line:list){
+                            for(String line2: line){
+                                System.out.print(line2);
+                            }
+                            System.out.print("\n");
+                        }
+
                     }
                    else if(ch ==2)
                    {

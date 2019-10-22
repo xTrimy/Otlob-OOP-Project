@@ -27,16 +27,13 @@ public class Customer extends User{
     
     public Customer()
     {
-        this.customerName = " ";
+        this.customerName = "";
         this.customerId = 0;
-        this.email = " ";
+        this.email = "";
     }
     
-    public   User getUser(String id) throws IOException
+    public User getUser(String id) throws IOException
     {
-        
-        
-        
         //customer 
         BufferedReader readobj = new BufferedReader(new FileReader("customer.txt"));
 

@@ -25,28 +25,28 @@ public class assistingClass {
         return size;
     }
     
-    public void resetSize(String fileName) throws IOException
-    {
-        File fileToBeModified = new File(fileName);
-        String oldSize = "";
-        
-       BufferedReader reader = new BufferedReader(new FileReader(fileToBeModified));
-       
-       String line = reader.readLine();
-
-        while (line != null)
-        {
-            oldSize = oldSize + line + System.lineSeparator();
-            line = reader.readLine();
-        }
-       // String newContent = oldSize.replaceAll(oldString, newString);
-        
-        FileWriter writer = new FileWriter(fileToBeModified);
-      //  writer.write(newContent);
-        reader.close();
-        writer.close();
-
-    }
+//    public void resetSize(String fileName) throws IOException
+//    {
+//        File fileToBeModified = new File(fileName);
+//        String oldSize = "";
+//        
+//       BufferedReader reader = new BufferedReader(new FileReader(fileToBeModified));
+//       
+//       String line = reader.readLine();
+//
+//        while (line != null)
+//        {
+//            oldSize = oldSize + line + System.lineSeparator();
+//            line = reader.readLine();
+//        }
+//       // String newContent = oldSize.replaceAll(oldString, newString);
+//        
+//        FileWriter writer = new FileWriter(fileToBeModified);
+//      //  writer.write(newContent);
+//        reader.close();
+//        writer.close();
+//
+//    }
     
 public String search(String arg,String fileName)throws IOException
 {
@@ -92,7 +92,7 @@ String passwordDecryption(String s)
     
     return d;
 }
-void writeFile(String arg,String fileName)throws IOException
+void writeFile(String arg/*Data*/,String fileName)throws IOException
 {
     BufferedWriter writer = new BufferedWriter(new FileWriter(fileName,true));
     writer.write(arg);
