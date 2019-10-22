@@ -40,6 +40,7 @@ public abstract class User {
     public abstract void writeUser() throws IOException;
     
     
+    @Override
     public String toString()
     {
         return String.format("%s,%s,%s",username,password,date);

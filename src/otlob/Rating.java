@@ -24,5 +24,4 @@ public class Rating {
                 rateId,restaurantId,deliveryTime,money,foodQuality);
     }
    
-   
 }

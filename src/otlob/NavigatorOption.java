@@ -23,6 +23,7 @@ public class NavigatorOption {
         setOption(option,type);
         this.typeId = typeId;
     }
+    @Override
     public String toString(){
         return String.format("%s,%s",option,type);
     }

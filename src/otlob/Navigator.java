@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package otlob;
-
+import java.io.*;
+import java.util.Scanner;
 /**
  *
  * @author PC
@@ -18,10 +19,12 @@ public class Navigator {
     private String Message = "-----Choose an option-----";
     public void Navigator(){
         this.page = 1;
-        this.type = "2";
-        this.typeId = 0;
+        this.type = "1";
+        this.typeId = 1;
+        getOptions();
     }
     public void getOptions(){
+        
         if(type == "1" /*Home*/){
             if(true /*checkLogin*/){
                 optionsSize = 4;
@@ -40,8 +43,25 @@ public class Navigator {
         }
 
         else if(type == "2"/*Login*/){
+            //Login code here
+            System.out.println("Login Page");
+        }
+        else if (type == "3"/*Sign Up */){
+            System.out.println("Sign Up Page");
+        }
+        else if (type == "4"/*Admin Login*/){
+            System.out.println("Admin Login Page");
+        }
+        else if(type == "5"/*Admin Sign Up*/){
+            System.out.println("Admin Sign Up Page");
+        }
+        else if(type == "6"/*View Restaurants*/){
+            System.out.println("View Restaurants");
             //get options from the files 
             //example: if you want to get restaurants available get restaurant name and id from files
+            //restaurant option = 61
+        }else{
+            go();
         }
     }
     public void display(){
@@ -50,8 +70,13 @@ public class Navigator {
         }
     }
     public void navigate(int option){
-        type = options[option].toString().split("\\,",-1)[1];
+        type = options[option].toString().split(",",-1)[1];
         getOptions();
         display();
+    }
+    public void go(){
+        Scanner input = new Scanner(System.in);
+        this.typeId = input.nextInt();
+        navigate(this.typeId);
     }
 }

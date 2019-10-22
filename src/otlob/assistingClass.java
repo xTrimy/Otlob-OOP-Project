@@ -92,7 +92,7 @@ String passwordDecryption(String s)
     
     return d;
 }
-void writeFile(String arg,String fileName)throws IOException
+void writeFile(String arg/*Data*/,String fileName)throws IOException
 {
     BufferedWriter writer = new BufferedWriter(new FileWriter(fileName,true));
     writer.write(arg);
@@ -179,6 +179,46 @@ String searchId(String Id,String fileName) throws IOException
                 e.printStackTrace();
             }
         }
+    }
+     
+     
+    public String[][] ReadFile(String fileName) throws IOException
+    {
+        File restaurants = new File(fileName);
+        String fileData = "";
+        BufferedReader reader = null;
+        try
+        {
+            reader = new BufferedReader(new FileReader(restaurants));
+            String line = reader.readLine();
+            while (line != null) 
+            {
+                fileData = fileData + line + System.lineSeparator();
+                 
+                line = reader.readLine();
+            }
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        String [] list = null;
+        String [][] result = null;
+        try
+        {
+            list = fileData.split(System.lineSeparator());
+            int size = list.length;
+            result = new String [size][]; 
+            int count = 0;
+            for (String line : list)
+            {
+                result [count] = line.split (",");
+                ++count;
+            }
+        }catch(Exception e){
+            System.out.print(e);
+            return null;
+        }
+        return result;
     }
     
 }

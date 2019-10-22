@@ -21,6 +21,16 @@ public class meal
     private static int quantity;
     private int restaurantId;
     
+    public meal(){
+        this.mealName = " ";
+        this.mealType = " ";
+        this.mealId = 0;
+        this.price = 0;
+        this.quantity = 0;
+        this.restaurantId = 0;
+    }
+    
+    
     //parametric constructor
     public meal(String N,String T,float pr,int quan)throws IOException
     {
