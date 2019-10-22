@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package otlob;
+import java.io.*;
 /**
  *
  * @author PC
@@ -17,6 +18,7 @@ public class Otlob {
     /**
      * @param args the command line arguments
      */
+
     public static void main(String[] args)throws IOException 
     {
         assistingClass obj = new assistingClass();
@@ -110,46 +112,61 @@ public class Otlob {
             }
         }
         else if(type == 2)
-        {
-            
+        {          
             System.out.println("enter 1 for signup and 2 for login");
             ch = input.nextByte();
 
             if(ch == 1)
             {
+                Scanner scan = new Scanner (new File("customer.txt"));
                 //prompting with spaces please!
                 //prompt for user information
-                String name,pass,mail,phoneNumber;
+                String name,FandLname,pass,mail,phoneNumber;
+                mail = " ";
+                String aN,aD,aL,bN,Ln;
                 
                 System.out.print("enter username: ");
                 name = input.next();
                 System.out.print("enter  pass: ");
                 pass = input.next();
-                System.out.print("enter  mail: ");
-                mail = input.next();
+                System.out.print("Enter First and Last name: ");
+                FandLname = input.next();
+                while (mail.equals(" ")) {
+                    System.out.print("enter  mail: ");
+                    mail = input.next();
+                    String existingEmail = scan.nextLine();
+                     if (mail.equals(existingEmail)) {
+                         System.err.println("Username already exists! Try Again.\n");
+                         mail = " ";
+                         break;
+                         }
+                }
+
+
                 System.out.print("enter phoneNumber: ");
                 phoneNumber = input.next();
 
                 //prompt for address
-                String aN,aD,aL,bN,Ln;
+                System.out.print("enter your address: ");
+                aL = input.next();
+                //  System.out.print("enter appartment description(optional): ");
+                //   aD = input.nextLine();
                 System.out.print("enter appartment number: ");
                 aN = input.next();
-              //  System.out.print("enter appartment description(optional): ");
-             //   aD = input.nextLine();
-                System.out.print("enter appartment location: ");
-                aL = input.next();
                 System.out.print("enter building number: ");
                 bN = input.next();
                 System.out.print("enter landLine number: ");
                 Ln = input.next();
 
                 //sign up !
-                Address location = new Address(aN,"test",aL,bN,Ln);
+                Address location = new Address(aL,"test",aN,bN,Ln);
                 
 
                   user = new Customer(name,mail,phoneNumber
-                        ,location,pass,name,LocalDate.now());
+                        ,location,pass,FandLname,LocalDate.now());
                 user.writeUser();
+                
+                //after sign up customer must be re-directed to login
             }
             else if(ch == 2)
             {
@@ -170,7 +187,7 @@ public class Otlob {
                {
                    user = user.getUser(id);
                    System.out.println("welcome, "+user.getUserName());
-                   System.out.println("1)toviewproducts\n2)to search restaurants");
+                   System.out.println("1)to view products\n2)to search restaurants");
                    ch = input.nextByte();
                    
                    if(ch == 1)
@@ -186,10 +203,10 @@ public class Otlob {
                 }
                    
             }
-        }   
-            
-    }
+
+        }
         
-}
+        }   
+    }
     
 

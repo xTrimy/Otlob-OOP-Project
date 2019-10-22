@@ -26,7 +26,7 @@ public class restaurant
     
     public restaurant(String n)throws IOException
     {
-        name =n;
+        name = n;
         assistingClass obj = new assistingClass();
         restaurantId = obj.getId("restaurant.txt") + 1;
         restaurantRating = 0;

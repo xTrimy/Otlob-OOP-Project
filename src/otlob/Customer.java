@@ -27,6 +27,9 @@ public class Customer extends User{
     
     public Customer()
     {
+        this.customerName = " ";
+        this.customerId = 0;
+        this.email = " ";
     }
     
     public   User getUser(String id) throws IOException
@@ -73,8 +76,8 @@ public class Customer extends User{
     {
         return customerId;
     }
-     public Customer(String cusname, String email, String phonNum,
-             Address loc,String pass, String uname, LocalDate myObj) throws IOException
+     public Customer(String uname, String email, String phonNum,
+             Address loc,String pass, String cusname, LocalDate myObj) throws IOException
     {
         super(pass, uname, myObj);
         this.customerName = cusname;
