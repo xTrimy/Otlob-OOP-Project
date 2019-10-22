@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-18
-=======
 19
->>>>>>> 16aab8592341f9447213b10da39ca89815f0ad08
 0,smth,ahmed,,mail
 1,password,ahmed,smth@domain.com 
 2,ssh,6adel,domain@smth 
@@ -19,13 +15,8 @@
 13,usre,ssad,2019-10-19,usre,testTest,13123
 14,blah,what,2019-10-19,blah,a@dmoi,123
 15,ss,123sd,2019-10-19,ss,@domian,123123123
-<<<<<<< HEAD
-16,zeina,123456,2019-10-21,zeina,zeina.ayman@hotmail.com,01211300998
-17,zeinaayman,1234,2019-10-21,zeina,zeina.ayman@hotmail.com,01211300998
-18,zeina,zadas,2019-10-21,zeinaayman,zeina.ayman@hotmail.com,01221
-=======
 16,ali,123,2019-10-21,ali,@domainsmth,12312345
 17,ahmed,pass,2019-10-21,ahmed,@domain,12312
 18,ahmed,qbtt,2019-10-21,ahmed,@odain,21321
 19,ahmed,ghi,2019-10-21,ahmed,@domain,21312
->>>>>>> 16aab8592341f9447213b10da39ca89815f0ad08
+
