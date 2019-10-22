@@ -131,17 +131,10 @@ public class Customer extends User{
 public void writeUser() throws IOException
 {
    assistingClass obj = new assistingClass();
-   //create the writing objects
-   FileWriter c = new FileWriter("customer.txt",true);
-   FileWriter c1 = new FileWriter("address.txt",true);
-   BufferedWriter Buffaddress = new BufferedWriter(c1);
-   BufferedWriter customerWriter = new BufferedWriter(c);
-
-   customerWriter.write(this.toString());
-   Buffaddress.write((customerId +1) +","+location.toString());
-
-   customerWriter.close();
-   Buffaddress.close();
+   
+   obj.writeFile(this.toString(), "customer.txt");
+   obj.writeFile((customerId +1) +","+location.toString(),"address.txt");
+   
    obj.modifyFile("customer.txt",Integer.toString(customerId -1), Integer.toString(customerId ));
    obj.modifyFile("address.txt",Integer.toString(customerId -1), Integer.toString(customerId ));
 
