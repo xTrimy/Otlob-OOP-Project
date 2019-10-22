@@ -22,9 +22,6 @@ public class Otlob {
     public static void main(String[] args)throws IOException 
     {
         assistingClass obj = new assistingClass();
-        String searching = obj.search("smth","customer.txt");
-        System.out.print(searching);
-        
         
         
         User user;
@@ -122,7 +119,6 @@ public class Otlob {
                 //prompting with spaces please!
                 //prompt for user information
                 String name,FandLname,pass,mail,phoneNumber;
-                mail = " ";
                 String aN,aD,aL,bN,Ln;
                 
                 System.out.print("enter username: ");
@@ -131,17 +127,15 @@ public class Otlob {
                 pass = input.next();
                 System.out.print("Enter First and Last name: ");
                 FandLname = input.next();
-                while (mail.equals(" ")) {
-                    System.out.print("enter  mail: ");
-                    mail = input.next();
-                    String existingEmail = scan.nextLine();
-                     if (mail.equals(existingEmail)) {
-                         System.err.println("Username already exists! Try Again.\n");
-                         mail = " ";
-                         break;
-                         }
+//              System.out.print("enter  mail: ");
+                mail = input.next();
+                boolean searchEmail = obj.search(mail,"customer.txt");
+                if(searchEmail)
+                {
+                    System.err.println("mail is already taken: ");
+                    
                 }
-
+              
 
                 System.out.print("enter phoneNumber: ");
                 phoneNumber = input.next();
