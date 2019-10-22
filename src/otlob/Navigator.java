@@ -40,8 +40,14 @@ public class Navigator {
         }
 
         else if(type == "2"/*Login*/){
+            //Login code here
+        }
+        
+        else if(type == "6"/*View Restaurant*/){
             //get options from the files 
             //example: if you want to get restaurants available get restaurant name and id from files
+            //restaurant option = 61
+            
         }
     }
     public void display(){

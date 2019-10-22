@@ -16,8 +16,7 @@ public class Admin extends User
     private String adminEmail;
     
     
-    public Admin()
-    {}
+    public Admin(){}
     
     
     
