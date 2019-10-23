@@ -21,7 +21,7 @@ public class restaurant
     
     public restaurant()
     {name = " ";
-        restaurantId =0;
+        restaurantId = 0;
         restaurantRating =0;
     }
     

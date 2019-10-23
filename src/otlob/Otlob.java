@@ -63,7 +63,28 @@ public class Otlob {
                    
                    if(ch == 1)
                    {
-                       return;
+                       int i=0;
+                       String [][] res = obj.ReadFile("restaurant.txt");
+                       String [][] meal = obj.ReadFile("meal.txt");
+                       int adminId = user.getUserId();
+                       System.out.println(adminId);
+                       System.out.println("Restaurant's name: " + res[adminId - 1][2]);
+                       System.out.println("Restaurant Products: ");
+                       
+                       for(String [] line: meal)
+                       {
+                           //System.out.println(line[0]);
+                           //System.out.println(adminId);
+                           try
+                           {
+                             if(line[0].equals(adminId))
+                             {
+                               System.out.println(i++ + ")" + line[2]);
+                               System.out.print("\n");
+                             }
+                           }catch(Exception e){continue;}
+                       }
+
                    }
                    else if(ch == 2)
                    {
@@ -76,7 +97,7 @@ public class Otlob {
                        mealType = input.next();
                        System.out.println("enter meal price: ");
                        price = input.nextFloat();
-                       System.out.println("enter mea; quantity: ");
+                       System.out.println("enter meal quantity: ");
                        quantity = input.nextInt();
                        
                         meal m = new meal(mealName,mealType,price,quantity);
@@ -207,13 +228,13 @@ public class Otlob {
                             
                             
                         }
-                        Byte choice ;
+                        Byte choice;
                         choice = input.nextByte();
                         String adminId = list[choice +1][0];                        
 
                         System.out.println("choose the meals which you "
                                 + "would like to add to cart\n to go to cart enter -1");
-                        int goTo = 0;
+                        int goTo = 1;
                         String choosedMeals = "";
                         String[][] listMeals = obj.ReadFile("meal.txt");
                         int i=0;
@@ -222,7 +243,9 @@ public class Otlob {
                                 {
                                     try
                                     {
-    //                                    System.out.println(x[0]);
+                                        //System.out.println(x[0]);
+                                        //System.out.println(adminId);
+                                      
 
                                         if(x[0].equals(adminId))
                                         {
@@ -238,7 +261,7 @@ public class Otlob {
                         {
                                     try
                                     {
-                                    choosedMeals = choosedMeals + ","+ listMeals[goTo + 1][2];
+                                    choosedMeals = choosedMeals + ","+ listMeals[goTo][2];
                                     }catch(Exception e){System.out.println("out of bounds");}
                                     goTo = input.nextInt();
                                    
