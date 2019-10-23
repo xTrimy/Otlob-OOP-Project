@@ -83,7 +83,7 @@ public abstract class User {
            }
 
         }
-        return "incorrect userName or password";
+        return "";
         
     }
     

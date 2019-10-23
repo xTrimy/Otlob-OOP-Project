@@ -28,7 +28,7 @@ public class Otlob {
         System.out.println("==== Please choose which type of user you are ====");
         System.out.println("1)Admin\n2)Customer");
         Scanner input = new Scanner(System.in);
-        
+        assistingClass obj = new assistingClass();
        
         byte type,ch;
         System.out.print(">");
@@ -51,20 +51,43 @@ public class Otlob {
                user = new Admin();
                String searchedId = user.LogIn("admin.txt", userName, password);
                //if matched returns the id else returns the following message
-               if(searchedId.equals("==== Incorrect Username or Password ===="))
+               if(searchedId.equals(""))
                {
-                   System.out.println(searchedId);
+                   System.out.println("==== Incorrect Username or Password ====");
                }
                else
                {
                    user = user.getUser(searchedId);
                    System.out.println("==== Welcome " + user.getUserName() + " =====");
-                   System.out.printf("==== Here you can manage your restaurant ====\n1)View Restaurant Products\n2)Add Restaurant Products  " );
+                   System.out.println("==== Here you can manage your restaurant ====\n1)View Restaurant Products\n2)Add Restaurant Products  " );
                    System.out.print(">");
                    ch = input.nextByte();
                    
                    if(ch == 1)
                    {
+                       int i=0;
+                       String [][] res = obj.ReadFile("restaurant.txt");
+                       String [][] meals = obj.ReadFile("meal.txt");
+                       int adminId = user.getUserId();
+                       System.out.println("====== Restaurant's Name: " + res[adminId - 1][2]+" ======");
+                       System.out.println("====== Restaurant Products: ======");
+                       for(String[] x : meals)
+                                {
+                                    try
+                                    {
+
+                                        if(Integer.parseInt(x[0]) == adminId)
+                                        {
+                                            System.out.println(i +"- "+x[2]+" | price: "+ x[4]);
+                                            i++;
+                                        }
+
+                                    }
+                                    catch(Exception e){
+                                    }
+                                    
+                                }
+
                        return;
                    }
                    else if(ch == 2)
@@ -180,9 +203,9 @@ public class Otlob {
                String id =  user.LogIn("customer.txt", userName, password);
                 
                 user = user.getUser(id);
-                if(id.equals("==== Incorrect Username or Password ===="))
+                if(id.equals(""))
                {
-                   System.out.println(id);
+                   System.out.println("==== Incorrect Username or Password ====");
                }
                else
                {
@@ -194,7 +217,7 @@ public class Otlob {
                    System.out.println("====== Please select from the following restaurants =====");
                    if(ch == 1)
                    {
-                        assistingClass obj = new assistingClass();
+                    
                      String[][] list = obj.ReadFile("restaurant.txt");
                         for(String[] line:list)
                         {
