@@ -284,32 +284,36 @@ public class Otlob {
                         String [] choosenIds = choosenMeals.split(",");
                         prodcutList L = new prodcutList(choosenIds);
                         L.display();
-                        
                         byte x;
                         System.out.println("1)Check Out\n2)Remove Product\n");
                         System.out.print(">");
-                        
                         x = input.nextByte();
-                        
-                        if(x == 1)
-                        {
-                        }
-                        else if(x == 2) 
-                        {
-                            System.out.println("===== Please choose what you want to remove: =====");
-                            System.out.println("(enter -1 to exit)");
+                        while(x == 2){
+                            if(x == 1)
+                            {
+                                //checkout code here
+                            }
+                            else if(x == 2) 
+                            {
+                                byte y;
+                                System.out.println("===== Please choose what you want to remove: =====");
+                                System.out.println("(enter -1 to exit)");
+                                System.out.print(">");
+                                y = input.nextByte();
+                                while(y != -1){
+                                    choosenMeals = choosenMeals.replaceFirst((choosenIds[y-1]+","), "");
+                                    System.out.print(">");
+                                    y = input.nextByte();
+                                }
+                                choosenIds = choosenMeals.split(",");
+                                L = new prodcutList(choosenIds);
+                                L.display();
+                            }
+                            System.out.println("1)Check Out\n2)Remove Product\n");
                             System.out.print(">");
                             x = input.nextByte();
-                            while(x != -1){
-                                choosenMeals = choosenMeals.replaceFirst((choosenIds[x-1]+","), "");
-                                System.out.print(">");
-                                x = input.nextByte();
-                            }
-                            choosenIds = choosenMeals.split(",");
-                            L = new prodcutList(choosenIds);
-                            L.display();
-                            
                         }
+
                     }
                 }
 
