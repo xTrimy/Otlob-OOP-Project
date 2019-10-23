@@ -5,24 +5,25 @@
  */
 package otlob;
 
+import java.io.*;
+
 /**
  *
  * @author ahmed
  */
 public class cart
 {
-    private int restaurantId;
-    private int productId;
     
-    public void addItem()
-    {
-        
+    private int totalPrice;
+    meal  mealList[] = new meal[20];
     
-    }
-    public void DeleteItem()
+    cart(String [] id)throws IOException
     {
+       // requestedQuantity = i;
         
     }
+    
+    
     public void Totalprice()
     {
         

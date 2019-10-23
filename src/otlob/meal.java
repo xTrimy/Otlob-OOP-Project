@@ -39,26 +39,29 @@ public class meal
         mealName = N;
         mealType = T;
         mealId= obj.getId("meal.txt") +1;
-        
         price = pr;
         quantity = quan;
     }
     
     
-public void writeToMeals(String adminId) throws IOException
-{
-    assistingClass obj = new assistingClass();
+    public void displayMeals()
+    {
+        System.out.printf("%s,%s,%s\n",mealName,mealType,price);
+    }
+    
+    public void writeToMeals(String adminId) throws IOException
+    {
+        assistingClass obj = new assistingClass();
 
-    FileWriter res = new FileWriter("meal.txt",true);
-    
-    BufferedWriter writer = new BufferedWriter(res);
-    
-    writer.write(adminId + "," + this.toString());
-    obj.modifyFile("meal.txt",   Integer.toString(mealId -1), Integer.toString(mealId ));
-    writer.close();
-    
-    
-}
+        FileWriter res = new FileWriter("meal.txt",true);
+
+        BufferedWriter writer = new BufferedWriter(res);
+
+        writer.write(adminId + "," + this.toString());
+        obj.modifyFile("meal.txt",Integer.toString(mealId -1), Integer.toString(mealId ));
+        writer.close();
+
+    }
 
     
     

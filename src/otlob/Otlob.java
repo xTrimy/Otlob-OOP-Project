@@ -217,7 +217,7 @@ public class Otlob {
                         System.out.println("choose the meals which you "
                                 + "would like to add to cart\n to go to cart enter -1");
                         int goTo = 0;
-                        String choosedMeals = "";
+                        String choosenMeals = "" ;
                         String[][] listMeals = obj.ReadFile("meal.txt");
                                                             int i=0;
 
@@ -229,7 +229,8 @@ public class Otlob {
 
                                         if(x[0].equals(adminId))
                                         {
-                                            System.out.println(i++ +")"+x[2]+" price: "+ x[4]);
+                                            System.out.println(i +")"+x[2]+" price: "+ x[4]);
+                                            i++;
                                         }
 
                                     }
@@ -237,16 +238,37 @@ public class Otlob {
                                     
                                 }
                                 goTo = input.nextInt();
+                                i=0;
                         while(goTo != -1)
                         {
                                     try
                                     {
-                                    choosedMeals = choosedMeals + ","+ listMeals[goTo + 1][2];
+                                        choosenMeals += listMeals[goTo + 1][1] + ",";
                                     }catch(Exception e){System.out.println("out of bounds");}
                                     goTo = input.nextInt();
                                    
                         }
-                        System.out.println(choosedMeals);
+                        
+                        String [] choosenIds = choosenMeals.split(",");
+                        
+                       // for(String x : choosenIds)
+                       //     System.out.println(x);
+                        
+                        prodcutList L = new prodcutList(choosenIds);
+                        L.display();
+                        
+                        byte x;
+                        System.out.println("1)checkOut\n2)removeProduct\n?");
+                        x = input.nextByte();
+                        
+                        if(x == 1)
+                        {
+                            
+                        }
+                        else 
+                        {
+                            
+                        }
                     }
                 }
 
