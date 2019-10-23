@@ -9,6 +9,12 @@ package otlob;
  *
  * @author PC
  */
-public class restaurantRating {
-    
+public class restaurantRating extends Rating {
+    private float averageRating;
+    public void restaturantRating(){
+    //set average rating
+    }
+    public float getRating(){
+        return averageRating;
+    }
 }

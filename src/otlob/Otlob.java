@@ -21,6 +21,7 @@ public class Otlob {
 
     public static void main(String[] args)throws IOException 
     {
+
         assistingClass obj = new assistingClass();
         
         
@@ -184,23 +185,79 @@ public class Otlob {
                    System.out.println("1)to view products\n2)to search restaurants");
                    ch = input.nextByte();
                    
+                   
+                   System.out.println("please select from the following restaurants");
                    if(ch == 1)
                    {
-                        restaurant res = new restaurant();
-                        res.Readrestaurant();
+                        String[][] list = obj.ReadFile("restaurant.txt");
+                        for(String[] line:list)
+                        {
+                            try
+                            {
+                            System.out.print(line[1]+")"+line[2]);
+//                            for(String line2: line){
+//                                System.out.print(line2);
+//                            }
+                            }
+                            catch(Exception e)
+                            {continue ;}
+                            System.out.print("\n");
+                            //prompt for choice 
+                            
+                            
+                            
+                        }
+                        Byte choice ;
+                        choice = input.nextByte();
+                        String adminId = list[choice +1][0];                        
+
+                        System.out.println("choose the meals which you "
+                                + "would like to add to cart\n to go to cart enter -1");
+                        int goTo = 0;
+                        String choosedMeals = "";
+                        String[][] listMeals = obj.ReadFile("meal.txt");
+                        int i=0;
+
+                                for(String[] x : listMeals)
+                                {
+                                    try
+                                    {
+    //                                    System.out.println(x[0]);
+
+                                        if(x[0].equals(adminId))
+                                        {
+                                            System.out.println(i++ +")"+x[2]+" price: "+ x[4]);
+                                        }
+
+                                    }
+                                    catch(Exception e){continue;}
+                                    
+                                }
+                                goTo = input.nextInt();
+                        while(goTo != -1)
+                        {
+                                    try
+                                    {
+                                    choosedMeals = choosedMeals + ","+ listMeals[goTo + 1][2];
+                                    }catch(Exception e){System.out.println("out of bounds");}
+                                    goTo = input.nextInt();
+                                   
+                        }
+                        System.out.println(choosedMeals);
                     }
+                }
+
+            }
                    else if(ch ==2)
                    {
                        
                        
                    }
-                }
-                   
-            }
-
         }
-        
-        }   
+                   
     }
+
+}
+       
     
 

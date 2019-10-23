@@ -27,16 +27,13 @@ public class Customer extends User{
     
     public Customer()
     {
-        this.customerName = " ";
+        this.customerName = "";
         this.customerId = 0;
-        this.email = " ";
+        this.email = "";
     }
     
-    public   User getUser(String id) throws IOException
+    public User getUser(String id) throws IOException
     {
-        
-        
-        
         //customer 
         BufferedReader readobj = new BufferedReader(new FileReader("customer.txt"));
 
@@ -83,7 +80,7 @@ public class Customer extends User{
         this.customerName = cusname;
         assistingClass obj = new assistingClass();
         //+1 for the printing
-        this.customerId  =  obj.getId("customer.txt") +1;
+        this.customerId  =  obj.getId("customer.txt")+1;
         this.email       = email;
         this.phoneNum  = phonNum;
         this.location = loc;
@@ -136,7 +133,7 @@ public void writeUser() throws IOException
    assistingClass obj = new assistingClass();
    
    obj.writeFile(this.toString(), "customer.txt");
-   obj.writeFile((customerId +1) +","+location.toString(),"address.txt");
+   obj.writeFile((customerId ) +","+location.toString(),"address.txt");
    
    obj.modifyFile("customer.txt",Integer.toString(customerId -1), Integer.toString(customerId ));
    obj.modifyFile("address.txt",Integer.toString(customerId -1), Integer.toString(customerId ));

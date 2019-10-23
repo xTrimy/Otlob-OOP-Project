@@ -24,6 +24,6 @@ public class cash implements payment
     }
     public void Transaction()
     {
-        //order will be ready in 60 mins
+
     }
 }

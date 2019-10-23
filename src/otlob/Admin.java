@@ -16,20 +16,20 @@ public class Admin extends User
     private String adminName;
     private String adminEmail;
     private restaurant R ;
-
-
+    final String adminFile = "admin.txt";
     
     public Admin(){}
     
-    public   User getUser(String id) throws IOException
+
+    public User getUser(String id) throws IOException
     {
         
         
         //customer 
-        BufferedReader readobj = new BufferedReader(new FileReader("admin.txt"));
-
+        //------Reading from file (START)------
+        BufferedReader readObj = new BufferedReader(new FileReader(adminFile));
         String s;
-        while((s = readobj.readLine()) != null)
+        while((s = readObj.readLine()) != null)
         {
             //try because the first iteration iterates over the first line which is the size
           try
@@ -54,18 +54,19 @@ public class Admin extends User
            }
 
         }
+        //-------Reading from file (END)------
         
         return null;
     }
-    
 
-public Admin(String aN, String aE, String pass
-        , String uname,String resName)throws IOException
+ 
+public Admin(String aN/*Admin Name*/, String aE/*Admin Email*/, String pass
+        , String uname,String resName/*Restaurant Name*/)throws IOException
 {
     super(pass, uname, LocalDate.now());
     //getting the Id of the admin and adding one to print in a file
     assistingClass obj = new assistingClass();
-    this.adminId  =  obj.getId("admin.txt") +1;
+    this.adminId  =  obj.getId(adminFile) +1;
 
     adminEmail = aE;
     adminName = aN;
@@ -81,10 +82,10 @@ public void writeUser() throws IOException
 {
     
     assistingClass obj = new assistingClass();
-    obj.writeFile(this.toString(), "admin.txt");
+    obj.writeFile(this.toString(), adminFile);
     writeToRestaurant();
     //previous admin id replace with the new incremented one in the constructor
-    obj.modifyFile("admin.txt",Integer.toString(adminId -1), Integer.toString(adminId));
+    obj.modifyFile(adminFile,Integer.toString(adminId -1), Integer.toString(adminId));
 
 }
 
