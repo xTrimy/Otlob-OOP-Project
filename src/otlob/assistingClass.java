@@ -142,6 +142,7 @@ String searchId(String Id,String fileName) throws IOException
             reader = new BufferedReader(new FileReader(fileToBeModified));
             //Reading all the lines of input text file into oldContent
             String line = reader.readLine();
+            
             //read all of the file !
            while (line != null) 
             {
@@ -178,6 +179,56 @@ String searchId(String Id,String fileName) throws IOException
                 e.printStackTrace();
             }
         }
+    }
+     
+     //ReadFile returns a 2d array 
+    public String[][] ReadFile(String fileName) throws IOException
+    {
+        //create the file objects
+        File restaurants = new File(fileName);
+        String fileData = "";
+        BufferedReader reader = null;
+        try
+        {
+            reader = new BufferedReader(new FileReader(restaurants));
+            String line = reader.readLine();
+            //read the whole file and store it into a string
+            while (line != null) 
+            {
+                //line separator in windows is \n
+
+                fileData = fileData + line + System.lineSeparator();
+                line = reader.readLine();
+
+            }
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        //make a 1d list
+        String [] list = null;
+        //make a 2d list
+        String [][] result = null;
+        try
+        {
+            //list has all lines in a single String
+            list = fileData.split(System.lineSeparator());
+            
+            int size = list.length;
+            //2d array to store the rows and columns
+            result = new String [size][]; 
+            int count = 0;
+            //iterate and put everything in a 2d array
+            for (String line : list)
+            {
+                result [count] = line.split (",");
+                ++count;
+            }
+        }catch(Exception e){
+            System.out.print(e);
+            return null;
+        }
+        return result;
     }
     
 }

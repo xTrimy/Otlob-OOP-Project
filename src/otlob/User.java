@@ -43,7 +43,6 @@ public abstract class User {
     @Override
     public String toString()
     {
-        assistingClass obj = new assistingClass();
         return String.format("%s,%s,%s",username,password,date);
     }
     
