@@ -67,7 +67,6 @@ public class Otlob {
                        String [][] res = obj.ReadFile("restaurant.txt");
                        String [][] meal = obj.ReadFile("meal.txt");
                        int adminId = user.getUserId();
-                       System.out.println(adminId);
                        System.out.println("Restaurant's name: " + res[adminId - 1][2]);
                        System.out.println("Restaurant Products: ");
                        
