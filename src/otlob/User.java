@@ -23,13 +23,13 @@ public abstract class User {
         
     }
     
-    public User(String pass, String uname, LocalDate myObj)
+    public User(String pass, String uname, LocalDate myDate)
     {
         password = pass;
         username = uname;
         
         
-        this.date = myObj;
+        this.date = myDate;
     }
     
     public abstract User getUser(String id) throws IOException;
@@ -46,9 +46,6 @@ public abstract class User {
         return String.format("%s,%s,%s",username,password,date);
     }
     
-    public Boolean verifylogin(){
-        return true;
-    }
     
     public int changePassword(){
         return 0;

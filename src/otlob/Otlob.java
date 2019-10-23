@@ -21,14 +21,11 @@ public class Otlob {
 
     public static void main(String[] args)throws IOException 
     {
-        
-        
-        
+        assistingClass obj = new assistingClass();
         User user;
         System.out.println("please choose which type of user you are");
         System.out.println("1)admin\n2)customer");
         Scanner input = new Scanner(System.in);
-        
        
         byte type,ch;
         type = input.nextByte();
@@ -59,11 +56,13 @@ public class Otlob {
                    System.out.println("welcome " + user.getUserName());
                    System.out.printf("here you can manage your restaurant\n1)view restaurant products\n2)add restaurant products  " );
                    ch = input.nextByte();
-                   
+                   //view meals
                    if(ch == 1)
                    {
-                       return;
+                       
+ 
                    }
+                   //adding meals 
                    else if(ch == 2)
                    {
                        String mealName,mealType;
@@ -128,16 +127,19 @@ public class Otlob {
                 pass = input.next();
                 System.out.print("Enter First and Last name: ");
                 FandLname = input.next();
-                while (mail.equals(" ")) {
+                
                     System.out.print("enter  mail: ");
                     mail = input.next();
-                    String existingEmail = scan.nextLine();
-                     if (mail.equals(existingEmail)) {
-                         System.err.println("Username already exists! Try Again.\n");
-                         mail = " ";
-                         break;
-                         }
-                }
+                    
+            //        assistingClass obj = new assistingClass();
+                    
+                    while(obj.search(mail, "customer.txt").equals(mail))
+                    {
+                        System.out.println("email is taken please choose another: ");
+                        mail = input.next();
+                    }
+                
+                
 
 
                 System.out.print("enter phoneNumber: ");
@@ -191,7 +193,7 @@ public class Otlob {
                    System.out.println("please select from the following restaurants");
                    if(ch == 1)
                    {
-                        assistingClass obj = new assistingClass();
+                   //     assistingClass obj = new assistingClass();
                      String[][] list = obj.ReadFile("restaurant.txt");
                         for(String[] line:list)
                         {
@@ -220,7 +222,7 @@ public class Otlob {
                         String choosenMeals = "" ;
                         String[][] listMeals = obj.ReadFile("meal.txt");
                                                             int i=0;
-
+                                  //for each meal in list meals                          
                                 for(String[] x : listMeals)
                                 {
                                     try

@@ -5,4 +5,4 @@
 6,3,asd,fgg,34.0,55
 6,4,meal,sdsd,22.0,344
 1,5,asd,ggh,34.0,22
-1,6,haborgar,smth,33.0,2
+1,6,haborgar,smth,33.0

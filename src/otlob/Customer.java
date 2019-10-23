@@ -32,6 +32,7 @@ public class Customer extends User{
         this.email = "";
     }
     
+    //takes a string id
     public User getUser(String id) throws IOException
     {
         //customer 
@@ -130,11 +131,12 @@ public class Customer extends User{
     
 public void writeUser() throws IOException
 {
+    //make an object called assistingClass
    assistingClass obj = new assistingClass();
-   
+   //write the contents of the file
    obj.writeFile(this.toString(), "customer.txt");
    obj.writeFile((customerId ) +","+location.toString(),"address.txt");
-   
+   //modify
    obj.modifyFile("customer.txt",Integer.toString(customerId -1), Integer.toString(customerId ));
    obj.modifyFile("address.txt",Integer.toString(customerId -1), Integer.toString(customerId ));
 
