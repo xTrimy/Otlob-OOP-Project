@@ -29,7 +29,6 @@ public class Otlob {
         System.out.println("1)Admin\n2)Customer");
         Scanner input = new Scanner(System.in);
         assistingClass obj = new assistingClass();
-       
         byte type,ch;
         System.out.print(">");
         type = input.nextByte();
@@ -62,51 +61,52 @@ public class Otlob {
                    System.out.println("==== Here you can manage your restaurant ====\n1)View Restaurant Products\n2)Add Restaurant Products  " );
                    System.out.print(">");
                    ch = input.nextByte();
-                   
-                   if(ch == 1)
-                   {
-                       int i=0;
-                       String [][] res = obj.ReadFile("restaurant.txt");
-                       String [][] meals = obj.ReadFile("meal.txt");
-                       int adminId = user.getUserId();
-                       System.out.println("====== Restaurant's Name: " + res[adminId - 1][2]+" ======");
-                       System.out.println("====== Restaurant Products: ======");
-                       for(String[] x : meals)
-                                {
-                                    try
-                                    {
+                   while(true){
+                        if(ch == 1)
+                        {
+                            int i=0;
+                            String [][] res = obj.ReadFile("restaurant.txt");
+                            String [][] meals = obj.ReadFile("meal.txt");
+                            int adminId = user.getUserId();
+                            System.out.println("====== Restaurant's Name: " + res[adminId - 1][2]+" ======");
+                            System.out.println("====== Restaurant Products: ======");
+                            for(String[] x : meals)
+                                     {
+                                         try
+                                         {
 
-                                        if(Integer.parseInt(x[0]) == adminId)
-                                        {
-                                            System.out.println(i +"- "+x[2]+" | price: "+ x[4]);
-                                            i++;
-                                        }
+                                             if(Integer.parseInt(x[0]) == adminId)
+                                             {
+                                                 System.out.println(i +"- "+x[2]+" | price: "+ x[4]);
+                                                 i++;
+                                             }
 
-                                    }
-                                    catch(Exception e){
-                                    }
-                                    
-                                }
+                                         }
+                                         catch(Exception e){
+                                         }
+                                     }
+                        }
+                        else if(ch == 2)
+                        {
+                            String mealName,mealType;
+                            float price;
+                            int quantity;
+                            System.out.println("Enter Meal Name: ");
+                            mealName = input.next();
+                            System.out.println("Enter Meal Type: ");
+                            mealType = input.next();
+                            System.out.println("Enter Meal Price: ");
+                            price = input.nextFloat();
+                            System.out.println("Enter Meal quantity: ");
+                            quantity = input.nextInt();
 
-                       return;
-                   }
-                   else if(ch == 2)
-                   {
-                       String mealName,mealType;
-                       float price;
-                       int quantity;
-                       System.out.println("Enter Meal Name: ");
-                       mealName = input.next();
-                       System.out.println("Enter Meal Type: ");
-                       mealType = input.next();
-                       System.out.println("Enter Meal Price: ");
-                       price = input.nextFloat();
-                       System.out.println("Enter Meal quantity: ");
-                       quantity = input.nextInt();
-                       
-                        meal m = new meal(mealName,mealType,price,quantity);
-                        m.writeToMeals(Integer.toString(user.getUserId()));
-                   }
+                             meal m = new meal(mealName,mealType,price,quantity);
+                             m.writeToMeals(Integer.toString(user.getUserId()));
+                         }
+                    System.out.println("1)View Restaurant Products\n2)Add Restaurant Products  " );
+                    System.out.print(">");
+                    ch = input.nextByte();
+                    }
                    
                }
 
@@ -155,18 +155,12 @@ public class Otlob {
                 pass = input.next();
                 System.out.print("Enter First and Last name: ");
                 FandLname = input.next();
-                while (mail.equals(" ")) {
-                    System.out.print("Enter  Email: ");
+                System.out.print("Enter Email: ");
+                mail = input.next();
+                while(obj.search(mail, "customer.txt").equals(mail)){
+                    System.out.println("email is taken please choose another: ");
                     mail = input.next();
-                    String existingEmail = scan.nextLine();
-                     if (mail.equals(existingEmail)) {
-                         System.err.println("Username already exists! Try Again.\n");
-                         mail = " ";
-                         break;
-                         }
-                }
-
-
+               }
                 System.out.print("Enter Phone Number: ");
                 phoneNumber = input.next();
 
@@ -233,8 +227,6 @@ public class Otlob {
                             System.out.print("\n");
                             //prompt for choice 
                             
-                            
-                            
                         }
                         Byte choice ;
                         System.out.print(">");
@@ -265,7 +257,6 @@ public class Otlob {
                                     }
                                     catch(Exception e){
                                     }
-                                    
                                 }
                                 String[] restaurantMealsIds = restaurantMeals.split(",");
                                 System.out.print(">");
@@ -313,20 +304,11 @@ public class Otlob {
                             System.out.print(">");
                             x = input.nextByte();
                         }
-
                     }
                 }
-
             }
-                   else if(ch ==2)
-                   {
-                       
-                       
-                   }
         }
-                   
     }
-
 }
        
     
