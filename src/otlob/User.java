@@ -58,7 +58,7 @@ public abstract class User {
     {
         //customer 
         BufferedReader readobj = new BufferedReader(new FileReader(fileName));
-                            boolean match = false;
+        boolean match = false;
 
         String s;
         //assistingClass obj = new assistingClass();

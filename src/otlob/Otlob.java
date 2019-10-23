@@ -258,7 +258,7 @@ public class Otlob {
                                         if(x[0].equals(adminId))
                                         {
                                             restaurantMeals = restaurantMeals+ x[1]+",";
-                                            System.out.println(i +")"+x[2]+" price: "+ x[4]);
+                                            System.out.println(i +")"+x[2]+" | price: "+ x[4]);
                                             i++;
                                         }
 
@@ -286,16 +286,28 @@ public class Otlob {
                         L.display();
                         
                         byte x;
-                        System.out.println("1)Check Out\n2)Remove Product\n?");
+                        System.out.println("1)Check Out\n2)Remove Product\n");
                         System.out.print(">");
+                        
                         x = input.nextByte();
                         
                         if(x == 1)
                         {
-                            
                         }
-                        else 
+                        else if(x == 2) 
                         {
+                            System.out.println("===== Please choose what you want to remove: =====");
+                            System.out.println("(enter -1 to exit)");
+                            System.out.print(">");
+                            x = input.nextByte();
+                            while(x != -1){
+                                choosenMeals = choosenMeals.replaceFirst((choosenIds[x-1]+","), "");
+                                System.out.print(">");
+                                x = input.nextByte();
+                            }
+                            choosenIds = choosenMeals.split(",");
+                            L = new prodcutList(choosenIds);
+                            L.display();
                             
                         }
                     }

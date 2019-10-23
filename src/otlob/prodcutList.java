@@ -56,11 +56,11 @@ public class prodcutList
     {
         try
         {
+        int i = 1;
         for(meal m : mealList)
         {
-            
+            System.out.print(i++ + ")");
             m.displayMeals();
-            
         }
         }catch(java.lang.NullPointerException exception){}
         System.out.println("--Requested Quantity: "+ requestedQuantity+"--");
