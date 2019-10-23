@@ -219,7 +219,8 @@ public class Otlob {
                         int goTo = 0;
                         String choosenMeals = "" ;
                         String[][] listMeals = obj.ReadFile("meal.txt");
-                                                            int i=0;
+                        String restaurantMeals = "";
+                        int i=0;
 
                                 for(String[] x : listMeals)
                                 {
@@ -229,31 +230,28 @@ public class Otlob {
 
                                         if(x[0].equals(adminId))
                                         {
+                                            restaurantMeals = restaurantMeals+ x[1]+",";
                                             System.out.println(i +")"+x[2]+" price: "+ x[4]);
                                             i++;
                                         }
 
                                     }
-                                    catch(Exception e){continue;}
+                                    catch(Exception e){System.out.println(e);}
                                     
                                 }
+                                String[] restaurantMealsIds = restaurantMeals.split(",");
                                 goTo = input.nextInt();
                                 i=0;
                         while(goTo != -1)
                         {
                                     try
                                     {
-                                        choosenMeals += listMeals[goTo + 1][1] + ",";
-                                    }catch(Exception e){System.out.println("out of bounds");}
+                                        choosenMeals += restaurantMealsIds[goTo] + ",";
+                                    }catch(Exception e){}
                                     goTo = input.nextInt();
                                    
                         }
-                        
                         String [] choosenIds = choosenMeals.split(",");
-                        
-                       // for(String x : choosenIds)
-                       //     System.out.println(x);
-                        
                         prodcutList L = new prodcutList(choosenIds);
                         L.display();
                         

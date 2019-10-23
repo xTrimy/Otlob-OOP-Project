@@ -28,7 +28,6 @@ public class prodcutList
     prodcutList(String [] id)throws IOException
     {
         BufferedReader r = new BufferedReader(new FileReader("meal.txt"));
-        
         String [] list ;
         String S;
         //id iterator
@@ -39,28 +38,18 @@ public class prodcutList
         while((S = r.readLine()) != null)
         {
             list = S.split(",");
-
-                try
-                    {
-
-                if(list[1].equals(id[i]))
-                {
-                   
+            try {
+                if(list[1].equals(id[i])){
                     mealList[i] = new meal(list[2],list[3],Float.parseFloat(list[4]),
                     Integer.parseInt(list[5]));
-                          totalPrice += Float.parseFloat(list[4]);   
-                            i++;
-                   
-
+                    totalPrice += Float.parseFloat(list[4]);   
+                    i++;
+                    r = new BufferedReader(new FileReader("meal.txt"));
                 }     
-
-                    }catch(Exception e){System.out.println("out of bounds");}           
-
+            }catch(Exception e){}           
         }
         requestedQuantity = i;
-        
     }
-    
     
     
     public void display()
