@@ -11,13 +11,18 @@ import java.time.*;
  */
 
 //InoviceType
-public class Invoice {
+public class Invoice 
+{
     private float subTotal;
     private float deliveryFee;
     private String paymentMethod;
     private LocalDate date;    
     private LocalTime time;
+    
     public String getData(){
         return subTotal+","+deliveryFee+","+paymentMethod+","+date+","+time;
     }
+    
+    
+    
 }
