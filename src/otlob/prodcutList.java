@@ -63,8 +63,8 @@ public class prodcutList
             
         }
         }catch(java.lang.NullPointerException exception){}
-        System.out.println("requested quantity: "+ requestedQuantity);
-        System.out.println("total price: "+ totalPrice);
+        System.out.println("--Requested Quantity: "+ requestedQuantity+"--");
+        System.out.println("--Total Price: "+ totalPrice+"--");
     }
     
     
