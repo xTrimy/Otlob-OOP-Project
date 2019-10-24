@@ -94,12 +94,16 @@ String passwordDecryption(String s)
 }
 void writeFile(String arg/*Data*/,String fileName)throws IOException
 {
-    BufferedWriter writer = new BufferedWriter(new FileWriter(fileName,true));
+    writeFile(arg,fileName,true);
+}
+
+void writeFile(String arg/*Data*/,String fileName,boolean app)throws IOException
+{
+    BufferedWriter writer = new BufferedWriter(new FileWriter(fileName,app));
     writer.write(arg);
     writer.close();
-    
-    
 }
+
 String searchId(String Id,String fileName) throws IOException
 {
    BufferedReader obj = new BufferedReader(new FileReader(fileName));

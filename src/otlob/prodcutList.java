@@ -83,5 +83,21 @@ public class prodcutList
         
     }
     
+    public void writemeal()throws IOException
+    {
+        assistingClass obj = new assistingClass();
+        obj.writeFile(this.toString(), "requestedProducts.txt",false);
+        
+    }
     
+    
+    @Override
+    public String toString(){
+        String s = String.format("%s|%s\n",requestedQuantity,totalPrice);
+        for(int i=0;i < requestedQuantity;i++)
+        {
+            s +=  mealList[i].toString();
+        }
+        return s;
+    }
 }
