@@ -67,7 +67,10 @@ public class prodcutList
         System.out.println("--Total Price: "+ totalPrice+"--");
     }
     
-    
+    public float getTotalPrice()
+    {
+        return totalPrice;
+    }
     
     public void addMeal()
     {

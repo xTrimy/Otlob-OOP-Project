@@ -48,7 +48,7 @@ public class assistingClass {
 //
 //    }
     
-public boolean search(String arg,String fileName)throws IOException
+public String search(String arg,String fileName)throws IOException
 {
     int count =0;
     BufferedReader obj = new BufferedReader(new FileReader(fileName));
@@ -63,11 +63,11 @@ public boolean search(String arg,String fileName)throws IOException
             {
                 if(x.equals(arg))
                 {
-                    return true;
+                    return x;
                 }
             }
     }
-    return false; //-1 
+    return "not found"; //-1 
 }
 //not used yet 
 String passwordEncyption(String s)
