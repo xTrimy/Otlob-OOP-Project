@@ -21,14 +21,14 @@ public class Otlob {
 
     public static void main(String[] args)throws IOException 
     {
-        
-        
-        
+
         User user;
-        System.out.println("==== Please choose which type of user you are ====");
+        System.out.println("==== Continue as ====");
         System.out.println("1)Admin\n2)Customer");
         Scanner input = new Scanner(System.in);
+
         assistingClass obj = new assistingClass();
+
         byte type,ch;
         System.out.print(">");
         type = input.nextByte();
@@ -37,17 +37,27 @@ public class Otlob {
         {
             
             //the admin section
-            System.out.println("1)Login\n2)Sign Up");
+            System.out.println("1)Sign up\n2)Login");
             System.out.print(">");
             ch = input.nextByte();
+            user = new Admin();
             if(ch == 1)
             {
-                System.out.println("Enter Username: ");
+               user = new Admin();
+               user.Signup();
+               ch = 2;
+            }
+                 
+             if(ch == 2)
+            {
+                System.out.println("======= Login ========");
+                //prompt for user information
+               System.out.println("Enter Username: ");
                 String userName = input.next();
                 System.out.println("Enter Password: ");
                 String password = input.next();
                 
-               user = new Admin();
+
                String searchedId = user.LogIn("admin.txt", userName, password);
                //if matched returns the id else returns the following message
                if(searchedId.equals(""))
@@ -61,6 +71,7 @@ public class Otlob {
                    System.out.println("==== Here you can manage your restaurant ====\n1)View Restaurant Products\n2)Add Restaurant Products  " );
                    System.out.print(">");
                    ch = input.nextByte();
+
                    while(true){
                         if(ch == 1)
                         {
@@ -85,8 +96,7 @@ public class Otlob {
                                          catch(Exception e){
                                          }
                                      }
-                        }
-                        else if(ch == 2)
+                        }else if(ch == 2)
                         {
                             String mealName,mealType;
                             float price;
@@ -102,98 +112,40 @@ public class Otlob {
 
                              meal m = new meal(mealName,mealType,price,quantity);
                              m.writeToMeals(Integer.toString(user.getUserId()));
-                         }
+                        }
+
                     System.out.println("1)View Restaurant Products\n2)Add Restaurant Products  " );
                     System.out.print(">");
                     ch = input.nextByte();
                     }
-                   
                }
 
             }     
-            else if(ch == 2)
-            {
-                //prompt for user information
-               String name,pass,mail,phoneNumber;
-               String resName;
-               System.out.print("Enter Username: ");
-               name = input.next();
-               System.out.print("Enter  Pass: ");
-               pass = input.next();
-               System.out.print("Enter  Mail: ");
-               mail = input.next();
-               System.out.print("Enter Phone Number: ");
-               phoneNumber = input.next();
-               System.out.print("Enter Restaurant Name: ");
-               resName = input.next();
                
-               
-                  user = new Admin(name,mail,
-                        pass,name,resName);
-                user.writeUser();
-               
-            }
+            
         }
         else if(type == 2)
         {          
             System.out.println("1) Sign Up\n2) Login");
             System.out.print(">");
             ch = input.nextByte();
-
+            user = new Customer();
             if(ch == 1)
             {
-                Scanner scan = new Scanner (new File("customer.txt"));
-                //prompting with spaces please!
-                //prompt for user information
-                String name,FandLname,pass,mail,phoneNumber;
-                mail = " ";
-                String aN,aD,aL,bN,Ln;
-                
-                System.out.print("Enter Username: ");
-                name = input.next();
-                System.out.print("Enter  Password: ");
-                pass = input.next();
-                System.out.print("Enter First and Last name: ");
-                FandLname = input.next();
-                System.out.print("Enter Email: ");
-                mail = input.next();
-                while(obj.search(mail, "customer.txt").equals(mail)){
-                    System.out.println("email is taken please choose another: ");
-                    mail = input.next();
-               }
-                System.out.print("Enter Phone Number: ");
-                phoneNumber = input.next();
-
-                //prompt for address
-                System.out.print("Enter Your Address: ");
-                aL = input.next();
-                //  System.out.print("enter appartment description(optional): ");
-                //   aD = input.nextLine();
-                System.out.print("Enter Appartment Number: ");
-                aN = input.next();
-                System.out.print("Enter Building Number: ");
-                bN = input.next();
-                System.out.print("Enter Landline Number: ");
-                Ln = input.next();
-
-                //sign up !
-                Address location = new Address(aL,"test",aN,bN,Ln);
-                
-
-                  user = new Customer(name,mail,phoneNumber
-                        ,location,pass,FandLname,LocalDate.now());
-                user.writeUser();
-                
+               
+                user.Signup();
                 //after sign up customer must be re-directed to login
+                ch=2;
             }
-            else if(ch == 2)
+            if(ch == 2)
             {
+                System.out.println("======= Login ========");
                 System.out.println("Enter Username: ");
                 String userName = input.next();
                 System.out.println("Enter Password: ");
                 String password = input.next();
                 
-                user = new Customer();
+               
                String id =  user.LogIn("customer.txt", userName, password);
                 
                 user = user.getUser(id);
@@ -211,8 +163,8 @@ public class Otlob {
                    System.out.println("====== Please select from the following restaurants =====");
                    if(ch == 1)
                    {
-                    
-                     String[][] list = obj.ReadFile("restaurant.txt");
+                        String[][] list = obj.ReadFile("restaurant.txt");
+
                         for(String[] line:list)
                         {
                             try
@@ -250,7 +202,9 @@ public class Otlob {
                                 {
                                     try
                                     {
-    //                                    System.out.println(x[0]);
+                                        //System.out.println(x[0]);
+                                        //System.out.println(adminId);
+                                      
 
                                         if(x[0].equals(adminId))
                                         {
@@ -280,17 +234,13 @@ public class Otlob {
                         String [] choosenIds = choosenMeals.split(",");
                         prodcutList L = new prodcutList(choosenIds);
                         L.display();
+                        
                         byte x;
                         System.out.println("1)Check Out\n2)Remove Product\n");
                         System.out.print(">");
                         x = input.nextByte();
+                        
                         while(x == 2){
-                            if(x == 1)
-                            {
-                                //checkout code here
-                            }
-                            else if(x == 2) 
-                            {
                                 byte y;
                                 System.out.println("===== Please choose what you want to remove: =====");
                                 System.out.println("(enter -1 to exit)");
@@ -307,17 +257,38 @@ public class Otlob {
                                 choosenIds = choosenMeals.split(",");
                                 L = new prodcutList(choosenIds);
                                 L.display();
-                            }
+                            
                             System.out.println("1)Check Out\n2)Remove Product\n");
                             System.out.print(">");
                             x = input.nextByte();
                         }
+                        if(x == 1)
+                            {
+                                
+                                 // prodcutList price = new prodcutList();
+                                 L.display();
+                                 L.writemeal();
+                                 byte y;
+                                System.out.println("===== Please choose your payment method: =====");
+                                System.out.println("1)Cash \n2)Credit\n");
+                                y = input.nextByte();
+                                 if(y == 1)
+                                 {
+                                     
+                                 }
+
+                            }
                     }
+                  
                 }
             }
         }
-    }
-}
+            }
+        }
+
+
+
+
        
     
 

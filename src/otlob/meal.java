@@ -46,7 +46,7 @@ public class meal
     
     public void displayMeals()
     {
-        System.out.printf("-Meal name: %s\n-Meal Discription: %s\n>>Price: %s\n==============\n",mealName,mealType,price);
+        System.out.printf("-Meal name: %s\n-Meal Description: %s\n>>Price: %s\n==============\n",mealName,mealType,price);
     }
     
     public void writeToMeals(String adminId) throws IOException
@@ -63,9 +63,8 @@ public class meal
 
     }
 
-    
-    
     //overRiding to return the meal details 
+    @Override
      public String toString()
     {
         return String.format("%s,%s,%s,%s,%s\n", 

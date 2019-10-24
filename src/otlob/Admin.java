@@ -6,6 +6,7 @@
 package otlob;
 import java.io.*;
 import java.time.LocalDate;
+import java.util.Scanner;
 /**
  *
  * @author Zeina Ayman
@@ -20,7 +21,32 @@ public class Admin extends User
     
     public Admin(){}
     
-
+    public void Signup() throws IOException
+    {
+        User user;
+        assistingClass obj = new assistingClass();
+        Scanner input = new Scanner(System.in);
+        Scanner scan = new Scanner (new File("admin.txt"));
+        String name,pass,mail,phoneNumber;
+               String resName;
+               System.out.print("Enter Username: ");
+               name = input.next();
+               System.out.print("Enter  Pass: ");
+               pass = input.next();
+               System.out.print("Enter  Mail: ");
+               mail = input.next();
+               System.out.print("Enter Phone Number: ");
+               phoneNumber = input.next();
+               System.out.print("Enter Restaurant Name: ");
+               resName = input.next();
+               
+               
+                  user = new Admin(name,mail,
+                        pass,name,resName);
+                user.writeUser();
+    }
+    
+    
     public User getUser(String id) throws IOException
     {
         
