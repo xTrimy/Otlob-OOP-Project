@@ -205,7 +205,7 @@ public class Otlob {
                {
                    user = user.getUser(id);
                    System.out.println("welcome, "+user.getUserName());
-                   System.out.println("1)View restaurants\n2)Search restaurants");
+                   System.out.println("1)View Restaurants");
                    System.out.print(">");
                    ch = input.nextByte();
                    System.out.println("====== Please select from the following restaurants =====");
@@ -231,7 +231,12 @@ public class Otlob {
                         Byte choice ;
                         System.out.print(">");
                         choice = input.nextByte();
-                        String adminId = list[choice +1][0];                        
+                        String adminId="";
+                        try{
+                            adminId = list[choice +1][0];  
+                        }catch(Exception e){
+                            
+                        }                    
 
                         System.out.println("===== Choose the meals which you "
                                 + "would like to add to cart ====\n===== To go to cart enter (-1) =====");
@@ -292,7 +297,10 @@ public class Otlob {
                                 System.out.print(">");
                                 y = input.nextByte();
                                 while(y != -1){
-                                    choosenMeals = choosenMeals.replaceFirst((choosenIds[y-1]+","), "");
+                                    try{
+                                        choosenMeals = choosenMeals.replaceFirst((choosenIds[y-1]+","), "");
+                                    }catch(Exception e){
+                                    }
                                     System.out.print(">");
                                     y = input.nextByte();
                                 }
