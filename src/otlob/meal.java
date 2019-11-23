@@ -46,7 +46,7 @@ public class meal
     
     public void displayMeals()
     {
-        System.out.printf("%s,%s,%s\n",mealName,mealType,price);
+        System.out.printf("-Meal name: %s\n-Meal Discription: %s\n>>Price: %s\n==============\n",mealName,mealType,price);
     }
     
     public void writeToMeals(String adminId) throws IOException
