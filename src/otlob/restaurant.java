@@ -1,3 +1,10 @@
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 package otlob;
 import java.util.*;
 import java.io.*;
@@ -14,7 +21,7 @@ public class restaurant
     
     public restaurant()
     {name = " ";
-        restaurantId =0;
+        restaurantId = 0;
         restaurantRating =0;
     }
     
@@ -55,8 +62,7 @@ public class restaurant
         return name;
     }
     
-
-    //overriding
+    @Override
     public String toString()
     {
         return String.format("%d,%s,%d\n", 

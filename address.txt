@@ -1,5 +1,15 @@
 0
+<<<<<<< HEAD
 21,110,near,kodak,19,123123
+||||||| merged common ancestors
+20,110,near,kodak,19,123123
+=======
+<<<<<<< HEAD
+24,110,near,kodak,19,123123
+=======
+24,110,near,kodak,19,123123
+>>>>>>> bba7a61f57c7b7620820b37f1859c7cc74691c12
+>>>>>>> fe74cd105945a8cb6c248f6132802e09f75d3ce9
 12,123,,smth,19,
 13,12,,12,22,
 14,19,besidesmth,nearsmth,19,123123
@@ -9,5 +19,21 @@
 18,2,test,besidessomthing,22,2943324
 19,2,test,besidessomthing,22,21312
 20,2,test,324,22,33
+<<<<<<< HEAD
+=======
 21,Maadi,test,53,1,00
+<<<<<<< HEAD
 21,1,test,2,3,4
+||||||| merged common ancestors
+=======
+21,dsadas,test,dsdasd,sadasd,dasdasd
+22,fsaf,test,fasfas,fasfas,fasfas
+23,fasfasf,test,fasfasf,fasfas,feasdfsd
+24,sfasf,test,sfasf,fsafa,fsafas
+>>>>>>> bba7a61f57c7b7620820b37f1859c7cc74691c12
+20,qe,test,qh,ieurfh,qowie
+21,wert,test,werty,wert,wert
+22,wert,test,wert,wert,wert
+23,13moez,test,9,21,22729955
+24,wert,test,wer,wery,qwert
+>>>>>>> fe74cd105945a8cb6c248f6132802e09f75d3ce9
