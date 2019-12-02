@@ -52,7 +52,7 @@ public abstract class User {
         return 0;
     }
     
-    public String LogIn(String fileName,String userName,String password) throws IOException
+    public  String LogIn(String fileName,String userName,String password) throws IOException
     {
         //customer 
         BufferedReader readobj = new BufferedReader(new FileReader(fileName));

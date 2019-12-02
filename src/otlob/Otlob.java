@@ -12,6 +12,7 @@ import java.io.*;
 import java.io.IOException;
 import java.util.*;
 import java.time.LocalDate;
+import javax.swing.JFrame;
 
 public class Otlob {
 
@@ -21,6 +22,11 @@ public class Otlob {
 
     public static void main(String[] args)throws IOException 
     {
+        LogInGUI d = new LogInGUI();
+        d.setVisible(true);
+        
+       d.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
         
     }
        
