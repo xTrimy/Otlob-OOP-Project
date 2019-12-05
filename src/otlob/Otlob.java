@@ -5,6 +5,8 @@
  */
 package otlob;
 import java.io.*;
+import javax.swing.*;
+
 /**
  *
  * @author PC
@@ -21,6 +23,12 @@ public class Otlob {
 
     public static void main(String[] args)throws IOException 
     {
+        
+        HomeGUI h = new HomeGUI();
+        JFrame f = new JFrame();
+        f.setSize(500,500);
+        f.getContentPane().add(h.f);
+        f.setVisible(true);
         
         
         
@@ -94,7 +102,7 @@ public class Otlob {
                             System.out.println("Enter Meal Name: ");
                             mealName = input.next();
                             System.out.println("Enter Meal Type: ");
-                            mealType = input.next();
+                            mealType = input.nextLine();
                             System.out.println("Enter Meal Price: ");
                             price = input.nextFloat();
                             System.out.println("Enter Meal quantity: ");
@@ -117,15 +125,15 @@ public class Otlob {
                String name,pass,mail,phoneNumber;
                String resName;
                System.out.print("Enter Username: ");
-               name = input.next();
+               name = input.nextLine();
                System.out.print("Enter  Pass: ");
-               pass = input.next();
+               pass = input.nextLine();
                System.out.print("Enter  Mail: ");
-               mail = input.next();
+               mail = input.nextLine();
                System.out.print("Enter Phone Number: ");
-               phoneNumber = input.next();
+               phoneNumber = input.nextLine();
                System.out.print("Enter Restaurant Name: ");
-               resName = input.next();
+               resName = input.nextLine();
                
                
                   user = new Admin(name,mail,
@@ -154,19 +162,20 @@ public class Otlob {
                 System.out.print("Enter  Password: ");
                 pass = input.next();
                 System.out.print("Enter First and Last name: ");
-                FandLname = input.next();
+                input.nextLine();
+                FandLname = input.nextLine();
                 System.out.print("Enter Email: ");
-                mail = input.next();
+                mail = input.nextLine();
                 while(obj.search(mail, "customer.txt").equals(mail)){
                     System.out.println("email is taken please choose another: ");
-                    mail = input.next();
+                    mail = input.nextLine();
                }
                 System.out.print("Enter Phone Number: ");
-                phoneNumber = input.next();
+                phoneNumber = input.nextLine();
 
                 //prompt for address
                 System.out.print("Enter Your Address: ");
-                aL = input.next();
+                aL = input.nextLine();
                 //  System.out.print("enter appartment description(optional): ");
                 //   aD = input.nextLine();
                 System.out.print("Enter Appartment Number: ");
