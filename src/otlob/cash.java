@@ -24,5 +24,6 @@ public class cash implements payment
     }
     public void Transaction()
     {
+
     }
 }

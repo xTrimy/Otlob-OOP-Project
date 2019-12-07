@@ -6,6 +6,7 @@
 package otlob;
 import java.io.*;
 import java.time.LocalDate;
+import java.util.Scanner;
 
 
 
@@ -30,6 +31,53 @@ public class Customer extends User{
         this.customerName = "";
         this.customerId = 0;
         this.email = "";
+    }
+    
+    public void Signup() throws IOException
+    {
+        User user;
+        assistingClass obj = new assistingClass();
+        Scanner input = new Scanner(System.in);
+        Scanner scan = new Scanner (new File("customer.txt"));
+                //prompting with spaces please!
+                //prompt for user information
+                String name,FandLname,pass,mail,phoneNumber;
+                String aN,aD,aL,bN,Ln;
+                
+                System.out.print("Enter Username: ");
+                name = input.next();
+                System.out.print("Enter  Password: ");
+                pass = input.next();
+                System.out.print("Enter First and Last name: ");
+                input.nextLine(); 
+                FandLname = input.nextLine();
+                System.out.print("Enter Email: ");
+                mail = input.nextLine();
+                while(obj.search(mail, "customer.txt").equals(mail)){
+                    System.out.println("email is taken please choose another: ");
+                    mail = input.nextLine();
+               }
+                System.out.print("Enter Phone Number: ");
+                phoneNumber = input.next();
+                //prompt for address
+                System.out.print("Enter Your Address: ");
+                aL = input.next();
+                //  System.out.print("enter appartment description(optional): ");
+                //   aD = input.nextLine();
+                System.out.print("Enter Appartment Number: ");
+                aN = input.next();
+                System.out.print("Enter Building Number: ");
+                bN = input.next();
+                System.out.print("Enter Landline Number: ");
+                Ln = input.next();
+
+                //sign up !
+                Address location = new Address(aL,"test",aN,bN,Ln);
+                
+
+                  user = new Customer(name,mail,phoneNumber
+                        ,location,pass,FandLname,LocalDate.now());
+                user.writeUser();
     }
     
     public User getUser(String id) throws IOException

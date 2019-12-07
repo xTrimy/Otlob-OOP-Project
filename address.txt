@@ -1,5 +1,7 @@
 0
 26,110,near,kodak,19,123123
+24,110,near,kodak,19,123123
+24,110,near,kodak,19,123123
 12,123,,smth,19,
 13,12,,12,22,
 14,19,besidesmth,nearsmth,19,123123
@@ -16,3 +18,8 @@
 24,sfasf,test,sfasf,fsafa,fsafas
 25,ffff,test,5,6,4
 26,0,test,0,0,0
+20,qe,test,qh,ieurfh,qowie
+21,wert,test,werty,wert,wert
+22,wert,test,wert,wert,wert
+23,13moez,test,9,21,22729955
+24,wert,test,wer,wery,qwert
