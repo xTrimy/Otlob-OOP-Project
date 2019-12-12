@@ -69,6 +69,28 @@ public String search(String arg,String fileName)throws IOException
     }
     return "not found"; //-1 
 }
+
+public boolean isTaken(String arg,String fileName)throws IOException
+{
+    BufferedReader obj = new BufferedReader(new FileReader(fileName));
+    String s;
+    while ((s = obj.readLine()) != null)
+    {
+        
+      // StringTokenizer tokens = new StringTokenizer(s,",");
+            String [] list = s.split(",");
+
+            for(String x : list)
+            {
+                if(!x.equals(arg))
+                {
+                    return false;
+                }
+            }
+    }
+    return true;
+}
+
 //not used yet 
 String passwordEncyption(String s)
 {
@@ -129,7 +151,59 @@ String searchId(String Id,String fileName) throws IOException
    }
    return "not found";
 }
-
+    void deleteFromFile(String filePath, String removable)
+    {
+        File fileToBeModified = new File(filePath);
+         
+        String oldContent = "";
+         
+        BufferedReader reader = null;
+         
+        FileWriter writer = null;
+         
+        try
+        {
+            reader = new BufferedReader(new FileReader(fileToBeModified));
+            //Reading all the lines of input text file into oldContent
+            String line = reader.readLine();
+            
+            //read all of the file !
+           while (line != null) 
+            {
+                //store it in oldcontenr and use a lineseparator
+                oldContent = oldContent + line + System.lineSeparator();
+                 
+                line = reader.readLine();
+            }
+             
+            //Replacing oldString with newString in the oldContent
+             //user replace first to replace the first thing you see
+             //when useing only replace you shall change the whole file 
+            
+             oldContent = oldContent.replaceFirst(removable,"");
+            //Rewriting the input text file with newContent
+            writer = new FileWriter(fileToBeModified);
+            writer.write(oldContent);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        //finaly block is always excuted in the try and catch
+        finally
+        {
+            try
+            {
+                //Closing the resources
+                reader.close();
+                writer.close();
+            } 
+            catch (IOException e) 
+            {
+                e.printStackTrace();
+            }
+        }
+    }
 
      void modifyFile(String filePath, String oldString, String newString)
     {
@@ -215,6 +289,7 @@ String searchId(String Id,String fileName) throws IOException
         String [][] result = null;
         try
         {
+            //looked for \n
             //list has all lines in a single String
             list = fileData.split(System.lineSeparator());
             

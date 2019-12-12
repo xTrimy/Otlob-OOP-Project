@@ -33,6 +33,10 @@ public class Customer extends User{
         this.email = "";
     }
     
+//<<<<<<< HEAD
+    //takes a string id
+//||||||| merged common ancestors
+//=======
     public void Signup() throws IOException
     {
         User user;
@@ -80,6 +84,7 @@ public class Customer extends User{
                 user.writeUser();
     }
     
+//>>>>>>> fe74cd105945a8cb6c248f6132802e09f75d3ce9
     public User getUser(String id) throws IOException
     {
         //customer 
@@ -178,11 +183,12 @@ public class Customer extends User{
     
 public void writeUser() throws IOException
 {
+    //make an object called assistingClass
    assistingClass obj = new assistingClass();
-   
+   //write the contents of the file
    obj.writeFile(this.toString(), "customer.txt");
    obj.writeFile((customerId ) +","+location.toString(),"address.txt");
-   
+   //modify
    obj.modifyFile("customer.txt",Integer.toString(customerId -1), Integer.toString(customerId ));
    obj.modifyFile("address.txt",Integer.toString(customerId -1), Integer.toString(customerId ));
 
