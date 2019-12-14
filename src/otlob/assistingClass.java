@@ -205,7 +205,7 @@ String searchId(String Id,String fileName) throws IOException
         }
     }
 
-     void modifyFile(String filePath, String oldString, String newString)
+     public void modifyFile(String filePath, String oldString, String newString)
     {
         File fileToBeModified = new File(filePath);
          
