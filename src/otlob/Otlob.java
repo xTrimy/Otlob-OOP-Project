@@ -4,12 +4,14 @@
  * and open the template in the editor.
  */
 package otlob;
+
 import java.io.*;
 /**
  *
  * @author PC
  */
 import java.io.IOException;
+import otlob.Admingui.*;
 import java.util.*;
 import java.time.LocalDate;
 import javax.swing.JFrame;
@@ -22,8 +24,9 @@ public class Otlob {
 
     public static void main(String[] args)throws IOException 
     {
-        LogInGUI d = new LogInGUI();
+        chooseType d = new chooseType();
         d.setVisible(true);
+        
         
        d.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     
     }

@@ -14,6 +14,8 @@ import java.awt.geom.RoundRectangle2D;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.border.*;
+import otlob.Admingui.adminFrame;
+import otlob.Admingui.signupadmingui;
 
 
 /**
@@ -28,15 +30,16 @@ public class LogInGUI extends JFrame
     JButton BSignIn = new JButton("Sign In");
     String userNameIn;
     String passIn;
+    boolean isAdmin;
     JTextField logInUName = new RoundJTextField(20);
     JTextField LogInPassword = new RoundJTextField(20);
-    public LogInGUI()throws IOException
+    public LogInGUI(boolean Admin)throws IOException
     {
 //        UIManager.put("TextField.background", Color.WHITE);
 //        UIManager.put("TextField.border", BorderFactory.createCompoundBorder(
 //            new CustomBorder(), 
 //            new EmptyBorder(new Insets(4,4,4,4))));
-        
+        isAdmin = Admin;
     
         
         this.setSize(500,500);
@@ -99,8 +102,14 @@ public class LogInGUI extends JFrame
             //obj.setVisible(true);
             SignupGUI sign;
                 try {
+                    if(isAdmin)
+                    {
+                        signupadmingui obj = new signupadmingui();
+                        obj.setVisible(true);
+                    }
+                    else{
                     sign = new SignupGUI();
-                    sign.setVisible(true);
+                    sign.setVisible(true);}
                 } catch (IOException ex) {
                     Logger.getLogger(LogInGUI.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -142,24 +151,55 @@ public class LogInGUI extends JFrame
         @Override
         public void actionPerformed(ActionEvent e) 
         {
-            
-            Customer current = new Customer();
-            userNameIn = logInUName.getText();          
-            passIn = LogInPassword.getText();
-            
-            String id;
-            try{
-                id = current.LogIn("customer.txt",userNameIn,passIn);}
-            catch(IOException E){id = "";}
-            if(id.equals(""))
-                JOptionPane.showMessageDialog(null, "incorrect username or password"
-                        , "incorrect" , JOptionPane.INFORMATION_MESSAGE);        
+                User current;
+            if(isAdmin)
+            {
+                current = new Admin();
+                userNameIn = logInUName.getText();          
+                passIn = LogInPassword.getText();
+                String id;
+                try{
+                    id = current.LogIn("admin.txt",userNameIn,passIn);}
+                catch(IOException E){id = "";}
+                if(id.equals(""))
+                    JOptionPane.showMessageDialog(null, "incorrect username or password"
+                            , "incorrect" , JOptionPane.INFORMATION_MESSAGE);        
+                else
+                {
+                    try{
+                    current = (Admin)current.getUser(id);}
+                    catch(IOException E){System.out.println("error getting customer");}
+                    try {
+                        adminFrame obj = new adminFrame((Admin)current);
+                        obj.setVisible(true);
+                    } catch (IOException ex) {
+                        Logger.getLogger(LogInGUI.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                }
+                
+            }
             else
             {
+                 current = new Customer();
+                userNameIn = logInUName.getText();          
+                passIn = LogInPassword.getText();
+
+                String id;
                 try{
-                current = (Customer)current.getUser(id);}
-                catch(IOException E){System.out.println("error getting customer");}
-                System.out.println("succeeded");
+                    id = current.LogIn("customer.txt",userNameIn,passIn);}
+                catch(IOException E){id = "";}
+                if(id.equals(""))
+                    JOptionPane.showMessageDialog(null, "incorrect username or password"
+                            , "incorrect" , JOptionPane.INFORMATION_MESSAGE);        
+                else
+                {
+                    try{
+                    current = (Customer)current.getUser(id);}
+                    catch(IOException E){System.out.println("error getting customer");}
+                    System.out.println("succeeded");
+                }
+
             }
             
         }

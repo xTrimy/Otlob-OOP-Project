@@ -146,6 +146,17 @@ public void Readadmin() throws IOException
         }
 
 }
+//private int adminId;
+//    private String adminName;
+//    private String adminEmail;
+//    private restaurant R ;
+//    final String adminFile = "admin.txt";
+
+public String getmail()
+{
+    return adminEmail;
+}
+
 
 public String getUserName()
 {
