@@ -25,11 +25,6 @@ public class Otlob {
         LogInGUI d = new LogInGUI();
         d.setVisible(true);
         
-       d.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        
+       d.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     
     }
-       
-    
-
 }

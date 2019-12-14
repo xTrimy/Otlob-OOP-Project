@@ -11,6 +11,8 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import javax.imageio.*;
 import java.awt.geom.RoundRectangle2D;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.border.*;
 
 
@@ -95,6 +97,15 @@ public class LogInGUI extends JFrame
                 // the user clicks on the label
             //    anotherPanel obj = new anotherPanel();
             //obj.setVisible(true);
+            SignupGUI sign;
+                try {
+                    sign = new SignupGUI();
+                    sign.setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(LogInGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
+            
             }
         });
         
