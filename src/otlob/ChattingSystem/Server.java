@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package otlob;
+package otlob.ChattingSystem;
 
 import java.awt.*;
 import java.awt.event.*;
