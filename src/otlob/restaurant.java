@@ -33,12 +33,15 @@ public class restaurant
         restaurantId = obj.getId("restaurant.txt") + 1;
         restaurantRating = 0;
     }
+    public void setID(String ID)
+    {
+        this.restaurantId = Integer.parseInt(ID);
+    }
     
-    
-    public void setRestaurant(String n,int rr)
+    public void setRestaurant(String n,int rr)throws IOException
     { 
         name =n;
-        restaurantId = 0;
+        restaurantId = this.getRestaurantid();
         restaurantRating = rr;
     }
     
@@ -47,9 +50,10 @@ public class restaurant
         return this.toString();
     }
     
-    public int getRestaurantid()
+    public int getRestaurantid()throws IOException
     {
         return restaurantId;
+        
     }
     
     public String getRestaurantRating()
@@ -60,6 +64,13 @@ public class restaurant
     public String getRestaurantName()
     {
         return name;
+    }
+    public void getRestaurantFromAdmin(int adminId)
+    {
+        
+        //returns restaurant name and restuarant ID
+        
+        
     }
     
     @Override

@@ -17,6 +17,11 @@ import javax.swing.text.*;
 import javax.accessibility.*;
 import javax.swing.filechooser.*;
 import java.text.*;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import otlob.Admin;
+import otlob.assistingClass;
 /**
  *
  * @author ahmed
@@ -27,17 +32,34 @@ public class adminPanel extends JPanel
     adminPanel(){
     //headers for the table
         String[] columns = new String[] {
-            "Id", "Name", "Hourly Rate", "Part Time"
+            "username", "date",  "mobile","Email"
         };
          
-        //actual data for the table in a 2d array
-        Object[][] data = new Object[][] {
-            {1, "John", 40.0, false },
-            {2, "Rambo", 70.0, false },
-            {3, "Zorro", 60.0, true },
-        };
+        
         //create table with data
-        JTable table = new JTable(data, columns);
+        Admin a = new Admin();
+       ArrayList<String> duplicates = null;
+        try {
+            duplicates = a.getDuplicated(Integer.toString(6));
+        } catch (IOException ex) {
+            Logger.getLogger(adminPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       assistingClass obj = new assistingClass();
+       String[][] arr = null;
+        try {
+            arr = obj.ReadFile("admin.txt", duplicates);
+        } catch (IOException ex) {
+            Logger.getLogger(adminPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        String dropped0[][] = obj.removeCol(arr, 0);
+        String droppedPass[][] = obj.removeCol(dropped0,1);
+        String droppedduplicaes[][] = obj.removeCol(droppedPass, 3);
+       // obj.removeCol(arr,3);
+       
+       
+        JTable table = new JTable(droppedduplicaes, columns);
+        table.setEnabled(false);
         JScrollPane p = new JScrollPane(table);
         p.setBackground(Color.WHITE);
         p.getViewport().setBackground(Color.WHITE);

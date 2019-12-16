@@ -6,6 +6,9 @@
 package otlob;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
 
 /**
@@ -117,6 +120,38 @@ String passwordDecryption(String s)
 void writeFile(String arg/*Data*/,String fileName)throws IOException
 {
     writeFile(arg,fileName,true);
+}
+
+public String validateMail(String mail)
+{System.out.println(mail);
+    if(mail.contains("@")){
+        
+        return "valid";
+    }
+    else
+        return "invalid email";
+                         
+}
+public static boolean isNumeric(String strNum) {
+    if (strNum == null) {
+        return false;
+    }
+    try {
+        double d = Double.parseDouble(strNum);
+    } catch (NumberFormatException nfe) {
+        return false;
+    }
+    return true;
+}
+
+public String validateMobile(String mobile)
+{
+    if(!isNumeric(mobile) || mobile.length() != 11)
+    {   
+        return "invalid phone nulmber";
+    }
+    else 
+        return "valid";
 }
 
 void writeFile(String arg/*Data*/,String fileName,boolean app)throws IOException
@@ -266,6 +301,7 @@ String searchId(String Id,String fileName) throws IOException
         File restaurants = new File(fileName);
         String fileData = "";
         BufferedReader reader = null;
+        int i=0;
         try
         {
             reader = new BufferedReader(new FileReader(restaurants));
@@ -274,7 +310,11 @@ String searchId(String Id,String fileName) throws IOException
             while (line != null) 
             {
                 //line separator in windows is \n
-
+                if(i ==0)
+                {
+                    i++ ;
+                    continue;
+                }
                 fileData = fileData + line + System.lineSeparator();
                 line = reader.readLine();
 
@@ -308,6 +348,127 @@ String searchId(String Id,String fileName) throws IOException
             return null;
         }
         return result;
+    }
+    
+     //ReadFile returns a 2d array 
+    public String[][] ReadFile(String fileName,ArrayList<String> IDS) throws IOException
+    {
+        //create the file objects
+        File restaurants = new File(fileName);
+        String fileData = "";
+        BufferedReader reader = null;
+        int i=0;
+        try
+        {
+            reader = new BufferedReader(new FileReader(restaurants));
+            String line ;
+            //read the whole file and store it into a string
+            while ((line = reader.readLine()) != null) 
+            {
+                //line separator in windows is \n
+                if(i ==0)
+                {
+                    i++ ;
+                    
+
+                    continue;
+                }
+                for(String x : IDS)
+                {
+                    if(x.equals(line.substring(0, line.indexOf(","))))
+                    fileData = fileData + line + System.lineSeparator();
+                    
+                }
+                
+
+            }
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        //make a 1d list
+        String [] list = null;
+        //make a 2d list
+        String [][] result = null;
+        try
+        {
+            //looked for \n
+            //list has all lines in a single String
+            list = fileData.split(System.lineSeparator());
+            
+            int size = list.length;
+            //2d array to store the rows and columns
+            result = new String [size][]; 
+            int count = 0;
+            //iterate and put everything in a 2d array
+            for (String line : list)
+            {
+                result [count] = line.split (",");
+                ++count;
+            }
+        }catch(Exception e){
+            System.out.print(e);
+            return null;
+        }
+        return result;
+    }
+    
+    public  String[][] removeCol(String [][] array, int colRemove)
+    {
+        int row = array.length;
+        int col = array[0].length;
+
+        String [][] newArray = new String[row][col-1]; //new Array will have one column less
+
+
+        for(int i = 0; i < row; i++)
+        {
+            for(int j = 0,currColumn=0; j < col; j++)
+            {
+                if(j != colRemove)
+                {
+                    newArray[i][currColumn++] = array[i][j];
+                }
+            }
+        }
+
+        return newArray;
+    }
+    public HashMap<String,String[]> readFiletoHashMap(String fileName)
+    {
+        HashMap<String,String[]> content = new HashMap();
+        
+        //create the file objects
+        File restaurants = new File(fileName);
+        String fileData = "";
+        BufferedReader reader = null;
+        try
+        {
+            reader = new BufferedReader(new FileReader(restaurants));
+            String line = reader.readLine();
+            String[] list;
+            int i=0;
+            //read the whole file and store it into a string
+            while (line != null) 
+            {
+                //line separator in windows is \n
+                if(i == 0)
+                {
+                    i++;
+                    continue;
+                }
+                fileData = fileData + line + System.lineSeparator();
+                list= line.split(",");
+                content.put(list[0],Arrays.copyOfRange(list,1,list.length));
+                line = reader.readLine();
+
+            }
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        
+        return content;
     }
     
 }
