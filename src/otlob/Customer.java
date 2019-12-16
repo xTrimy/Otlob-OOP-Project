@@ -145,6 +145,11 @@ public class Customer extends User{
        return username;   
      }
      
+     public String getmail()
+     {
+       return email;   
+     }
+     
      public void writedetails()throws IOException {
     
         BufferedWriter writer = new BufferedWriter(new FileWriter("Customer.txt"));
@@ -179,7 +184,10 @@ public class Customer extends User{
                 customerId,super.toString(),customerName,email,phoneNum);
     }
     
-    
+    public String getAdress()
+    {
+        return location.toString();
+    }
     
 public void writeUser() throws IOException
 {
