@@ -58,7 +58,6 @@ public class PieChart{
                 Color c= colors.get(i);
                 g.setColor(c);
                 int aSize = (int)((float)data[i]/(float)dataTotal * 365);
-                System.out.println(aSize);
                 if(centerPos){
                     posx = f.getWidth()/2 - size/2;
                 }

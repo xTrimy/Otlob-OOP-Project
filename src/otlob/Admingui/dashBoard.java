@@ -27,7 +27,6 @@ public class dashBoard extends JPanel{
             setSize(512, 512);
             
             setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-            setBorder(BorderFactory.createEmptyBorder(0, 10,10,10));
             this.add(Box.createVerticalGlue());
 
             
@@ -38,13 +37,6 @@ public class dashBoard extends JPanel{
           //  this.setLayout(null);
             int h = this.getHeight();
             int w = this.getWidth();
-            
-            g.drawLine(w -100 ,0, w -100, this.getHeight());
-            g.drawLine(0,100 , w-100, 100);
-            g.drawLine(0,150,w - 100 ,150);
-            g.drawLine(0,200,w-100,200);
-            g.drawLine(0,250,w- 100,250);
-            
             BufferedImage img = null;
             try{
              img = ImageIO.read(new File("Asset 2.png"));}
@@ -59,9 +51,6 @@ public class dashBoard extends JPanel{
             g2.setFont(new Font("serif", Font.BOLD, 35));
             g2.setPaint(Color.BLACK);
 
-            
-        g.setColor(Color.RED);
-        g.fillRect(x, y, 289, 50);
     
            
         }

@@ -32,13 +32,14 @@ public class LogInGUI extends JFrame
     String passIn;
     boolean isAdmin;
     JTextField logInUName = new RoundJTextField(20);
-    JTextField LogInPassword = new RoundJTextField(20);
+    JPasswordField LogInPassword = new RoundJPasswordField(20);
     public LogInGUI(boolean Admin)throws IOException
     {
 //        UIManager.put("TextField.background", Color.WHITE);
 //        UIManager.put("TextField.border", BorderFactory.createCompoundBorder(
 //            new CustomBorder(), 
 //            new EmptyBorder(new Insets(4,4,4,4))));
+        LogInPassword.setEchoChar('*');
         isAdmin = Admin;
     
         
@@ -155,8 +156,12 @@ public class LogInGUI extends JFrame
             if(isAdmin)
             {
                 current = new Admin();
-                userNameIn = logInUName.getText();          
-                passIn = LogInPassword.getText();
+                userNameIn = logInUName.getText();
+                char[] passInA = LogInPassword.getPassword();
+                passIn = "";
+                for(int i = 0; i<passInA.length; i++){
+                    passIn += passInA[i];
+                }
                 String id;
                 try{
                     id = current.LogIn("admin.txt",userNameIn,passIn);}
@@ -172,6 +177,7 @@ public class LogInGUI extends JFrame
                     try {
                         adminFrame obj = new adminFrame((Admin)current);
                         obj.setVisible(true);
+                        exit();
                     } catch (IOException ex) {
                         Logger.getLogger(LogInGUI.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -263,7 +269,34 @@ public class LogInGUI extends JFrame
              return shape.contains(x, y);
         }
     }
-    
+        public class RoundJPasswordField extends JPasswordField 
+    {
+        private Shape shape;
+        public RoundJPasswordField(String text,int size) {
+            super(text,size);
+            setOpaque(false); // As suggested by @AVD in comment.
+        }
+        public RoundJPasswordField(int size) {
+            super(size);
+            setOpaque(false); // As suggested by @AVD in comment.
+        }
+
+        protected void paintComponent(Graphics g) {
+             g.setColor(getBackground());
+             g.fillRoundRect(0, 0, getWidth()-1, getHeight()-1, 15, 15);
+             super.paintComponent(g);
+        }
+        protected void paintBorder(Graphics g) {
+             g.setColor(getForeground());
+             g.drawRoundRect(0, 0, getWidth()-1, getHeight()-1, 15, 15);
+        }
+        public boolean contains(int x, int y) {
+             if (shape == null || !shape.getBounds().equals(getBounds())) {
+                 shape = new RoundRectangle2D.Float(0, 0, getWidth()-1, getHeight()-1, 15, 15);
+             }
+             return shape.contains(x, y);
+        }
+    }
     public class roundJButton extends JButton
     {
         private Shape shape;
@@ -294,7 +327,9 @@ public class LogInGUI extends JFrame
              return shape.contains(x, y);
         }
     }
-    
+    void exit(){
+     this.dispose();
+    }
 
     
 }

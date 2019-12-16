@@ -25,10 +25,14 @@ import otlob.Admin;
 public class adminFrame extends JFrame  implements Accessible
 {
     JLabel AccountL = new JLabel("Account");
+    JPanel AccountLPanel = new JPanel();
     JLabel AdminsL = new JLabel("Admins");
+    JPanel AdminsLPanel = new JPanel();
     JLabel HomeL = new JLabel("Home");
-    
-        JPanel current = new JPanel();
+    JPanel HomeLPanel = new JPanel();
+    JLabel[] myLabels = {AccountL, AdminsL, HomeL};    
+    JPanel[] myLabelPanels = {AccountLPanel, AdminsLPanel, HomeLPanel};
+    JPanel current = new JPanel();
     JPanel AccountP;
     JPanel HomeP = new adminHome();
     //JPanel AdminsP = new JPanel();
@@ -39,30 +43,34 @@ public class adminFrame extends JFrame  implements Accessible
     dashBoard d = new dashBoard(0,100);
     
     Admin currentA;
-    
+
     public adminFrame(Admin currentA) throws IOException
     {
-        
+        for(int i = 0; i<myLabels.length;i++){
+            myLabelPanels[i].setMinimumSize(new Dimension(512,100));
+            myLabelPanels[i].setAlignmentX(RIGHT_ALIGNMENT);
+            myLabelPanels[i].setMaximumSize(new Dimension(1000,100));
+            myLabelPanels[i].add(myLabels[i]);
+            myLabelPanels[i].setBackground(Color.WHITE);
+            myLabels[i].setForeground(Color.BLACK);
+        }
         this.currentA = currentA;
         AccountP = new accountPanel(currentA);
         setSize(790,500);
         current = HomeP;
-       
-       
         dashBoardP = d;
         //dashboard panel
-        dashBoardP.add(HomeL);
-        dashBoardP.add(Box.createRigidArea(new Dimension(0, 20)));
-        dashBoardP.add(AccountL);
-        dashBoardP.add(Box.createRigidArea(new Dimension(0,20)));
-        dashBoardP.add(AdminsL);
-        dashBoardP.add(Box.createRigidArea(new Dimension(0,this.getHeight()-300)));
+        dashBoardP.add(HomeLPanel);
+        dashBoardP.add(Box.createRigidArea(new Dimension(0, 0)));
+        dashBoardP.add(AccountLPanel);
+        dashBoardP.add(Box.createRigidArea(new Dimension(0,0)));
+        dashBoardP.add(AdminsLPanel);
+        dashBoardP.add(Box.createRigidArea(new Dimension(200,this.getHeight()-280)));
         setFont(AdminsL);
         setFont(HomeL);
         setFont(AccountL); 
         HomeL.setForeground(Color.WHITE);
-
-     
+        HomeLPanel.setBackground(Color.red);
         current.setBackground(Color.WHITE);
         this.setTitle("admin view");
         cp.setLayout(new GridLayout(1,2));
@@ -100,10 +108,10 @@ public class adminFrame extends JFrame  implements Accessible
                 {                     
                     cp.remove(current);
                     current = null;
-                    
                     current = AccountP;
                     cp.add(current);
-                     current.setBackground(Color.WHITE);
+                    current.setBackground(Color.WHITE);
+                    changeSelection(AccountL,AccountLPanel);
                     getContentPane().repaint();
                     getContentPane().validate();
                 }
@@ -116,8 +124,9 @@ public class adminFrame extends JFrame  implements Accessible
                     current = HomeP;
                     cp.add(current);
                     current.setBackground(Color.WHITE);
+                    changeSelection(HomeL,HomeLPanel);
                     getContentPane().repaint();
-                                        getContentPane().validate();
+                    getContentPane().validate();
 
                 }
                 if(obj.equals(AdminsL))
@@ -128,7 +137,8 @@ public class adminFrame extends JFrame  implements Accessible
                     //setAdminPanel(ad);
                     current = AdminsP;
                     cp.add(current);
-                     current.setBackground(Color.WHITE);
+                    current.setBackground(Color.WHITE);
+                    changeSelection(AdminsL,AdminsLPanel);
                     getContentPane().repaint();
                     getContentPane().validate();
 
@@ -170,5 +180,12 @@ public class adminFrame extends JFrame  implements Accessible
          }
          System.out.println("Images were written succesfully.");
     }
-    
+    private void changeSelection(JLabel x,JPanel y){
+        for(int i = 0; i<myLabels.length; i++){
+            myLabelPanels[i].setBackground(Color.WHITE);
+            myLabels[i].setForeground(Color.BLACK);
+        }
+        y.setBackground(Color.RED);
+        x.setForeground(Color.WHITE);
+    }
 }

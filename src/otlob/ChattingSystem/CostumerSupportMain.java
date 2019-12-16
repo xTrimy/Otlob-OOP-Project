@@ -32,6 +32,7 @@ public class CostumerSupportMain {
          Thread.sleep(1000);
         }catch(Exception e){
         }
+        
         Client cl=new Client("Ahmed");
         cl.setVisible(true);
         cl.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

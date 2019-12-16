@@ -73,14 +73,10 @@ public class ServerConnectionThread implements Runnable{
                     clientsSockets.put(LIST[2],s);
                     Message.setText(Message.getText() +"<div style='color:blue;'>"+clients.get(LIST[2]) +" Joined the chat</div>");
                     boolean check = false;
-                    toclient.println(admins.size());
-                     Set<Map.Entry<String, String>> set = admins.entrySet();
+                    Set<Map.Entry<String, String>> set = admins.entrySet();
                     for(Map.Entry<String, String> entry : set) {
                         String key = entry.getKey();
-                        System.out.println(admins);
-                        toclient.println("<br>Checking availablity of admin "+admins.get(key));
                         if(!connectionsA.containsKey(key)){
-                            toclient.println("Connected to support admin ("+admins.get(key)+")");
                             connectionsC.put(LIST[2],key);
                             connectionsA.put(key,LIST[2]);
                             System.out.println(connectionsC);                            
@@ -91,6 +87,8 @@ public class ServerConnectionThread implements Runnable{
                     }
                     if(!check){
                         toclient.println("All support admins are currently unavailable, please come back later");
+                    }else{
+                        toclient.println("<br>Connected to support admin ("+admins.get(connectionsC.get(LIST[2]))+")");
                     }
                    }else if(LIST[0].equals(tokenA)){
                     toclient.println(clients.size() + " clients online<br>and "+ admins.size() + " admins online");
