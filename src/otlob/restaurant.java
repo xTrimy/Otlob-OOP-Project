@@ -67,18 +67,12 @@ public class restaurant
     }
     public void getRestaurantFromAdmin(int adminId)
     {
-        
         //returns restaurant name and restuarant ID
-        
-        
     }
-    
     @Override
     public String toString()
     {
         return String.format("%d,%s,%d\n", 
                 restaurantId ,name,restaurantRating);
-    }
-    
-    
+    }    
 }
