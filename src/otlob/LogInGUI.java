@@ -108,9 +108,11 @@ public class LogInGUI extends JFrame
                     {
                         signupadmingui obj = new signupadmingui();
                         obj.setVisible(true);
+                        dispose();
                     }
                     else{
                     sign = new SignupGUI();
+                    dispose();
                     sign.setVisible(true);}
                 } catch (IOException ex) {
                     Logger.getLogger(LogInGUI.class.getName()).log(Level.SEVERE, null, ex);

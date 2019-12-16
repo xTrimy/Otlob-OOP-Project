@@ -30,19 +30,24 @@ public class adminFrame extends JFrame  implements Accessible
     JLabel AdminsL = new JLabel("Admins");
     JPanel AdminsLPanel = new JPanel();
     JLabel HomeL = new JLabel("Home");
+    
+    JLabel AddAdminL = new JLabel("Add Admins");
+    JPanel AddAdminLP = new JPanel();
+    
+
     JPanel HomeLPanel = new JPanel();
-    JLabel[] myLabels = {AccountL, AdminsL, HomeL};    
-    JPanel[] myLabelPanels = {AccountLPanel, AdminsLPanel, HomeLPanel};
+    JLabel[] myLabels = {AccountL, AdminsL, HomeL,AddAdminL};    
+    JPanel[] myLabelPanels = {AccountLPanel, AdminsLPanel, HomeLPanel,AddAdminLP};
+    
     JPanel current = new JPanel();
     JPanel AccountP;
     JPanel HomeP = new adminHome();
     //JPanel AdminsP = new JPanel();
     JPanel AdminsP = new adminPanel();
-
     Container cp = getContentPane();
     JPanel dashBoardP ;
     dashBoard d = new dashBoard(0,100);
-    
+    JPanel addAdminP;
     Admin currentA;
 
     public adminFrame(Admin currentA) throws IOException
@@ -55,6 +60,7 @@ public class adminFrame extends JFrame  implements Accessible
             myLabelPanels[i].setBackground(Color.WHITE);
             myLabels[i].setForeground(Color.BLACK);
         }
+        addAdminP = new AddAdminsPanel(currentA);
         this.currentA = currentA;
         AccountP = new accountPanel(currentA);
         setSize(790,500);
@@ -66,10 +72,13 @@ public class adminFrame extends JFrame  implements Accessible
         dashBoardP.add(AccountLPanel);
         dashBoardP.add(Box.createRigidArea(new Dimension(0,0)));
         dashBoardP.add(AdminsLPanel);
+        dashBoardP.add(Box.createRigidArea(new Dimension(0,0)));
+        dashBoardP.add(AddAdminLP);
         dashBoardP.add(Box.createRigidArea(new Dimension(200,this.getHeight()-280)));
         setFont(AdminsL);
         setFont(HomeL);
         setFont(AccountL); 
+        setFont(AddAdminL);
         HomeL.setForeground(Color.WHITE);
         HomeLPanel.setBackground(Color.red);
         current.setBackground(Color.WHITE);
@@ -83,7 +92,7 @@ public class adminFrame extends JFrame  implements Accessible
         HomeL.addMouseListener(new RectListener());
         AccountL.addMouseListener(new RectListener());
         AdminsL.addMouseListener(new RectListener());
-    
+        AddAdminL.addMouseListener(new RectListener());
     }
  
  
@@ -143,6 +152,16 @@ public class adminFrame extends JFrame  implements Accessible
                     getContentPane().repaint();
                     getContentPane().validate();
 
+                }
+                if(obj.equals(AddAdminL))
+                {
+                    cp.remove(current);
+                    current = null;
+                    current = addAdminP;
+                    cp.add(current);
+                    changeSelection(AddAdminL,AddAdminLP);
+                    getContentPane().repaint();
+                    getContentPane().validate();
                 }
         }
 

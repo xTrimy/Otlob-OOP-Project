@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -17,6 +17,8 @@ import javax.swing.text.*;
 import javax.accessibility.*;
 import javax.swing.filechooser.*;
 import java.text.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import otlob.Admin;
 import otlob.assistingClass;
 /**
@@ -36,9 +38,10 @@ public class accountPanel extends JPanel
     
     private String oldname ;
     private String oldMail;
-    
+    Admin current;
     accountPanel(Admin current)
     {
+        this.current = current;
         profileTypeT.setEnabled(false);
         NameT.setEnabled(false);
         EmailT.setEnabled(false);
@@ -99,6 +102,9 @@ public class accountPanel extends JPanel
         @Override
         public void actionPerformed(ActionEvent e) 
         {
+            
+            
+            
             Object obj = e.getSource();
             if(obj.equals(EditB))
             {
@@ -111,14 +117,34 @@ public class accountPanel extends JPanel
             }
             else if(obj.equals(submitEdit))
             {
-                String newName = NameT.getText();
-                String newmail =  EmailT.getText();
-                String newpass = passwordT.getText();
+                Object[] options = { "YES", "NO" };
+                   int n= JOptionPane.showOptionDialog(null, "Are you sure you want to save?", "Warning",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+                    null, options, options[0]);
+
+                    if(n == JOptionPane.YES_OPTION)
+                    {
+                        System.out.println("said yes");
+                       // Admin newAdmin = new Admin();
+                       String newName = NameT.getText();
+                        String newmail =  EmailT.getText();
+                        String newpass = passwordT.getText();
+                    try {
+                        current.modifyFile("admin.txt",newName,newpass,newmail);
+                    } catch (IOException ex) {
+                        Logger.getLogger(accountPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+//                        assistingClass helper = new assistingClass();
+//                        helper.modifyFile("admin.txt",oldname,newName);
+//                        helper.modifyFile("admin.txt",oldMail,newmail);
+                       // helper.modifyFile("admin.txt",,newpass);
+
+                    }
+                    else if(n == JOptionPane.NO_OPTION)
+                    {
+                        System.out.println("said no");
+                    }
                 
-                assistingClass helper = new assistingClass();
-                helper.modifyFile("admin.txt",oldname,newName);
-                helper.modifyFile("admin.txt",oldMail,newmail);
-               // helper.modifyFile("admin.txt",,newpass);
                 
             }
         }
@@ -126,14 +152,14 @@ public class accountPanel extends JPanel
     }
     
     private static JButton createSimpleButton(String text) {
-  JButton button = new JButton(text);
-  button.setBorderPainted(true);
-  button.setForeground(Color.WHITE);
-  button.setBackground(Color.RED);
-  Border line = new LineBorder(Color.BLACK);
-  Border margin = new EmptyBorder(5, 15, 5, 15);
-  Border compound = new CompoundBorder(line, margin);
-  button.setBorder(compound);
-  return button;
-}
+        JButton button = new JButton(text);
+        button.setBorderPainted(true);
+        button.setForeground(Color.WHITE);
+        button.setBackground(Color.RED);
+        Border line = new LineBorder(Color.BLACK);
+        Border margin = new EmptyBorder(5, 15, 5, 15);
+        Border compound = new CompoundBorder(line, margin);
+        button.setBorder(compound);
+        return button;
+    }
 }

@@ -135,18 +135,34 @@ public class SignupGUI extends JFrame{
         public void actionPerformed(ActionEvent a)
         {
             Object buttonPressed = a.getSource();
+            assistingClass obj = new assistingClass();
             if(buttonPressed == save)
             {
-                User signup;
-                Address location = new Address(add.getText(),"test",apparnumber.getText(),builnumber.getText(),landnumber.getText());
-                
-                try {
-                    signup = new Customer(user.getText(),email.getText(),phone.getText()
-                            ,location,pass.getText(),fnamelname.getText(),LocalDate.now());
-                    signup.writeUser();
-                } catch (IOException ex) {
-                    Logger.getLogger(SignupGUI.class.getName()).log(Level.SEVERE, null, ex);
+                if("".equals(user.getText()) || "".equals(pass.getText()) || "".equals(fnamelname.getText())|| "".equals(email.getText())|| "".equals(phone.getText())|| "".equals(add.getText())|| "".equals(apparnumber.getText())|| "".equals(builnumber.getText())|| "".equals(landnumber.getText()))
+                {
+                    JOptionPane.showMessageDialog(null, "Please enter missing fields. ", "ERROR" , JOptionPane.ERROR_MESSAGE);
                 }
+                else if(user.getText().length() < 3)
+                {
+                    JOptionPane.showMessageDialog(null, "Name must be at least 3 characters", "ERROR" , JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                        
+                        try {
+                            User signup;
+                            Address location = new Address(add.getText(),"test",apparnumber.getText(),builnumber.getText(),landnumber.getText());
+                            signup = new Customer(user.getText(),email.getText(),phone.getText()
+                                    ,location,pass.getText(),fnamelname.getText(),LocalDate.now());
+                            signup.writeUser();
+                            LogInGUI log = new LogInGUI(false);
+                            dispose();
+                            log.setVisible(true);
+                            
+                        } catch (IOException ex) {
+                            Logger.getLogger(SignupGUI.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+
             }
         }
     }

@@ -16,18 +16,18 @@ public abstract class User {
     protected String password;
     protected String username;
     LocalDate date = LocalDate.now();
-    
+   protected String phoneNum;
     //you need the same contructor header style in the super class
     public User()
     {
         
     }
     
-    public User(String pass, String uname, LocalDate myDate)
+    public User(String pass, String uname, LocalDate myDate,String ph)
     {
         password = pass;
         username = uname;
-        
+        phoneNum = ph;
         
         this.date = myDate;
     }
@@ -44,7 +44,7 @@ public abstract class User {
     @Override
     public String toString()
     {
-        return String.format("%s,%s,%s",username,password,date);
+        return String.format("%s,%s,%s,%s",username,password,date,phoneNum);
     }
     
     
