@@ -17,6 +17,7 @@ import javax.swing.text.*;
 import javax.accessibility.*;
 import javax.swing.filechooser.*;
 import java.text.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -29,7 +30,8 @@ import otlob.assistingClass;
 public class customerHome extends JPanel
 {
     private BufferedImage[] images = new BufferedImage[6];
-    private JLabel[] restaurantNames = new JLabel[6];
+    private JLabel[] displayLabels = new JLabel[6];    
+    private JLabel[] displayPrices= new JLabel[6];
     private HashMap<String,String[]> restaurants;
     private String[] restaurantsIds;
     private int restaurantsSize;
@@ -45,21 +47,38 @@ public class customerHome extends JPanel
     private JButton next;    
     private JButton prev;    
     private JLabel currentPageLabel;
-
+    private int selectedRestaurant = 0;
+    private HashMap<String,String[]> meals;
+    private int mealsSize;
+    private String[] mealsIds;
+    private ArrayList<String> selectedMeals = new ArrayList<String>();
     customerHome() throws IOException
     {
         restaurants = ac.readFiletoHashMap("restaurant.txt");
         restaurantsSize = restaurants.size();
         restaurantsIds = new String[restaurantsSize];
-        Set<Map.Entry<String, String[]>> set = restaurants.entrySet();
+        Set<Map.Entry<String, String[]>> rSet = restaurants.entrySet();        
         int it = 0;
-        for(Map.Entry<String,String[]> s: set){
+        for(Map.Entry<String,String[]> s: rSet){
             restaurantsIds[it] = s.getKey();
-            System.out.println(restaurantsIds[it]);
+            it++;
+        }
+        
+        meals = ac.readFiletoHashMap("meal.txt");
+        System.out.println("MAP: "+meals);
+
+        mealsSize = meals.size();
+        mealsIds = new String[mealsSize];
+        Set<Map.Entry<String, String[]>> mSet = meals.entrySet();
+        it = 0;
+        for(Map.Entry<String,String[]> s: mSet){
+            mealsIds[it] = s.getKey();
             it++;
         }
         this.setLayout(null);
-        this.addMouseMotionListener(new RectListener());
+        this.addMouseMotionListener(new RectListener());        
+        this.addMouseListener(new RectListener2());
+
         try{
             for(int i = 0;i<6;i++){
                 images[i] = ImageIO.read(new File("Untitled.jpg"));
@@ -69,8 +88,10 @@ public class customerHome extends JPanel
             System.out.println(ex);
         }
         for(int i = 0; i<6; i++){
-            restaurantNames[i] = new JLabel("", SwingConstants.CENTER);
-            this.add(restaurantNames[i]);
+            displayLabels[i] = new JLabel();            
+            displayPrices[i] = new JLabel();
+            this.add(displayLabels[i]);            
+            this.add(displayPrices[i]);
         }
         next = new JButton(">");        
         prev = new JButton("<");
@@ -113,7 +134,6 @@ public class customerHome extends JPanel
         g.setColor(new Color((float)1,(float)0,(float)0,(float)0.2));
         if(selectedRect != 0){
             int y = (selectedRect>3)? 1: 0;
-            System.out.println(y+","+selectedRect);
             g.fillRect(startPosx+((selectedRect-1)%3)*sizeX,startPosy+(sizeY+marginsY)*y,sizeX,sizeY);
         }
     }
@@ -127,8 +147,11 @@ public class customerHome extends JPanel
 
         @Override
         public void mousePressed(MouseEvent arg0) {
+            int posX = arg0.getX();
+            int posY = arg0.getY();
+            int itemsSize = (selectedRestaurant == 0)?restaurantsIds.length:selectedMeals.size();
             if(arg0.getSource() == next){
-                if((float)currentPage < restaurantsIds.length/(float)maxPerPage){
+                if((float)currentPage < itemsSize/(float)maxPerPage){
                     currentPage++;
                     createLabels();
                     currentPageLabel.setText(Integer.toString(currentPage));
@@ -147,6 +170,25 @@ public class customerHome extends JPanel
                     validate();
                 }else{
                     JOptionPane.showMessageDialog(null, "This is the first page", "Error",JOptionPane.ERROR_MESSAGE);
+                }
+            }else{
+                for(int i = 0;i<2;i++){
+                    for(int j = 0;j<3; j++){
+                        if(posX>startPosx+j*sizeX && posX<startPosx+j*sizeX+sizeX && posY > startPosy+(sizeY+marginsY)*i && posY < startPosy+(sizeY+marginsY)*i+sizeY){
+                            selectedRestaurant = Integer.parseInt(restaurantsIds[(j+1)+(3*i)-1+(currentPage-1)*6]);
+                            currentPage = 1;
+                            currentPageLabel.setText("1");
+                            for(int k =0; k<mealsSize;k++){
+                                String id = meals.get(mealsIds[k])[0];
+                                if(id.equals(Integer.toString(selectedRestaurant))){
+                                    selectedMeals.add(mealsIds[k]);
+                                }
+                            }
+                            createLabels();
+                            repaint();
+                            validate();
+                        }
+                    }
                 }
             }
         }
@@ -176,12 +218,13 @@ public class customerHome extends JPanel
         public void mouseMoved(MouseEvent arg0) {
             int posX = arg0.getX();
             int posY = arg0.getY();
-
+            setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
             selectedRect = 0;
             for(int i = 0;i<2;i++){
                 for(int j = 0;j<3; j++){
                     if(posX>startPosx+j*sizeX && posX<startPosx+j*sizeX+sizeX && posY > startPosy+(sizeY+marginsY)*i && posY < startPosy+(sizeY+marginsY)*i+sizeY){
                         selectedRect = (j+1)+(3*i);
+                        setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                     }
                 }
             }
@@ -191,13 +234,30 @@ public class customerHome extends JPanel
     }
     private void createLabels(){
         for(int i = 0; i<6; i++){
-            this.remove(restaurantNames[i]);
-            String label = "";
-            if(i+(currentPage-1)*6 < restaurantsSize){
-                label = restaurants.get(restaurantsIds[i+(currentPage-1)*6])[1];
-                restaurantNames[i] = new JLabel(label, SwingConstants.CENTER);
-                restaurantNames[i].setBounds(startPosx+((i)%3)*sizeX,sizeY+startPosy+(sizeY+marginsY)*(int)(i/3),sizeX,marginsY/2);
-                this.add(restaurantNames[i]);
+            this.remove(displayLabels[i]);            
+            this.remove(displayPrices[i]);
+            String label = "";            
+            String price = "";
+
+            if(selectedRestaurant == 0){
+                if(i+(currentPage-1)*6 < restaurantsSize){
+                    label = restaurants.get(restaurantsIds[i+(currentPage-1)*6])[1];
+                    displayLabels[i] = new JLabel(label, SwingConstants.CENTER);
+                    displayLabels[i].setBounds(startPosx+((i)%3)*sizeX,sizeY+startPosy+(sizeY+marginsY)*(int)(i/3),sizeX,marginsY/2);
+                    this.add(displayLabels[i]);
+                }
+            }
+            else{
+                if(i+(currentPage-1)*6 < selectedMeals.size() && !selectedMeals.isEmpty()){
+                    label = meals.get(selectedMeals.get(i+(currentPage-1)*6))[1];                    
+                    price = meals.get(selectedMeals.get(i+(currentPage-1)*6))[3];
+                    displayLabels[i] = new JLabel(label, SwingConstants.CENTER);                    
+                    displayPrices[i] = new JLabel(price + "EGP", SwingConstants.CENTER);
+                    displayLabels[i].setBounds(startPosx+((i)%3)*sizeX,sizeY+startPosy+(sizeY+marginsY)*(int)(i/3),sizeX,marginsY/2);
+                    displayPrices[i].setBounds(startPosx+((i)%3)*sizeX,20+sizeY+startPosy+(sizeY+marginsY)*(int)(i/3),sizeX,marginsY/2);
+                    this.add(displayLabels[i]);                    
+                    this.add(displayPrices[i]);
+                }
             }
         }
     }
