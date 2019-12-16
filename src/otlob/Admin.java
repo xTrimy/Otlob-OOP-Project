@@ -6,6 +6,7 @@
 package otlob;
 import java.io.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 /**
  *
@@ -42,7 +43,7 @@ public class Admin extends User
                
                
                   user = new Admin(name,mail,
-                        pass,name,resName);
+                        pass,name,resName,"sometest");
                 user.writeUser();
     }
     
@@ -87,9 +88,9 @@ public class Admin extends User
 
  
 public Admin(String aN/*Admin Name*/, String aE/*Admin Email*/, String pass
-        , String uname,String resName/*Restaurant Name*/)throws IOException
+        , String uname,String resName/*Restaurant Name*/,String ph)throws IOException
 {
-    super(pass, uname, LocalDate.now());
+    super(pass, uname, LocalDate.now(),ph);
     //getting the Id of the admin and adding one to print in a file
     assistingClass obj = new assistingClass();
     this.adminId  =  obj.getId(adminFile) +1;
@@ -99,10 +100,26 @@ public Admin(String aN/*Admin Name*/, String aE/*Admin Email*/, String pass
 
        R = new restaurant(resName);
 
+}
 
+public void setRes(String resName)throws IOException
+{
+    R.setRestaurant(resName, 0);
 }
 
 
+//didnt test it yet
+public void addAdmin(Admin addedAdmin,String resId,String resName,String rating)throws IOException
+{
+    
+    assistingClass obj = new assistingClass();
+    addedAdmin.adminId = obj.getId(adminFile)+1;
+        addedAdmin.R.setRestaurant(resName, 0);
+        addedAdmin.R.setID(resId);
+    addedAdmin.writeUser();
+   
+
+}
 
 public void writeUser() throws IOException
 {
@@ -119,10 +136,11 @@ public void writeUser() throws IOException
 public void writeToRestaurant() throws IOException
 {
     assistingClass obj = new assistingClass();
-    int rId = R.getRestaurantid();
+    int rId = obj.getId("restaurant.txt") + 1;
     //second parameter true for appending
     obj.writeFile(Integer.toString(adminId)+"," + R.toString(),"restaurant.txt");
-    obj.modifyFile("restaurant.txt",Integer.toString(rId -1), Integer.toString(rId));
+    obj.modifyFile("restaurant.txt",Integer.toString(rId -1)
+            , Integer.toString(rId));
 }
 
 public int getUserId()
@@ -157,6 +175,76 @@ public String getmail()
     return adminEmail;
 }
 
+public void modifyFile(String fileName,String newName,String newPass,String newMail) throws  IOException
+{
+    
+    BufferedReader reader = new BufferedReader(new FileReader(new File("admin.txt")));
+    BufferedWriter writer = new BufferedWriter(new FileWriter(new File("temp.txt")));
+    String line;
+    String [] arr;
+    int i =0;
+    while((line = reader.readLine()) != null)
+    {
+        arr = line.split(",");
+        
+        if(arr[0].equals(Integer.toString(this.adminId)))
+        {
+           //write new shit
+            writer.write(String.format("%s,%s,%s,%s,%s,%s,%s\n",
+                    Integer.toString(this.adminId),newName,newPass,arr[3],arr[4],newName,newMail));
+        }
+        else
+        {
+            writer.write(line + " " + System.lineSeparator());
+        }
+        
+    }
+    reader.close();
+    writer.close();
+
+}
+
+public ArrayList<String> getDuplicated(String id) throws IOException
+{
+    ArrayList <String>duplicates = new ArrayList();
+    File restaurants = new File("restaurant.txt");
+        
+        BufferedReader reader = new BufferedReader(new FileReader("restaurant.txt")); 
+        String l;
+        String list[];
+        String saveID = "-1";
+        int i=0;
+        while((l = reader.readLine()) != null)
+        {
+            list = l.split(",");
+            if(i == 0)
+            {
+                i++;
+                continue;
+            }
+            if(list[0].equals(id))
+            {
+                saveID = list[1];
+                break;
+            }
+        }
+        reader.close();
+        String list2[];
+        i=0;
+        BufferedReader reader1= new BufferedReader(new FileReader(new File("restaurant.txt")));
+        while((l = reader1.readLine()) != null)
+        {
+            list2 = l.split(",");
+            if(i == 0)
+            {
+             i++;
+             continue;
+            }
+            if(list2[1].equals(saveID))
+                duplicates.add(list2[0]);
+        }
+    return duplicates;
+}
 
 public String getUserName()
 {

@@ -18,7 +18,7 @@ public class Customer extends User{
     private String customerName;
     private int customerId;
     private String email;
-    private String phoneNum;
+  //  private String phoneNum;
     private Address location;
     
     
@@ -126,16 +126,16 @@ public class Customer extends User{
     {
         return customerId;
     }
-     public Customer(String uname, String email, String phonNum,
+     public Customer(String uname, String email, String ph,
              Address loc,String pass, String cusname, LocalDate myObj) throws IOException
     {
-        super(pass, uname, myObj);
+        super(pass, uname, myObj,ph);
         this.customerName = cusname;
         assistingClass obj = new assistingClass();
         //+1 for the printing
         this.customerId  =  obj.getId("customer.txt")+1;
         this.email       = email;
-        this.phoneNum  = phonNum;
+      //  this.phoneNum  = phonNum;
         this.location = loc;
     }
      

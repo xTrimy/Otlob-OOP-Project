@@ -30,7 +30,5 @@ public class Otlob {
         
        d.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
        
-       
-      
     }
 }

@@ -25,10 +25,12 @@ import otlob.User;
  * @author ahmed
  */
 public class signupadmingui extends JFrame{
-    private JTextField user,pass,email,res;
+    private JTextField user,pass,email,res,phoneNum;
     private JLabel luser,lpass,lemail,lres;
     private JPanel SignupPanel;
     private JButton save;
+    
+    
     
     public signupadmingui()throws IOException
     {
@@ -42,7 +44,7 @@ public class signupadmingui extends JFrame{
         lpass = new JLabel("Password");
         lemail = new JLabel("Email");
         lres = new JLabel("restaurantName");
-        
+        phoneNum = new RoundJTextField(21);
         
         SignupPanel = new JPanel();
         JPanel LogoPanel = new JPanel();
@@ -50,7 +52,7 @@ public class signupadmingui extends JFrame{
         JPanel twoPanelContainer = new JPanel();
         //twoPanelContainer = new JPanel(new GridLayout(2,1));
         twoPanelContainer.setLayout(null);
-
+        
         twoPanelContainer.add(LogoPanel);
         LogoPanel.setBounds(0, 0, 250, 250);
         twoPanelContainer.add(SignupPanel);
@@ -71,7 +73,8 @@ public class signupadmingui extends JFrame{
         SignupPanel.add(user);
         SignupPanel.add(lpass);
         SignupPanel.add(pass);
-        
+        SignupPanel.add(new JLabel("Phone Number"));
+        SignupPanel.add(phoneNum);
         SignupPanel.add(lemail);
         SignupPanel.add(email);
         SignupPanel.add(lres);
@@ -127,7 +130,7 @@ public class signupadmingui extends JFrame{
                     //    private JTextField user,pass,email,res;
 
                     signup = new Admin(user.getText(),email.getText(),
-                            pass.getText(),user.getText(),res.getText());
+                            pass.getText(),user.getText(),res.getText(),phoneNum.getText());
                     signup.writeUser();
                     JOptionPane.showMessageDialog(null,"All set!", "please choose",JOptionPane.INFORMATION_MESSAGE);
                    System.exit(0);
