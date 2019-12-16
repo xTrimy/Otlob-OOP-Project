@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -126,14 +126,14 @@ public class accountPanel extends JPanel
     }
     
     private static JButton createSimpleButton(String text) {
-  JButton button = new JButton(text);
-  button.setBorderPainted(true);
-  button.setForeground(Color.WHITE);
-  button.setBackground(Color.RED);
-  Border line = new LineBorder(Color.BLACK);
-  Border margin = new EmptyBorder(5, 15, 5, 15);
-  Border compound = new CompoundBorder(line, margin);
-  button.setBorder(compound);
-  return button;
-}
+        JButton button = new JButton(text);
+        button.setBorderPainted(true);
+        button.setForeground(Color.WHITE);
+        button.setBackground(Color.RED);
+        Border line = new LineBorder(Color.BLACK);
+        Border margin = new EmptyBorder(5, 15, 5, 15);
+        Border compound = new CompoundBorder(line, margin);
+        button.setBorder(compound);
+        return button;
+    }
 }

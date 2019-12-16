@@ -18,6 +18,7 @@ import javax.accessibility.*;
 import javax.swing.filechooser.*;
 import java.text.*;
 import static otlob.Admingui.adminFrame.imageIoWrite;
+import otlob.assistingClass;
 /**
  *
  * @author ahmed
@@ -26,7 +27,8 @@ public class customerHome extends JPanel
 {
     private BufferedImage[] images = new BufferedImage[6];
     private JLabel[] restaurantNames = new JLabel[6];
-    
+    private String[][] restaurants;
+    private assistingClass ac;
     private int startPosy;
     private int selectedRect = 0;
     private int startPosx = 0;
@@ -35,6 +37,7 @@ public class customerHome extends JPanel
     private int marginsY = 70;
     customerHome() throws IOException
     {
+        restaurants = ac.ReadFile("restaurant.txt");
         this.setLayout(null);
         this.addMouseMotionListener(new RectListener());
         try{
