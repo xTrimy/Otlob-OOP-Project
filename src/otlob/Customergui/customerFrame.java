@@ -55,9 +55,11 @@ public class customerFrame extends JFrame
             myLabelPanels[i].setBackground(Color.WHITE);
             myLabels[i].setForeground(Color.BLACK);
         }
-        
         AccountP = new accountPanel(currentC);
         setSize(790,500);
+        setMinimumSize(new Dimension(790, 500));        
+        setMaximumSize(new Dimension(790, 500));
+
         current = HomeP;
         dashBoardP = d;
         //dashboard panel
