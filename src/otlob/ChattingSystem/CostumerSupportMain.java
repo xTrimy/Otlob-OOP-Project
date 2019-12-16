@@ -33,9 +33,9 @@ public class CostumerSupportMain {
         }catch(Exception e){
         }
         
-        Client cl=new Client("Ahmed");
-        cl.setVisible(true);
-        cl.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //Client cl=new Client("Ahmed");
+       // cl.setVisible(true);
+        //cl.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         Client cl2=new Client("Haidy");
         cl2.setVisible(true);
