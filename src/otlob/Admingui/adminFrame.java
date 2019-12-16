@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package otlob.Admingui;
+import otlob.guiassets.dashBoard;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;

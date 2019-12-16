@@ -327,7 +327,7 @@ public class LogInGUI extends JFrame
              return shape.contains(x, y);
         }
     }
-    void exit(){
+    private void exit(){
      this.dispose();
     }
 

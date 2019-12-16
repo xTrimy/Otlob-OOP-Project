@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package otlob.Admingui;
+package otlob.guiassets;
 import java.awt.BorderLayout;
 import java.io.*;
 import javax.imageio.*;
@@ -20,7 +20,7 @@ import javax.swing.*;
 public class dashBoard extends JPanel{
      int x;
     int y;
-    dashBoard(int x,int y)
+    public dashBoard(int x,int y)
         {
             this.x = x;
             this.y = y;
