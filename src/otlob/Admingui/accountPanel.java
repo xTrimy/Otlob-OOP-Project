@@ -46,8 +46,11 @@ public class accountPanel extends JPanel
         NameT.setEnabled(false);
         EmailT.setEnabled(false);
         passwordT.setEnabled(false);
+        //restaurant stuff is for the phone number
         resNameT.setEnabled(false);
-        
+        resNameT.setText(current.getphoneNumber());
+        passwordT.setText(current.getPassword());
+        System.out.println(current.getUserName());
         oldname = current.getUserName();
         oldMail = current.getmail();
         profileTypeT.setText("Admin");
@@ -81,7 +84,7 @@ public class accountPanel extends JPanel
         this.add(AL);
         this.add(passwordT);
         
-        JLabel PL = new JLabel("restaurant Name ");
+        JLabel PL = new JLabel("phone Number");
         PL.setBounds(170,180,100,50);
         resNameT.setBounds(170,220,150,30);
         this.add(PL);
@@ -112,7 +115,7 @@ public class accountPanel extends JPanel
                 NameT.setEnabled(true);
                 EmailT.setEnabled(true);
                 passwordT.setEnabled(true);
-                
+                resNameT.setEnabled(true);
                 
             }
             else if(obj.equals(submitEdit))
@@ -129,8 +132,10 @@ public class accountPanel extends JPanel
                        String newName = NameT.getText();
                         String newmail =  EmailT.getText();
                         String newpass = passwordT.getText();
+                        String newphoneNumber = resNameT.getText();
                     try {
-                        current.modifyFile("admin.txt",newName,newpass,newmail);
+                        current.modifyFile("admin.txt",newName,newpass,newmail,newphoneNumber);
+                        
                     } catch (IOException ex) {
                         Logger.getLogger(accountPanel.class.getName()).log(Level.SEVERE, null, ex);
                     }

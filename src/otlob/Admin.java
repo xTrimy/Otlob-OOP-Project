@@ -20,6 +20,7 @@ public class Admin extends User
     private restaurant R ;
     final String adminFile = "admin.txt";
     
+    
     public Admin(){}
     
     public void Signup() throws IOException
@@ -55,21 +56,27 @@ public class Admin extends User
         //customer 
         //------Reading from file (START)------
         BufferedReader readObj = new BufferedReader(new FileReader(adminFile));
-        String s;
+        String s;int i=0;
         while((s = readObj.readLine()) != null)
         {
             //try because the first iteration iterates over the first line which is the size
           try
           {
                // StringTokenizer tokens = new StringTokenizer(s,",");
+              if(i == 0)
+              {
+                i++;
+                continue;
+              }
                String [] list = s.split(",");
                 if(list[0].equals(id))
                 {
                     this.password = list[2];
+                    this.phoneNum = list[4];
                     this.username = list[1];
-                    this.adminName = list[4];
+                    this.adminName = list[5];
                     this.adminId = Integer.parseInt(id);
-                    this.adminEmail  = list[5];
+                    this.adminEmail  = list[6];
                     this.date = LocalDate.parse(list[3]);
                     return this;
                 }
@@ -175,14 +182,19 @@ public String getmail()
     return adminEmail;
 }
 
-public void modifyFile(String fileName,String newName,String newPass,String newMail) throws  IOException
+public void modifyFile(String fileName,String newName,String newPass,String newMail,String newphoneNumber) throws  IOException
 {
-    
-    BufferedReader reader = new BufferedReader(new FileReader(new File("admin.txt")));
-    BufferedWriter writer = new BufferedWriter(new FileWriter(new File("temp.txt")));
+    File readerFile = new File("admin.txt");
+    File writerFile = new File("admin.txt");
+    BufferedReader reader = null;
+    FileWriter writer = null;
     String line;
     String [] arr;
     int i =0;
+    String newData = "";
+    try
+    {
+        reader = new BufferedReader(new FileReader(readerFile));
     while((line = reader.readLine()) != null)
     {
         arr = line.split(",");
@@ -190,16 +202,37 @@ public void modifyFile(String fileName,String newName,String newPass,String newM
         if(arr[0].equals(Integer.toString(this.adminId)))
         {
            //write new shit
-            writer.write(String.format("%s,%s,%s,%s,%s,%s,%s\n",
-                    Integer.toString(this.adminId),newName,newPass,arr[3],arr[4],newName,newMail));
+            //writer.write(String.format("%s,%s,%s,%s,%s,%s,%s\n",
+            //        Integer.toString(this.adminId),newName,newPass,arr[3],newphoneNumber,newName,newMail));
+            String modified = Integer.toString(this.adminId)+ "," +
+                    newName+ "," +newPass+ ","+ arr[3] + ","+ newphoneNumber+"," +newName+ ","+newMail;
+            newData = newData + modified + System.lineSeparator();
         }
         else
         {
-            writer.write(line + " " + System.lineSeparator());
+            newData = newData + line + " " + System.lineSeparator();
+           
         }
+        writer = (new FileWriter(writerFile,false));
+        writer.write(newData);
         
     }
-    reader.close();
+    }catch(IOException E){}
+    finally
+        {
+            try
+            {
+                //Closing the resources
+                reader.close();
+                writer.close();
+            } 
+            catch (IOException e) 
+            {
+                e.printStackTrace();
+            }
+        }
+    
+    
     writer.close();
 
 }
