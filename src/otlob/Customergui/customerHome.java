@@ -37,7 +37,6 @@ public class customerHome extends JPanel
     private int marginsY = 70;
     customerHome() throws IOException
     {
-        restaurants = ac.ReadFile("restaurant.txt");
         this.setLayout(null);
         this.addMouseMotionListener(new RectListener());
         try{
