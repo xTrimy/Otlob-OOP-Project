@@ -119,7 +119,7 @@ public class customerFrame extends JFrame
                     try {
                         client = new ClientChattingSystem("Client");
                         client.setVisible(true);
-                        client.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        client.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     } catch (IOException ex) {
                         Logger.getLogger(customerFrame.class.getName()).log(Level.SEVERE, null, ex);
                     }
