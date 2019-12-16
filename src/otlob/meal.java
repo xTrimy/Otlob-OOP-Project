@@ -56,8 +56,10 @@ public class meal
         FileWriter res = new FileWriter("meal.txt",true);
 
         BufferedWriter writer = new BufferedWriter(res);
-
-        writer.write(adminId + "," + this.toString());
+        String mealLine = this.toString();
+        mealLine = mealLine.replaceFirst(",", ","+adminId+",");
+        //System.out.println(mealLine);
+        writer.write(mealLine);
         obj.modifyFile("meal.txt",Integer.toString(mealId -1), Integer.toString(mealId ));
         writer.close();
 

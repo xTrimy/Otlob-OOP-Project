@@ -41,7 +41,7 @@ public class adminFrame extends JFrame  implements Accessible
     
     JPanel current = new JPanel();
     JPanel AccountP;
-    JPanel HomeP = new adminHome();
+    JPanel HomeP ;
     //JPanel AdminsP = new JPanel();
     JPanel AdminsP = new adminPanel();
     Container cp = getContentPane();
@@ -60,6 +60,7 @@ public class adminFrame extends JFrame  implements Accessible
             myLabelPanels[i].setBackground(Color.WHITE);
             myLabels[i].setForeground(Color.BLACK);
         }
+        HomeP = new adminHome(currentA);
         addAdminP = new AddAdminsPanel(currentA);
         this.currentA = currentA;
         AccountP = new accountPanel(currentA);
@@ -186,13 +187,13 @@ public class adminFrame extends JFrame  implements Accessible
         
     }
     
-  public static void imageIoWrite(File i) {
+  public static void imageIoWrite(File i,String picName) {
          BufferedImage bImage = null;
          try {
              //File initialImage = new File("C://Users/Rou/Desktop/image.jpg");
              bImage = ImageIO.read(i);
  
-             ImageIO.write(bImage, "jpg", new File("iii.jpg"));
+             ImageIO.write(bImage, "jpg", new File(picName));
             
  
          } catch (IOException e) {

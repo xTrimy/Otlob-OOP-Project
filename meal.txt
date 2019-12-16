@@ -1,46 +1,21 @@
-<<<<<<< HEAD
-6
-6,0,burger,onions blah blah,55.5,5
-6,1,burger,awsome,55.0,40
-6,2,pizza,bakery,34.0,99
-6,3,asd,fgg,34.0,55
-6,4,meal,sdsd,22.0,344
-1,5,asd,ggh,34.0,22
-<<<<<<< HEAD
-1,6,haborgar,smth,33.0
-||||||| merged common ancestors
-1,6,haborgar,smth,33.0,2
-=======
-2,6,haborgar,smth,33.0,2
-2,7,haborgar2,smth,33.0,2
-2,8,haborgar3,smth,33.0,2
-2,9,haborgar4,smth,33.0,2
->>>>>>> 275a32eeda86ae6b1c59d9424ac6b9c74cb16f4a
-||||||| merged common ancestors
-6
-6,0,burger,onions blah blah,55.5,5
-6,1,burger,awsome,55.0,40
-6,2,pizza,bakery,34.0,99
-6,3,asd,fgg,34.0,55
-6,4,meal,sdsd,22.0,344
-1,5,asd,ggh,34.0,22
-2,6,haborgar,smth,33.0,2
-2,7,haborgar2,smth,33.0,2
-2,8,haborgar3,smth,33.0,2
-2,9,haborgar4,smth,33.0,2
-=======
-13
-6,0,Super Dinner,2 pieces of chicken and rizo - served with small french fries - bun and pepsi can 330 ml.,51.75,5
-6,1,Snack Box,2 Pieces fried chicken - served with small French fries and bun,32.02,40
-6,2,Double Wrap Box,Double wrap sandwich - 1 piece of chicken - 1 large rice and soft drink.,73.68,99
-6,3,Fillet Supreme,2 Pieces fried chicken - turkey slices - cheddar cheese slices - lettuce and mayonnaise sauce,59.21,55
-2,5,Mushroom Joint Sandwich,Burger - grilled mushroom - cheese and onion,54.00,2
-2,6,Triple B Sandwich,Burger - beef bacon - onion - lettuce - cheese - barbeque sauce and mayonnaise,59.25,2
-2,7,The Blue Sandwich,Burger - blue cheese - walnuts - lettuce - onion and red berries sauce,53.25,2
-2,8,The Classic Burger Sandwich,Burger - tomato - lettuce - onion - pickled cucumber and mayonnaise,45.00,2
-4,9,Cheesy Tucker,Burger - lettuce - onions - tomatoes - cheese and mayonnaise.,48.00,2
-4,10,The Dog Father,Chili Con Carne Hot Dod Sandwich,45.00,2
-5,11,Chicken Alfredo Pasta,Fettuccine pasta - chicken - mushroom - parmesean cheese and alfredo sauce,50.50,5
-5,12,Negresco,Penne pasta - chicken - mushroom - mozzarella cheese and  creamy sauce,65.00,7
-5,13,Shrimp pasta,Penna Pasta - Shrimp - parmesean cheese and alfredo sauce - red sauce,70.00,5
->>>>>>> fe74cd105945a8cb6c248f6132802e09f75d3ce9
+20
+0,6,Super Dinner,2 pieces of chicken and rizo - served with small french fries - bun and pepsi can 330 ml.,51.75,5
+1,6,Snack Box,2 Pieces fried chicken - served with small French fries and bun,32.02,40
+2,6,Double Wrap Box,Double wrap sandwich - 1 piece of chicken - 1 large rice and soft drink.,73.68,99
+3,6,Fillet Supreme,2 Pieces fried chicken - turkey slices - cheddar cheese slices - lettuce and mayonnaise sauce,59.21,55
+5,2,Mushroom Joint Sandwich,Burger - grilled mushroom - cheese and onion,54.00,2
+6,2,Triple B Sandwich,Burger - beef bacon - onion - lettuce - cheese - barbeque sauce and mayonnaise,59.25,2
+7,2,The Blue Sandwich,Burger - blue cheese - walnuts - lettuce - onion and red berries sauce,53.25,2
+8,2,The Classic Burger Sandwich,Burger - tomato - lettuce - onion - pickled cucumber and mayonnaise,45.00,2
+9,4,Cheesy Tucker,Burger - lettuce - onions - tomatoes - cheese and mayonnaise.,48.00,2
+10,4,The Dog Father,Chili Con Carne Hot Dod Sandwich,45.00,2
+11,5,Chicken Alfredo Pasta,Fettuccine pasta - chicken - mushroom - parmesean cheese and alfredo sauce,50.50,5
+12,5,Negresco,Penne pasta - chicken - mushroom - mozzarella cheese and  creamy sauce,65.00,7
+13,5,Shrimp pasta,Penna Pasta - Shrimp - parmesean cheese and alfredo sauce - red sauce,70.00,5
+14,6,chicken,parmesian someth,122.0,0
+15,6,mealname101,spce,122.0,0
+16,6,mes,asd,222.0,0
+17,6,mes,asd,222.0,0
+18,6,ss,dd,122.0,0
+19,6,somepci,mesl,123.0,0
+20,6,name,dd,123.0,3
