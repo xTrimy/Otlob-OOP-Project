@@ -1,4 +1,4 @@
-19
+20
 0,6,Super Dinner,2 pieces of chicken and rizo - served with small french fries - bun and pepsi can 330 ml.,51.75,5
 1,6,Snack Box,2 Pieces fried chicken - served with small French fries and bun,32.02,40
 2,6,Double Wrap Box,Double wrap sandwich - 1 piece of chicken - 1 large rice and soft drink.,73.68,99
@@ -18,3 +18,4 @@
 17,6,mes,asd,222.0,0
 18,6,ss,dd,122.0,0
 19,6,somepci,mesl,123.0,0
+20,6,name,dd,123.0,3

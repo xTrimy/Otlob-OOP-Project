@@ -1,4 +1,4 @@
-18
+20
 3,0,Burger Joint,0
 4,1,Flying Dogs,0
 5,2,Pasta Factory,0
@@ -11,9 +11,12 @@
 1,10,Foody,0
 11,11,selected,0
 12,3,KFC,0
-13,3,Test,0
-14,3,Test4,0
-15,3,KFC2,0
-16,3,KFC3,0
-17,3,KFC4,0
-18,18,Test,0
+13,3,KFC,0
+14,3,KFC,0
+15,3,KFC,0
+16,3,KFC,0
+17,3,KFC,0
+18,18,asd,0
+19,19,newrest,0
+20,20,sad,0
+
