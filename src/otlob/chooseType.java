@@ -68,6 +68,7 @@ public class chooseType extends JFrame
                 LogInGUI obj = new LogInGUI(admin);
                 obj.setVisible(true);
                 exit();
+                obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             }catch(IOException E){}
                 
             }

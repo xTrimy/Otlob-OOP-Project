@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.border.*;
 import otlob.Admingui.adminFrame;
 import otlob.Admingui.signupadmingui;
+import otlob.Customergui.*;
 
 
 /**
@@ -178,6 +179,7 @@ public class LogInGUI extends JFrame
                         adminFrame obj = new adminFrame((Admin)current);
                         obj.setVisible(true);
                         exit();
+                         obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     } catch (IOException ex) {
                         Logger.getLogger(LogInGUI.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -201,9 +203,15 @@ public class LogInGUI extends JFrame
                 else
                 {
                     try{
-                    current = (Customer)current.getUser(id);}
+                    current = (Customer)current.getUser(id);
+                    customerFrame obj = new customerFrame((Customer)current);
+                    obj.setVisible(true);
+                    obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+                    }
                     catch(IOException E){System.out.println("error getting customer");}
-                    System.out.println("succeeded");
+                    
                 }
 
             }

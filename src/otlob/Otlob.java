@@ -28,6 +28,9 @@ public class Otlob {
         d.setVisible(true);
         
         
-       d.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     
+       d.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+       
+       
+      
     }
 }
