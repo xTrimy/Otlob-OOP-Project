@@ -17,6 +17,9 @@ import javax.swing.text.*;
 import javax.accessibility.*;
 import javax.swing.filechooser.*;
 import java.text.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import static otlob.Admingui.adminFrame.imageIoWrite;
 import otlob.assistingClass;
 /**
@@ -27,16 +30,34 @@ public class customerHome extends JPanel
 {
     private BufferedImage[] images = new BufferedImage[6];
     private JLabel[] restaurantNames = new JLabel[6];
-    private String[][] restaurants;
-    private assistingClass ac;
+    private HashMap<String,String[]> restaurants;
+    private String[] restaurantsIds;
+    private int restaurantsSize;
+    private assistingClass ac = new assistingClass();
     private int startPosy;
     private int selectedRect = 0;
     private int startPosx = 0;
     private int sizeX = 120;
     private int sizeY = 100;
     private int marginsY = 70;
+    private int maxPerPage = 6;
+    private int currentPage = 1;
+    private JButton next;    
+    private JButton prev;    
+    private JLabel currentPageLabel;
+
     customerHome() throws IOException
     {
+        restaurants = ac.readFiletoHashMap("restaurant.txt");
+        restaurantsSize = restaurants.size();
+        restaurantsIds = new String[restaurantsSize];
+        Set<Map.Entry<String, String[]>> set = restaurants.entrySet();
+        int it = 0;
+        for(Map.Entry<String,String[]> s: set){
+            restaurantsIds[it] = s.getKey();
+            System.out.println(restaurantsIds[it]);
+            it++;
+        }
         this.setLayout(null);
         this.addMouseMotionListener(new RectListener());
         try{
@@ -48,9 +69,24 @@ public class customerHome extends JPanel
             System.out.println(ex);
         }
         for(int i = 0; i<6; i++){
-            restaurantNames[i] = new JLabel("test", SwingConstants.CENTER);
+            restaurantNames[i] = new JLabel("", SwingConstants.CENTER);
             this.add(restaurantNames[i]);
         }
+        next = new JButton(">");        
+        prev = new JButton("<");
+        currentPageLabel = new JLabel("1", SwingConstants.CENTER);
+        next.setBounds(290,420,50,20);    
+        prev.setBounds(200,420,50,20);        
+        currentPageLabel.setBounds(250,420,40,20);
+
+        next.addMouseListener(new RectListener2());        
+        prev.addMouseListener(new RectListener2());
+        
+        this.add(next);        
+        this.add(prev);        
+        this.add(currentPageLabel);
+
+
     }
     
     private static JButton createSimpleButton(String text) {
@@ -81,6 +117,54 @@ public class customerHome extends JPanel
             g.fillRect(startPosx+((selectedRect-1)%3)*sizeX,startPosy+(sizeY+marginsY)*y,sizeX,sizeY);
         }
     }
+      
+    public class RectListener2 implements MouseListener {
+
+        @Override
+        public void mouseClicked(MouseEvent arg0) {
+
+        }
+
+        @Override
+        public void mousePressed(MouseEvent arg0) {
+            if(arg0.getSource() == next){
+                if((float)currentPage < restaurantsIds.length/(float)maxPerPage){
+                    currentPage++;
+                    createLabels();
+                    currentPageLabel.setText(Integer.toString(currentPage));
+                    repaint();
+                    validate();
+                }else{
+                    JOptionPane.showMessageDialog(null, "This is the last page", "Error",JOptionPane.ERROR_MESSAGE);
+                }
+
+            }else if(arg0.getSource() == prev){
+                if(currentPage > 1){
+                    currentPage--;
+                    createLabels();
+                    currentPageLabel.setText(Integer.toString(currentPage));
+                    repaint();
+                    validate();
+                }else{
+                    JOptionPane.showMessageDialog(null, "This is the first page", "Error",JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent arg0) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent arg0) {
+        }
+
+        @Override
+        public void mouseExited(MouseEvent arg0) {
+        }
+        
+    }
+
     public class RectListener implements MouseMotionListener 
     {
         @Override
@@ -108,9 +192,13 @@ public class customerHome extends JPanel
     private void createLabels(){
         for(int i = 0; i<6; i++){
             this.remove(restaurantNames[i]);
-            restaurantNames[i] = new JLabel("Test", SwingConstants.CENTER);
-            restaurantNames[i].setBounds(startPosx+((i)%3)*sizeX,sizeY+startPosy+(sizeY+marginsY)*(int)(i/3),sizeX,marginsY/2);
-            this.add(restaurantNames[i]);
+            String label = "";
+            if(i+(currentPage-1)*6 < restaurantsSize){
+                label = restaurants.get(restaurantsIds[i+(currentPage-1)*6])[1];
+                restaurantNames[i] = new JLabel(label, SwingConstants.CENTER);
+                restaurantNames[i].setBounds(startPosx+((i)%3)*sizeX,sizeY+startPosy+(sizeY+marginsY)*(int)(i/3),sizeX,marginsY/2);
+                this.add(restaurantNames[i]);
+            }
         }
     }
 }
