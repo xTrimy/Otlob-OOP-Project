@@ -54,7 +54,6 @@ public class chooseType extends JFrame
 
         @Override
         public void actionPerformed(ActionEvent e) {
-          
             boolean customer = typeCustomer.isSelected();
             boolean admin = typeAdmin.isSelected();
             System.out.println(admin);
@@ -67,16 +66,10 @@ public class chooseType extends JFrame
             {try{
                 LogInGUI obj = new LogInGUI(admin);
                 obj.setVisible(true);
-                exit();
+                dispose();
                 obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             }catch(IOException E){}
-                
             }
-          
         }
-        
-    }
-    void exit(){
-     this.dispose();
     }
 }

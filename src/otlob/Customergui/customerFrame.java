@@ -18,6 +18,9 @@ import javax.swing.text.*;
 import javax.accessibility.*;
 import javax.swing.filechooser.*;
 import java.text.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import otlob.ChattingSystem.ClientChattingSystem;
 import otlob.Customer;
 /**
  *
@@ -39,6 +42,7 @@ public class customerFrame extends JFrame
     JPanel HomeP = new customerHome();
     //JPanel AdminsP = new JPanel();
     JPanel orders = new ordersTable();
+    JButton customerService = new JButton("Customer Service");
 
     Container cp = getContentPane();
     JPanel dashBoardP ;
@@ -55,9 +59,11 @@ public class customerFrame extends JFrame
             myLabelPanels[i].setBackground(Color.WHITE);
             myLabels[i].setForeground(Color.BLACK);
         }
-        
         AccountP = new accountPanel(currentC);
         setSize(790,500);
+        setMinimumSize(new Dimension(790, 500));        
+        setMaximumSize(new Dimension(790, 500));
+
         current = HomeP;
         dashBoardP = d;
         //dashboard panel
@@ -67,6 +73,7 @@ public class customerFrame extends JFrame
         dashBoardP.add(Box.createRigidArea(new Dimension(0,0)));
         dashBoardP.add(AdminsLPanel);
         dashBoardP.add(Box.createRigidArea(new Dimension(200,this.getHeight()-280)));
+        dashBoardP.add(customerService);
         setFont(AdminsL);
         setFont(HomeL);
         setFont(AccountL); 
@@ -83,6 +90,7 @@ public class customerFrame extends JFrame
         HomeL.addMouseListener(new RectListener());
         AccountL.addMouseListener(new RectListener());
         AdminsL.addMouseListener(new RectListener());
+        customerService.addMouseListener(new RectListener());
     
     }
  
@@ -105,6 +113,19 @@ public class customerFrame extends JFrame
         public void mouseClicked(MouseEvent e) {
                 //System.out.println(e.getX() + ", " + e.getY());
                 Object obj = e.getSource();
+                if(obj.equals(customerService))
+                {
+                    ClientChattingSystem client;
+                    try {
+                        client = new ClientChattingSystem("Client");
+                        client.setVisible(true);
+                        client.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    } catch (IOException ex) {
+                        Logger.getLogger(customerFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    
+                }
                 if(obj.equals(AccountL))
                 {                     
                     cp.remove(current);
