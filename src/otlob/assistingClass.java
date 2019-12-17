@@ -9,6 +9,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.IntStream;
 
 
 /**
@@ -471,4 +473,86 @@ String searchId(String Id,String fileName) throws IOException
         return content;
     }
     
+    public HashMap<String,String[]> readFiletoHashMap(String fileName,boolean colSelection)
+    {
+        if(colSelection == true)
+        {
+            HashMap<String,String[]> content = new HashMap();
+
+            //create the file objects
+            File restaurants = new File(fileName);
+            String fileData = "";
+            BufferedReader reader = null;
+            try
+            {
+                reader = new BufferedReader(new FileReader(restaurants));
+                //String line = reader.readLine();
+                String line;
+                String[] list;
+                int i=0;
+                //read the whole file and store it into a string
+                while ((line = reader.readLine()) != null) 
+                {
+                    //line separator in windows is \n
+                    if(i == 0)
+                    {
+                        i++;
+                        continue;
+                    }
+                    fileData = fileData + line + System.lineSeparator();
+                    list= line.split(",");
+                    String l = list[1];
+                    String afterremoval[] = removeTheElement(list,1);
+                    content.put(l,afterremoval);
+                    line = reader.readLine();
+
+                }
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
+            return content;
+        }
+        else
+        {
+            return readFiletoHashMap(fileName);
+        }
+    }
+    
+     public static String[] removeTheElement(String[] arr, 
+                                          int index) 
+    { 
+  
+        // If the array is empty 
+        // or the index is not in array range 
+        // return the original array 
+        if (arr == null
+            || index < 0
+            || index >= arr.length) { 
+  
+            return arr; 
+        } 
+  
+        // Create another array of size one less 
+        String[] anotherArray = new String[arr.length - 1]; 
+  
+        // Copy the elements except the index 
+        // from original array to the other array 
+        for (int i = 0, k = 0; i < arr.length; i++) { 
+  
+            // if the index is 
+            // the removal element index 
+            if (i == index) { 
+                continue; 
+            } 
+  
+            // if the index is not 
+            // the removal element index 
+            anotherArray[k++] = arr[i]; 
+        } 
+  
+        // return the resultant array 
+        return anotherArray; 
+    } 
 }

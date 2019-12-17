@@ -18,13 +18,17 @@ import javax.swing.text.*;
 import javax.accessibility.*;
 import javax.swing.filechooser.*;
 import java.text.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import otlob.Admin;
+import otlob.LogInGUI;
 /**
  *
  * @author ahmed
  */
 public class adminFrame extends JFrame  implements Accessible
 {
+    
     JLabel AccountL = new JLabel("Account");
     JPanel AccountLPanel = new JPanel();
     JLabel AdminsL = new JLabel("Admins");
@@ -33,11 +37,12 @@ public class adminFrame extends JFrame  implements Accessible
     
     JLabel AddAdminL = new JLabel("Add Admins");
     JPanel AddAdminLP = new JPanel();
-    
+    JLabel logout = new JLabel("Log Out");
+    JPanel LogOutP = new JPanel();
 
     JPanel HomeLPanel = new JPanel();
-    JLabel[] myLabels = {AccountL, AdminsL, HomeL,AddAdminL};    
-    JPanel[] myLabelPanels = {AccountLPanel, AdminsLPanel, HomeLPanel,AddAdminLP};
+    JLabel[] myLabels = {AccountL, AdminsL, HomeL,AddAdminL,logout};    
+    JPanel[] myLabelPanels = {AccountLPanel, AdminsLPanel, HomeLPanel,AddAdminLP,LogOutP};
     
     JPanel current = new JPanel();
     JPanel AccountP;
@@ -49,7 +54,7 @@ public class adminFrame extends JFrame  implements Accessible
     dashBoard d = new dashBoard(0,100);
     JPanel addAdminP;
     Admin currentA;
-
+    JFrame disposed = this;
     public adminFrame(Admin currentA) throws IOException
     {
         for(int i = 0; i<myLabels.length;i++){
@@ -75,11 +80,14 @@ public class adminFrame extends JFrame  implements Accessible
         dashBoardP.add(AdminsLPanel);
         dashBoardP.add(Box.createRigidArea(new Dimension(0,0)));
         dashBoardP.add(AddAdminLP);
+        dashBoardP.add(Box.createRigidArea(new Dimension(0,0)));
+        dashBoardP.add(LogOutP);
         dashBoardP.add(Box.createRigidArea(new Dimension(200,this.getHeight()-280)));
         setFont(AdminsL);
         setFont(HomeL);
         setFont(AccountL); 
         setFont(AddAdminL);
+        setFont(logout);
         HomeL.setForeground(Color.WHITE);
         HomeLPanel.setBackground(Color.red);
         current.setBackground(Color.WHITE);
@@ -94,6 +102,7 @@ public class adminFrame extends JFrame  implements Accessible
         AccountL.addMouseListener(new RectListener());
         AdminsL.addMouseListener(new RectListener());
         AddAdminL.addMouseListener(new RectListener());
+        logout.addMouseListener(new RectListener());
     }
  
  
@@ -163,6 +172,16 @@ public class adminFrame extends JFrame  implements Accessible
                     changeSelection(AddAdminL,AddAdminLP);
                     getContentPane().repaint();
                     getContentPane().validate();
+                }
+                if(obj.equals(logout))
+                {
+                    try {
+                        disposed.dispose();
+                        LogInGUI l = new LogInGUI(true);
+                        l.setVisible(true);
+                    } catch (IOException ex) {
+                        Logger.getLogger(adminFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
         }
 
