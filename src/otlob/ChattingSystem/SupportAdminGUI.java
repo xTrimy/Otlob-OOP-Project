@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package otlob.ChattingSystem;
 
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,36 +16,44 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.logging.*;
-import javax.swing.*;
 /**
  *
- * @author xTrimy
+ * @author Zeina Ayman
  */
-public class SupportClient extends JFrame{
+public class SupportAdminGUI extends JFrame{
+    private JTextArea text = new JTextArea();
+    private JButton send = new JButton("Send");
     static private int cid = 0;
     private int clientId;
     private JLabel recivedMsg;
-    private JTextArea tx_Msg=new JTextArea("Write message to server here");
+//    private JTextField tx_Msg=new JTextField("Write message to server here");
     InputStream is;
     OutputStream os;
     Socket toFromserver = null;
     String clientName;
-    public SupportClient (String Name) throws IOException
+    
+    public SupportAdminGUI(String Name) throws IOException
     {
-        this.clientName=Name;
-        setSize(300,600);
-        setTitle("Support Client V 1.0" + Name);
-        recivedMsg=new JLabel("<html><div style='color:red'>Recived Message</div><br>");
-        setLayout(null);
-        recivedMsg.setBounds(20,20, 200,250);
-        add(recivedMsg);
-        JButton btnReciveMsg=new JButton("Send");
-        btnReciveMsg.setBounds(20,350,100,50);
-        tx_Msg.setBounds(btnReciveMsg.getBounds().x,btnReciveMsg.getBounds().y+50,100,50);
-        add(tx_Msg);
-        btnReciveMsg.addActionListener(new act());
-        add(btnReciveMsg);
+          this.setSize(500,500);
+          send.setForeground(Color.WHITE);
+          send.setBackground(Color.RED);
+          text.setColumns(10);
+          text.setRows(5);
+          setTitle("Support Client V 1.0" + Name);
+          recivedMsg=new JLabel("<html><div style='color:red'>Recived Message</div><br>");
+          JPanel panel1 = new JPanel();
+          panel1.setLayout(null);
+          Container cp = getContentPane();
+          cp.setLayout(new GridLayout(2,1));
+          cp.add(recivedMsg);
+          text.setBounds(0, 130, 300, 100);
+          panel1.add(text);
+          
+          send.setBounds(350, 170, 70, 30);
+          panel1.add(send);
+          
+          cp.add(panel1);
+          send.addActionListener(new act());
         
                 try {
                     toFromserver = new Socket("127.0.0.1", 6000);
@@ -61,14 +70,14 @@ public class SupportClient extends JFrame{
         px.println("y,1,"+ ++cid+","+Name);
         clientId = cid;
     }
-     private class act implements  ActionListener
+    private class act implements  ActionListener
     {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             PrintWriter pw=new PrintWriter(os,true);
-            pw.println("y1,"+clientId+","+tx_Msg.getText());
-            recivedMsg.setText(recivedMsg.getText()+"<br><span style='color:blue;'>You: </span>"+tx_Msg.getText());
+            pw.println("y1,"+clientId+","+text.getText());
+            recivedMsg.setText(recivedMsg.getText()+"<br><span style='color:blue;'>You: </span>"+text.getText());
         }
     }
     private class updategui extends Thread
@@ -100,6 +109,4 @@ public class SupportClient extends JFrame{
             }
         }
         }
-    }
-    
-
+}
