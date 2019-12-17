@@ -74,8 +74,16 @@ public class adminHome extends JPanel
         mealTypeT.setBounds(65,200,150,30);
         
         //setting price positions
+        NumberFormat format = NumberFormat.getInstance();
+    NumberFormatter formatter = new NumberFormatter(format);
+    formatter.setValueClass(Integer.class);
+    formatter.setMinimum(0);
+    formatter.setMaximum(Integer.MAX_VALUE);
+    formatter.setAllowsInvalid(false);
+    // If you want the value to be committed on each keystroke instead of focus lost
+    formatter.setCommitsOnValidEdit(true);
         amountFormat = NumberFormat.getNumberInstance();
-        amountField = new JFormattedTextField(amountFormat);
+        amountField = new JFormattedTextField(formatter);
         amountField.setBounds(65, 280, 150, 30);
         pL.setBounds(30,280,70,30);
         
