@@ -61,9 +61,9 @@ public class customerFrame extends JFrame
         }
         AccountP = new accountPanel(currentC);
         setSize(790,500);
-        setMinimumSize(new Dimension(790, 500));        
-        setMaximumSize(new Dimension(790, 500));
-
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        setResizable(false);
+        setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         current = HomeP;
         dashBoardP = d;
         //dashboard panel
