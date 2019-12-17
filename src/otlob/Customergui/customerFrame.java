@@ -22,6 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import otlob.ChattingSystem.ClientChattingSystem;
 import otlob.Customer;
+import otlob.cart;
 /**
  *
  * @author ahmed
@@ -34,14 +35,17 @@ public class customerFrame extends JFrame
     JLabel AdminsL = new JLabel("orders");
     JPanel AdminsLPanel = new JPanel();
     JLabel HomeL = new JLabel("Home");
+    JLabel CartL = new JLabel("My Cart");
     JPanel HomeLPanel = new JPanel();
-    JLabel[] myLabels = {AccountL, AdminsL, HomeL};    
-    JPanel[] myLabelPanels = {AccountLPanel, AdminsLPanel, HomeLPanel};
+    JPanel CartPanel = new JPanel();
+    JLabel[] myLabels = {AccountL, AdminsL, HomeL, CartL};    
+    JPanel[] myLabelPanels = {AccountLPanel, AdminsLPanel, HomeLPanel, CartPanel};
     JPanel current = new JPanel();
     JPanel AccountP;
     JPanel HomeP = new customerHome();
     //JPanel AdminsP = new JPanel();
     JPanel orders = new ordersTable();
+    JPanel CartP = new JPanel();
     JButton customerService = new JButton("Customer Service");
 
     Container cp = getContentPane();
@@ -72,9 +76,11 @@ public class customerFrame extends JFrame
         dashBoardP.add(AccountLPanel);
         dashBoardP.add(Box.createRigidArea(new Dimension(0,0)));
         dashBoardP.add(AdminsLPanel);
+        dashBoardP.add(CartPanel);
         dashBoardP.add(Box.createRigidArea(new Dimension(200,this.getHeight()-280)));
         dashBoardP.add(customerService);
         setFont(AdminsL);
+        setFont(CartL);
         setFont(HomeL);
         setFont(AccountL); 
         HomeL.setForeground(Color.WHITE);
@@ -91,6 +97,7 @@ public class customerFrame extends JFrame
         AccountL.addMouseListener(new RectListener());
         AdminsL.addMouseListener(new RectListener());
         customerService.addMouseListener(new RectListener());
+        CartL.addMouseListener(new RectListener());
     
     }
  
@@ -124,6 +131,14 @@ public class customerFrame extends JFrame
                         Logger.getLogger(customerFrame.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     
+                    
+                }
+                if(obj.equals(CartL))
+                {
+                    cp.remove(current);
+                    current = null;
+                    getContentPane().repaint();
+                    getContentPane().validate();
                     
                 }
                 if(obj.equals(AccountL))
