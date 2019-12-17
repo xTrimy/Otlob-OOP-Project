@@ -45,7 +45,8 @@ public class customerHome extends JPanel
     private int maxPerPage = 6;
     private int currentPage = 1;
     private JButton next;    
-    private JButton prev;    
+    private JButton prev;        
+    private JButton back;    
     private JLabel currentPageLabel;
     private int selectedRestaurant = 0;
     private HashMap<String,String[]> meals;
@@ -79,14 +80,7 @@ public class customerHome extends JPanel
         this.addMouseMotionListener(new RectListener());        
         this.addMouseListener(new RectListener2());
 
-        try{
-            for(int i = 0;i<6;i++){
-                images[i] = ImageIO.read(new File("Untitled.jpg"));
-            }
-        }
-        catch(IOException ex){
-            System.out.println(ex);
-        }
+
         for(int i = 0; i<6; i++){
             displayLabels[i] = new JLabel();            
             displayPrices[i] = new JLabel();
@@ -95,19 +89,31 @@ public class customerHome extends JPanel
         }
         next = new JButton(">");        
         prev = new JButton("<");
+        back = new JButton("Back");
         currentPageLabel = new JLabel("1", SwingConstants.CENTER);
         next.setBounds(290,420,50,20);    
-        prev.setBounds(200,420,50,20);        
+        prev.setBounds(200,420,50,20);           
+        back.setBounds(0,420,130,20);        
         currentPageLabel.setBounds(250,420,40,20);
+        back.setVisible(false);
 
         next.addMouseListener(new RectListener2());        
-        prev.addMouseListener(new RectListener2());
-        
+        prev.addMouseListener(new RectListener2());        
+        back.addMouseListener(new RectListener2());
+
         this.add(next);        
         this.add(prev);        
+        this.add(back); 
+        
         this.add(currentPageLabel);
-
-
+        try{
+            for(int i = 0;i<6;i++){
+                images[i] = ImageIO.read(new File(new String("./logos/"+restaurantsIds[i]+".jpg")));
+            }
+        }
+        catch(IOException ex){
+            System.out.println(ex);
+        }
     }
     
     private static JButton createSimpleButton(String text) {
@@ -155,38 +161,90 @@ public class customerHome extends JPanel
                     currentPage++;
                     createLabels();
                     currentPageLabel.setText(Integer.toString(currentPage));
+                    try{
+                        for(int i = 0;i<6;i++){
+                            if(i+(currentPage-1)*6 < selectedMeals.size() || selectedRestaurant == 0)
+                                images[i] = ImageIO.read(new File(new String("./"+(( selectedRestaurant == 0 )?"logos":"mealPics")+"/"+(( selectedRestaurant == 0 )?restaurantsIds[i+(currentPage-1)*6]:selectedMeals.get(i+(currentPage-1)*6))+".jpg")));
+                            else
+                                images[i] = new BufferedImage(100,100,BufferedImage.TYPE_INT_ARGB);
+                        }
+                    }
+                    catch(IOException ex){
+                        System.out.println(ex);
+                    }
                     repaint();
                     validate();
                 }else{
                     JOptionPane.showMessageDialog(null, "This is the last page", "Error",JOptionPane.ERROR_MESSAGE);
                 }
-
+                
             }else if(arg0.getSource() == prev){
                 if(currentPage > 1){
                     currentPage--;
                     createLabels();
                     currentPageLabel.setText(Integer.toString(currentPage));
+                    try{
+                        for(int i = 0;i<6;i++){
+                            if(i+(currentPage-1)*6 < selectedMeals.size() || selectedRestaurant == 0)
+                                images[i] = ImageIO.read(new File(new String("./"+(( selectedRestaurant == 0 )?"logos":"mealPics")+"/"+(( selectedRestaurant == 0 )?restaurantsIds[i+(currentPage-1)*6]:selectedMeals.get(i+(currentPage-1)*6))+".jpg")));
+                            else
+                                images[i] = new BufferedImage(100,100,BufferedImage.TYPE_INT_RGB);
+                        }
+                    }
+                    catch(IOException ex){
+                        System.out.println(ex);
+                    }
                     repaint();
                     validate();
                 }else{
                     JOptionPane.showMessageDialog(null, "This is the first page", "Error",JOptionPane.ERROR_MESSAGE);
                 }
+            }else if(arg0.getSource() == back){
+                currentPage = 1;
+                back.setVisible(false);
+                selectedRestaurant = 0;
+                selectedMeals.clear();
+                try{
+                      for(int i = 0;i<6;i++){
+                        images[i] = ImageIO.read(new File(new String("./logos/"+restaurantsIds[i+(currentPage-1)*6]+".jpg")));
+                      }
+                  }
+                  catch(IOException ex){
+                      System.out.println(ex);
+                  }
+                repaint();
+                validate();
             }else{
                 for(int i = 0;i<2;i++){
                     for(int j = 0;j<3; j++){
                         if(posX>startPosx+j*sizeX && posX<startPosx+j*sizeX+sizeX && posY > startPosy+(sizeY+marginsY)*i && posY < startPosy+(sizeY+marginsY)*i+sizeY){
-                            selectedRestaurant = Integer.parseInt(restaurantsIds[(j+1)+(3*i)-1+(currentPage-1)*6]);
-                            currentPage = 1;
-                            currentPageLabel.setText("1");
-                            for(int k =0; k<mealsSize;k++){
-                                String id = meals.get(mealsIds[k])[0];
-                                if(id.equals(Integer.toString(selectedRestaurant))){
-                                    selectedMeals.add(mealsIds[k]);
+                            if(selectedRestaurant == 0){
+                                back.setVisible(true);
+                                selectedRestaurant = Integer.parseInt(restaurantsIds[(j+1)+(3*i)-1+(currentPage-1)*6]);
+                                currentPage = 1;
+                                currentPageLabel.setText("1");
+                                selectedMeals.clear();
+                                for(int k =0; k<mealsSize;k++){
+                                    String id = meals.get(mealsIds[k])[0];
+                                    if(id.equals(Integer.toString(selectedRestaurant))){
+                                        selectedMeals.add(mealsIds[k]);
+                                    }
                                 }
-                            }
-                            createLabels();
-                            repaint();
-                            validate();
+                                try{
+                                    for(int k = 0;k<6;k++){
+                                        if(i+(currentPage-1)*6 < selectedMeals.size())
+                                           images[k] = ImageIO.read(new File(new String("./mealPics/"+selectedMeals.get(k+(currentPage-1)*6)+".jpg")));
+                                        else
+                                            images[k] = new BufferedImage(100,100,BufferedImage.TYPE_INT_ARGB);
+                                    }
+                                }
+                                catch(IOException ex){
+                                    System.out.println(ex);
+                                }
+                                createLabels();
+                                repaint();
+                                validate();  
+                                }
                         }
                     }
                 }
