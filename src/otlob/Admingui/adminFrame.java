@@ -65,11 +65,12 @@ public class adminFrame extends JFrame  implements Accessible
             myLabelPanels[i].setBackground(Color.WHITE);
             myLabels[i].setForeground(Color.BLACK);
         }
+
         HomeP = new adminHome(currentA);
         addAdminP = new AddAdminsPanel(currentA);
         this.currentA = currentA;
         AccountP = new accountPanel(currentA);
-        setSize(790,500);
+        setSize(790,650);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         setResizable(false);
         setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
@@ -85,7 +86,7 @@ public class adminFrame extends JFrame  implements Accessible
         dashBoardP.add(AddAdminLP);
         dashBoardP.add(Box.createRigidArea(new Dimension(0,0)));
         dashBoardP.add(LogOutP);
-        dashBoardP.add(Box.createRigidArea(new Dimension(200,this.getHeight()-280)));
+        dashBoardP.add(Box.createRigidArea(new Dimension(200,this.getHeight()-320)));
         setFont(AdminsL);
         setFont(HomeL);
         setFont(AccountL); 
@@ -180,7 +181,7 @@ public class adminFrame extends JFrame  implements Accessible
                 {
                     try {
                         disposed.dispose();
-                        LogInGUI l = new LogInGUI(true);
+                        LogInGUI l = new LogInGUI(0);
                         l.setVisible(true);
                     } catch (IOException ex) {
                         Logger.getLogger(adminFrame.class.getName()).log(Level.SEVERE, null, ex);

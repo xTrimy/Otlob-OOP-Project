@@ -34,9 +34,11 @@ public class signupadmingui extends JFrame{
     private JLabel luser,lpass,lemail,lres;
     private JPanel SignupPanel;
     private JButton save;
+
     private JButton uploadPicture;
     signupadmingui actualPanel = this;
      private File choosenPic ;
+
     public signupadmingui()throws IOException
     {
         
@@ -52,6 +54,7 @@ public class signupadmingui extends JFrame{
         lemail = new JLabel("Email");
         lres = new JLabel("restaurantName");
         phoneNum = new RoundJTextField(21);
+
         uploadPicture.addActionListener(new ButtonWatcher());
         SignupPanel = new JPanel();
         JPanel LogoPanel = new JPanel();
@@ -157,7 +160,7 @@ public class signupadmingui extends JFrame{
                                 signup.writeUser();
                                 JOptionPane.showMessageDialog(null,"All set!", "please choose",JOptionPane.INFORMATION_MESSAGE);
                                 actualPanel.dispose();
-                               LogInGUI obj = new LogInGUI(true);
+                               LogInGUI obj = new LogInGUI(0);
                                obj.setVisible(true);
 
                             } catch (IOException ex) {

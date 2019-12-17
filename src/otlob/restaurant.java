@@ -67,6 +67,7 @@ public class restaurant
     }
     public void getRestaurantFromAdmin(int adminId)
     {
+
         //returns restaurant name and restuarant ID
     }
     @Override

@@ -48,7 +48,7 @@ public abstract class User {
     public abstract int getUserId();
     //declared abstract for overRiding only
     public abstract void writeUser() throws IOException;
-    public abstract void Signup() throws IOException;
+    //public abstract void Signup() throws IOException;
     
     
     @Override

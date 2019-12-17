@@ -21,9 +21,9 @@ public class CostumerSupportMain {
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
                 
-        SupportClient sc=new SupportClient("Admin1");
-        sc.setVisible(true);
-        sc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        SupportAdminGUI sc=new SupportAdminGUI("Admin1");
+//        sc.setVisible(true);
+//        sc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         SupportClient sc1 =new SupportClient("Admin2");
         sc1.setVisible(true);

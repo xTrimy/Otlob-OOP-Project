@@ -22,7 +22,7 @@ public class Admin extends User
     
     
     public Admin(){}
-    
+   /* 
     public void Signup() throws IOException
     {
         User user;
@@ -47,7 +47,7 @@ public class Admin extends User
                         pass,name,resName,"sometest");
                 user.writeUser();
     }
-    
+    */
     
     public User getUser(String id) throws IOException
     {
@@ -202,6 +202,7 @@ public void modifyFile(String fileName,String newName,String newPass,String newM
         if(arr[0].equals(Integer.toString(this.adminId)))
         {
            //write new shit
+
             //writer.write(String.format("%s,%s,%s,%s,%s,%s,%s\n",
             //        Integer.toString(this.adminId),newName,newPass,arr[3],newphoneNumber,newName,newMail));
             String modified = Integer.toString(this.adminId)+ "," +
@@ -231,7 +232,6 @@ public void modifyFile(String fileName,String newName,String newPass,String newM
                 e.printStackTrace();
             }
         }
-    
     
     writer.close();
 

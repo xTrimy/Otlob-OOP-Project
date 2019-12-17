@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.border.*;
 import otlob.Admingui.adminFrame;
 import otlob.Admingui.signupadmingui;
+import otlob.ChattingSystem.SupportAdminGUI;
 import otlob.Customergui.*;
 
 
@@ -31,10 +32,10 @@ public class LogInGUI extends JFrame
     JButton BSignIn = new JButton("Sign In");
     String userNameIn;
     String passIn;
-    boolean isAdmin;
+    int isAdmin;
     JTextField logInUName = new RoundJTextField(20);
     JPasswordField LogInPassword = new RoundJPasswordField(20);
-    public LogInGUI(boolean Admin)throws IOException
+    public LogInGUI(int Admin)throws IOException
     {
 //        UIManager.put("TextField.background", Color.WHITE);
 //        UIManager.put("TextField.border", BorderFactory.createCompoundBorder(
@@ -93,6 +94,10 @@ public class LogInGUI extends JFrame
         hyperLink.setForeground(Color.RED.darker());
         //to turn the cursor into a hand
         hyperLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        if(isAdmin == 2)
+        {
+            hyperLink.setVisible(false);
+        }
         
         //instead of making a class for only one function
         //this mouse listener opens the signup panel
@@ -104,13 +109,15 @@ public class LogInGUI extends JFrame
             //obj.setVisible(true);
             SignupGUI sign;
                 try {
-                    if(isAdmin)
+                    if(isAdmin == 0)
                     {
                         signupadmingui obj = new signupadmingui();
                         obj.setVisible(true);
-                    }
-                    else{
+                        dispose();
+                    }      
+                    else {
                     sign = new SignupGUI();
+                    dispose();
                     sign.setVisible(true);}
                 } catch (IOException ex) {
                     Logger.getLogger(LogInGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -119,8 +126,7 @@ public class LogInGUI extends JFrame
             
             }
         });
-        
-        
+
         getContentPane().add(allThree);
         
     }
@@ -154,7 +160,7 @@ public class LogInGUI extends JFrame
         public void actionPerformed(ActionEvent e) 
         {
                 User current;
-            if(isAdmin)
+            if(isAdmin == 0)
             {
                 current = new Admin();
                 userNameIn = logInUName.getText();
@@ -187,7 +193,7 @@ public class LogInGUI extends JFrame
                 }
                 
             }
-            else
+            else if(isAdmin == 1)
             {
                  current = new Customer();
                 userNameIn = logInUName.getText();          
@@ -205,6 +211,33 @@ public class LogInGUI extends JFrame
                     try{
                     current = (Customer)current.getUser(id);
                     customerFrame obj = new customerFrame((Customer)current);
+                    obj.setVisible(true);
+                    obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+                    }
+                    catch(IOException E){System.out.println("error getting customer");}
+                    
+                }
+
+            }
+            else if(isAdmin == 2)
+            {
+                current = new SupportAdmin();
+                userNameIn = logInUName.getText();          
+                passIn = LogInPassword.getText();
+
+                String id;
+                try{
+                    id = current.LogIn("SupportAdmin.txt",userNameIn,passIn);}
+                catch(IOException E){id = "";}
+                if(id.equals(""))
+                    JOptionPane.showMessageDialog(null, "incorrect username or password"
+                            , "incorrect" , JOptionPane.INFORMATION_MESSAGE);        
+                else
+                {
+                    try{
+                    SupportAdminGUI obj = new SupportAdminGUI("Support Admin");
                     obj.setVisible(true);
                     obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

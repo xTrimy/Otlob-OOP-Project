@@ -132,17 +132,18 @@ public class accountPanel extends JPanel
                        String newName = NameT.getText();
                         String newmail =  EmailT.getText();
                         String newpass = passwordT.getText();
+
                         String newphoneNumber = resNameT.getText();
+
                     try {
                         current.modifyFile("admin.txt",newName,newpass,newmail,newphoneNumber);
-                        
-                    } catch (IOException ex) {
-                        Logger.getLogger(accountPanel.class.getName()).log(Level.SEVERE, null, ex);
-                    }
 //                        assistingClass helper = new assistingClass();
 //                        helper.modifyFile("admin.txt",oldname,newName);
 //                        helper.modifyFile("admin.txt",oldMail,newmail);
-                       // helper.modifyFile("admin.txt",,newpass);
+// helper.modifyFile("admin.txt",,newpass);
+                    } catch (IOException ex) {
+                        Logger.getLogger(accountPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
 
                     }
                     else if(n == JOptionPane.NO_OPTION)
