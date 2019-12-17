@@ -30,7 +30,7 @@ public class ordersTable  extends JPanel
         
     //headers for the table
         String[] columns = new String[] {
-            "id", "uname", "pass", "date","name","mail"
+            "id", "uname", "pass", "date"
         };
          
         //actual data for the table in a 2d array
@@ -45,7 +45,7 @@ public class ordersTable  extends JPanel
        String [][] o = (String[][])helper.ReadFile("admin.txt");
         //create table with data
 
-        JTable table = new JTable(o, columns);
+        JTable table = new JTable(data, columns);
         JScrollPane p = new JScrollPane(table);
        p.setBackground(Color.WHITE);
         p.getViewport().setBackground(Color.WHITE);
