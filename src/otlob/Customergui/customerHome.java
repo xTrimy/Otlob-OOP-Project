@@ -55,7 +55,7 @@ public class customerHome extends JPanel
     private ArrayList<String> selectedMeals = new ArrayList<String>();
     customerHome() throws IOException
     {
-        restaurants = ac.readFiletoHashMap("restaurant.txt");
+        restaurants = ac.readFiletoHashMap("restaurant.txt",true);
         restaurantsSize = restaurants.size();
         restaurantsIds = new String[restaurantsSize];
         Set<Map.Entry<String, String[]>> rSet = restaurants.entrySet();        
@@ -163,8 +163,9 @@ public class customerHome extends JPanel
                     currentPageLabel.setText(Integer.toString(currentPage));
                     try{
                         for(int i = 0;i<6;i++){
-                            if(i+(currentPage-1)*6 < selectedMeals.size() || selectedRestaurant == 0)
-                                images[i] = ImageIO.read(new File(new String("./"+(( selectedRestaurant == 0 )?"logos":"mealPics")+"/"+(( selectedRestaurant == 0 )?restaurantsIds[i+(currentPage-1)*6]:selectedMeals.get(i+(currentPage-1)*6))+".jpg")));
+                            if(i+(currentPage-1)*6 < selectedMeals.size() || (selectedRestaurant == 0 && (i+(currentPage-1)*6) < restaurantsIds.length))
+                                images[i] = ImageIO.read(new File(new String("./"+(( selectedRestaurant == 0 )?
+                                        "logos":"mealPics")+"/"+(( selectedRestaurant == 0 )?restaurantsIds[i+(currentPage-1)*6]:selectedMeals.get(i+(currentPage-1)*6))+".jpg")));
                             else
                                 images[i] = new BufferedImage(100,100,BufferedImage.TYPE_INT_ARGB);
                         }
@@ -185,7 +186,7 @@ public class customerHome extends JPanel
                     currentPageLabel.setText(Integer.toString(currentPage));
                     try{
                         for(int i = 0;i<6;i++){
-                            if(i+(currentPage-1)*6 < selectedMeals.size() || selectedRestaurant == 0)
+                            if(i+(currentPage-1)*6 < selectedMeals.size() || (selectedRestaurant == 0 && (i+(currentPage-1)*6) < restaurantsIds.length))
                                 images[i] = ImageIO.read(new File(new String("./"+(( selectedRestaurant == 0 )?"logos":"mealPics")+"/"+(( selectedRestaurant == 0 )?restaurantsIds[i+(currentPage-1)*6]:selectedMeals.get(i+(currentPage-1)*6))+".jpg")));
                             else
                                 images[i] = new BufferedImage(100,100,BufferedImage.TYPE_INT_RGB);
@@ -232,7 +233,7 @@ public class customerHome extends JPanel
                                 }
                                 try{
                                     for(int k = 0;k<6;k++){
-                                        if(i+(currentPage-1)*6 < selectedMeals.size())
+                                        if(k+(currentPage-1)*6 < selectedMeals.size())
                                            images[k] = ImageIO.read(new File(new String("./mealPics/"+selectedMeals.get(k+(currentPage-1)*6)+".jpg")));
                                         else
                                             images[k] = new BufferedImage(100,100,BufferedImage.TYPE_INT_ARGB);
