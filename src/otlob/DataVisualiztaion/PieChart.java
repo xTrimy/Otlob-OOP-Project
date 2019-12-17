@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
+import otlob.guiassets.ToastMessage;
 /**
  *
  * @author PC
@@ -22,7 +23,7 @@ public class PieChart{
     private JFrame f;
     private boolean centerPos;
     private int dataTotal;
-    PieChart(int size,int posx, int posy, int[] data, String[] dataValues,JFrame f){
+    public PieChart(int size,int posx, int posy, int[] data, String[] dataValues,JFrame f){
         this.size = size;
         this.posx = posx;
         this.posy = posy;
@@ -35,8 +36,13 @@ public class PieChart{
             colors.add(generateColor());
         }
         this.f = f;
+        if(data.length == 0){
+            //JOptionPane.showMessageDialog(null, "This is the first page", "Error",JOptionPane.INFORMATION_MESSAGE);
+            ToastMessage t = new ToastMessage("no data to show");
+            t.display();
+        }
     }
-    PieChart(int size,int posx, int posy, int[] data, String[] dataValues,boolean centerPos,JFrame f){
+    public PieChart(int size,int posx, int posy, int[] data, String[] dataValues,boolean centerPos,JFrame f){
         this(size,posx,posy,data,dataValues,f);
         this.centerPos = centerPos;
     }

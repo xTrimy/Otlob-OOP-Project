@@ -156,7 +156,10 @@ public int getUserId()
 }
         
 
-
+public String getResID() throws IOException
+{
+    return Integer.toString(this.R.getRestaurantid());
+}
 
 
 public void Readadmin() throws IOException

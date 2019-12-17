@@ -17,9 +17,13 @@ import javax.swing.text.*;
 import javax.accessibility.*;
 import javax.swing.filechooser.*;
 import java.text.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import otlob.Admin;
+import otlob.DataVisualiztaion.PieChart;
+import otlob.DataVisualiztaion.filterData;
 import otlob.assistingClass;
 /**
  *
@@ -35,13 +39,15 @@ public class accountPanel extends JPanel
     JTextField resNameT = new JTextField(15);
     JButton EditB = createSimpleButton("Edit");
     JButton submitEdit = createSimpleButton("submit");
-    
+    JButton statB = createSimpleButton("see statistics");
     private String oldname ;
     private String oldMail;
     Admin current;
     accountPanel(Admin current)
     {
+        statB.setBounds(200,250,150,30);
         this.current = current;
+        this.add(statB);
         profileTypeT.setEnabled(false);
         NameT.setEnabled(false);
         EmailT.setEnabled(false);
@@ -96,6 +102,8 @@ public class accountPanel extends JPanel
         this.add(submitEdit);
         EditB.addActionListener(new action());
         submitEdit.addActionListener(new action());
+                statB.addActionListener(new action());
+
     }
     
     
@@ -149,9 +157,43 @@ public class accountPanel extends JPanel
                     {
                         System.out.println("said no");
                     }
+                    
                 
                 
             }
+            if(obj.equals(statB))
+                    {
+                    try {
+                        assistingClass o = new assistingClass();
+                            HashMap<String,String[]> read = o.readFiletoHashMap("restaurant.txt");
+                            
+                            String[] resID = (read.get(Integer.toString(current.getUserId())));
+                            filterData helper = new filterData();
+                            System.out.println(resID[0]);
+                            ArrayList<String> ids = helper.getMealIds(resID[0]);
+                            HashMap<String,Integer> count = helper.countIt(ids);
+                            int i =0;
+                            String IDS[] = new String[count.size()];
+                            int numberoftimes[] = new int[count.size()];
+                                 for (String name: count.keySet()){
+                                                String key = name.toString();
+                                                int value = count.get(name); 
+                                                IDS[i] = key;
+                                                numberoftimes[i] = value;
+                                                i++;
+                                                System.out.println(key + " " + value);  
+                                    }
+                                 JFrame f = new JFrame();
+                                 f.setSize(500,500);
+                                 f.setResizable(false);
+                                 f.setVisible(true);
+                                 PieChart pie = new PieChart(200,150,0,numberoftimes,IDS,true,f);
+                                 f.add(pie.draw());
+                        } catch (IOException ex) {
+                            Logger.getLogger(accountPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        
+                    }
         }
         
     }
