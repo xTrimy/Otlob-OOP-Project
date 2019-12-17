@@ -32,13 +32,23 @@ public abstract class User {
         this.date = myDate;
     }
     
+    public String getPassword()
+    {
+        return password;
+    }
+    
+    public String getphoneNumber()
+    {
+        return phoneNum;
+    }
+    
     public abstract User getUser(String id) throws IOException;
     
     public abstract String getUserName();
     public abstract int getUserId();
     //declared abstract for overRiding only
     public abstract void writeUser() throws IOException;
-    public abstract void Signup() throws IOException;
+    //public abstract void Signup() throws IOException;
     
     
     @Override

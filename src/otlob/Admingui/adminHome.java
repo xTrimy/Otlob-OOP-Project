@@ -17,7 +17,13 @@ import javax.swing.text.*;
 import javax.accessibility.*;
 import javax.swing.filechooser.*;
 import java.text.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import otlob.Admin;
 import static otlob.Admingui.adminFrame.imageIoWrite;
+import otlob.assistingClass;
+import otlob.guiassets.ToastMessage;
+import otlob.meal;
 /**
  *
  * @author ahmed
@@ -31,18 +37,32 @@ public class adminHome extends JPanel
     private NumberFormat amountFormat;
     private JFormattedTextField amountField;
     JButton uploadPicture = createSimpleButton("upload Picture");
-
+    private int count =0;
+    private JButton increaseB = createSimpleButton("<");
+    private JButton decreaseB = createSimpleButton(">");
+    private JLabel controlable = new JLabel("0");
     private File choosenPic ;
     BufferedImage img = null;
-    adminHome()
+    Admin current;
+    adminHome(Admin current)
     {
+        this.current = current;
         this.setLayout(null);
         //inisializing labels
         JLabel pL = new JLabel("price");
         JLabel mealNL = new JLabel("meal Name");
         JLabel mealTL = new JLabel("meal type");
-        JLabel quantityL = new JLabel("meal type");
-        
+        JLabel quantityL = new JLabel("quantity");
+        controlable.setBounds(330,100,50,50);
+        quantityL.setBounds(300,70,50,50);
+        increaseB.setBounds(280,110,40,30);
+        decreaseB.setBounds(350,110,40,30);
+        this.add(controlable);
+        this.add(quantityL);
+        this.add(increaseB);
+        this.add(decreaseB);
+        increaseB.addActionListener(new actions());
+        decreaseB.addActionListener(new actions());
         uploadPicture.setBounds(0,350,150,30);
         
         //setting meal name positions 
@@ -72,7 +92,7 @@ public class adminHome extends JPanel
         this.add(addMealB);
         
          uploadPicture.addActionListener(new actions());
-        
+        addMealB.addActionListener(new actions());
     }
     
     private static JButton createSimpleButton(String text) {
@@ -111,20 +131,67 @@ public class adminHome extends JPanel
                 if(returnVal == JFileChooser.APPROVE_OPTION) 
                 {
                  choosenPic = chooser.getSelectedFile();
+                    System.out.println(choosenPic);
                   BufferedImage img = null;
                      try{
                       img = ImageIO.read(choosenPic);
-                     imageIoWrite(choosenPic);
+                      assistingClass o = new assistingClass();
+                     imageIoWrite(choosenPic, ".//mealPics//"+(o.getId("meal.txt")+1) + ".jpg");
+                     ToastMessage t = new ToastMessage("picture selected");
+                     t.display();
                      }
                      catch(IOException ee){System.out.println("something with iamges");}    
                   //System.out.println("getSelectedFile() : " + );
 
                 }
+                
+                
+                
             }
             
             else if(s.equals(addMealB))
             {
+                String mealName  = mealNameT.getText();
+                String mealType = mealTypeT.getText();
+                String price = amountField.getText();
+                if(mealName.equals("") || mealType.equals("")||price.equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "one of the fields was left empty ", 
+                            "InfoBox: " + "invalid", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else
+                {
+                        try {
+                            
+
+                       meal m = new meal(mealName,mealType,Float.parseFloat(price),count);
+                                    ToastMessage message = new ToastMessage("Meal Added");
+                        message.display();
+                        m.writeToMeals(Integer.toString(current.getUserId()));
+
+                    } catch (IOException ex) {
+                        Logger.getLogger(adminHome.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                 
+                
+            }
+            if(s.equals(increaseB))
+            {
+                count--;
+                if(count < 0)
+                {
+                    
+                    count = 0;
+                }
+                
+                controlable.setText("" + count);
+            }
+            else if(s.equals(decreaseB))
+            {
+                
+                count++;
+                controlable.setText(""+count);
             }
             
         }

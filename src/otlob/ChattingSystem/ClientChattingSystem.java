@@ -55,20 +55,20 @@ public class ClientChattingSystem extends JFrame{
           send.addActionListener(new act());
           
           
-          try {
-                    toFromserver = new Socket("127.0.0.1", 6000);
-                    is=toFromserver.getInputStream();
-                    os=toFromserver.getOutputStream();
-                    updategui2 t=new updategui2();
-                    t.start();
-
-
-                } catch (IOException ex) {
-                    
-                }
-        PrintWriter px=new PrintWriter(os,true);
-        px.println("x,1,"+ ++cid+","+name);
-        clientId = cid;
+            try {
+              toFromserver = new Socket("127.0.0.1", 6000);
+              is=toFromserver.getInputStream();
+              os=toFromserver.getOutputStream();
+              updategui2 t=new updategui2();
+              t.start();
+              PrintWriter px=new PrintWriter(os,true);
+              px.println("x,1,"+ ++cid+","+name);
+              clientId = cid;
+            } catch (IOException ex) {
+                recivedMsg.setText("<html><span style='color:red;'>Server is currently offline</span>");
+                panel1.remove(send);                
+                panel1.remove(text);
+            }
     }
     private class act implements  ActionListener
     {

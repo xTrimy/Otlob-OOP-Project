@@ -31,10 +31,10 @@ public class LogInGUI extends JFrame
     JButton BSignIn = new JButton("Sign In");
     String userNameIn;
     String passIn;
-    boolean isAdmin;
+    int isAdmin;
     JTextField logInUName = new RoundJTextField(20);
     JPasswordField LogInPassword = new RoundJPasswordField(20);
-    public LogInGUI(boolean Admin)throws IOException
+    public LogInGUI(int Admin)throws IOException
     {
 //        UIManager.put("TextField.background", Color.WHITE);
 //        UIManager.put("TextField.border", BorderFactory.createCompoundBorder(
@@ -104,7 +104,7 @@ public class LogInGUI extends JFrame
             //obj.setVisible(true);
             SignupGUI sign;
                 try {
-                    if(isAdmin)
+                    if(isAdmin == 0)
                     {
                         signupadmingui obj = new signupadmingui();
                         obj.setVisible(true);
@@ -156,7 +156,7 @@ public class LogInGUI extends JFrame
         public void actionPerformed(ActionEvent e) 
         {
                 User current;
-            if(isAdmin)
+            if(isAdmin == 0)
             {
                 current = new Admin();
                 userNameIn = logInUName.getText();

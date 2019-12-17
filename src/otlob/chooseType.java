@@ -54,29 +54,33 @@ public class chooseType extends JFrame
 
         @Override
         public void actionPerformed(ActionEvent e) {
-          
             boolean customer = typeCustomer.isSelected();
             boolean admin = typeAdmin.isSelected();
             System.out.println(admin);
             System.out.println(customer);
+            if(admin)
+            {
+                try{
+                LogInGUI obj = new LogInGUI(0);
+                obj.setVisible(true);
+                dispose();
+                obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            }catch(IOException E){}
+            }
+            else if(customer)
+            {
+                try{
+                LogInGUI obj = new LogInGUI(1);
+                obj.setVisible(true);
+                dispose();
+                obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            }catch(IOException E){}
+            }
             if(admin == false && customer == false)
             {
                 JOptionPane.showMessageDialog(null,"please choose one of the options", "please choose",JOptionPane.INFORMATION_MESSAGE);
             }
-            else
-            {try{
-                LogInGUI obj = new LogInGUI(admin);
-                obj.setVisible(true);
-                exit();
-                obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            }catch(IOException E){}
-                
+
             }
-          
-        }
-        
-    }
-    void exit(){
-     this.dispose();
     }
 }

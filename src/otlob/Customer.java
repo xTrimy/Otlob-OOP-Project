@@ -37,6 +37,7 @@ public class Customer extends User{
     //takes a string id
 //||||||| merged common ancestors
 //=======
+    /*
     public void Signup() throws IOException
     {
         User user;
@@ -83,7 +84,7 @@ public class Customer extends User{
                         ,location,pass,FandLname,LocalDate.now());
                 user.writeUser();
     }
-    
+    */
 //>>>>>>> fe74cd105945a8cb6c248f6132802e09f75d3ce9
     public User getUser(String id) throws IOException
     {

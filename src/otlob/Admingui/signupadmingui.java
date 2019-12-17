@@ -15,11 +15,16 @@ import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import otlob.Address;
 import otlob.Admin;
+import static otlob.Admingui.adminFrame.imageIoWrite;
 import otlob.Customer;
+import otlob.LogInGUI;
 import otlob.SignupGUI;
 import otlob.User;
+import otlob.assistingClass;
+import otlob.guiassets.ToastMessage;
 /**
  *
  * @author ahmed
@@ -29,12 +34,16 @@ public class signupadmingui extends JFrame{
     private JLabel luser,lpass,lemail,lres;
     private JPanel SignupPanel;
     private JButton save;
-    
-    
-    
+
+    private JButton uploadPicture;
+    signupadmingui actualPanel = this;
+     private File choosenPic ;
+
     public signupadmingui()throws IOException
     {
+        
         setSize(500,750);
+        uploadPicture = new JButton("upload picture");
         save = new JButton("         Save         ");
         user = new RoundJTextField(21);
         pass = new RoundJTextField(21);
@@ -45,7 +54,8 @@ public class signupadmingui extends JFrame{
         lemail = new JLabel("Email");
         lres = new JLabel("restaurantName");
         phoneNum = new RoundJTextField(21);
-        
+
+        uploadPicture.addActionListener(new ButtonWatcher());
         SignupPanel = new JPanel();
         JPanel LogoPanel = new JPanel();
         SignupPanel.setLayout(new FlowLayout());
@@ -80,7 +90,7 @@ public class signupadmingui extends JFrame{
         SignupPanel.add(lres);
         
         SignupPanel.add(res);
-        
+        SignupPanel.add(uploadPicture);
         SignupPanel.add(save);
         SignupPanel.setBackground(Color.white);
         LogoPanel.setBackground(Color.white);
@@ -122,20 +132,86 @@ public class signupadmingui extends JFrame{
         public void actionPerformed(ActionEvent a)
         {
             Object buttonPressed = a.getSource();
-            if(buttonPressed == save)
+            if(buttonPressed.equals(save))
             {
                 User signup;
-                
-                try {
-                    //    private JTextField user,pass,email,res;
+                String userName = user.getText();
+                String mail = email.getText();
+                String password = pass.getText();
+                String resName = res.getText();
+                String phoneNumber = phoneNum.getText();
+                if(userName.equals("")|| mail.equals("")||password.equals("")||resName.equals("")||phoneNumber.equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "one of the fields was left empty ", 
+                            "InfoBox: " + "invalid", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else
+                {
+                    assistingClass validate = new assistingClass();
+                    if(validate.validateMail(mail).equals("valid"))
+                    {
+                        if(validate.validateMobile(phoneNumber).equals("valid"))
+                        {
+                            try {
+                                //    private JTextField user,pass,email,res;
 
-                    signup = new Admin(user.getText(),email.getText(),
-                            pass.getText(),user.getText(),res.getText(),phoneNum.getText());
-                    signup.writeUser();
-                    JOptionPane.showMessageDialog(null,"All set!", "please choose",JOptionPane.INFORMATION_MESSAGE);
-                   System.exit(0);
-                } catch (IOException ex) {
-                    Logger.getLogger(SignupGUI.class.getName()).log(Level.SEVERE, null, ex);
+                                signup = new Admin(user.getText(),email.getText(),
+                                        pass.getText(),user.getText(),res.getText(),phoneNum.getText());
+                                signup.writeUser();
+                                JOptionPane.showMessageDialog(null,"All set!", "please choose",JOptionPane.INFORMATION_MESSAGE);
+                                actualPanel.dispose();
+                               LogInGUI obj = new LogInGUI(0);
+                               obj.setVisible(true);
+
+                            } catch (IOException ex) {
+                                Logger.getLogger(SignupGUI.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null, "invalid phone Number", 
+                            "InfoBox: " + "invalid mobile", JOptionPane.INFORMATION_MESSAGE);
+
+                        }
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "invalid email", 
+                            "InfoBox: " + "invalidmail", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+                
+                
+            }
+            if(buttonPressed.equals(uploadPicture))
+            {
+                // picchooser 
+                JFileChooser chooser = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter(
+               "JPG & GIF Images", "jpg", "gif");
+               chooser.setFileFilter(filter);
+
+               chooser.setBounds(30,350,300,300);
+
+               JPanel p = new JPanel();
+               p.setSize(300,300);
+                p.setVisible(true);
+               int returnVal = chooser.showOpenDialog(p);
+        
+                if(returnVal == JFileChooser.APPROVE_OPTION) 
+                {
+                 choosenPic = chooser.getSelectedFile();
+                    System.out.println(choosenPic);
+                  BufferedImage img = null;
+                     try{
+                      img = ImageIO.read(choosenPic);
+                      assistingClass o = new assistingClass();
+                     imageIoWrite(choosenPic, ".//logos//"+(o.getId("restaurant.txt")+1) + ".jpg");
+                     ToastMessage t = new ToastMessage("picture selected");
+                     t.display();
+                     }
+                     catch(IOException ee){System.out.println("something with iamges");}    
+                  //System.out.println("getSelectedFile() : " + );
                 }
             }
         }

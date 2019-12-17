@@ -154,7 +154,7 @@ public class SignupGUI extends JFrame{
                             signup = new Customer(user.getText(),email.getText(),phone.getText()
                                     ,location,pass.getText(),fnamelname.getText(),LocalDate.now());
                             signup.writeUser();
-                            LogInGUI log = new LogInGUI(false);
+                            LogInGUI log = new LogInGUI(1);
                             dispose();
                             log.setVisible(true);
                             
